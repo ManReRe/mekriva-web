@@ -925,7 +925,7 @@
       },
       "founder": {
         "@type": "Person",
-        "name": "Manuel Ángel Reyes Resta"
+        "name": "Mekriva Founder"
       },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -955,7 +955,6 @@
             <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
             <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
             <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-            <li><a href="#cases"     data-i18n="nav_cases">Cases</a></li>
             <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
             <li><a href="#about"     data-i18n="nav_about">About</a></li>
             <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
@@ -979,7 +978,6 @@
         <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
         <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
         <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-        <li><a href="#cases"     data-i18n="nav_cases">Cases</a></li>
         <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
         <li><a href="#about"     data-i18n="nav_about">About</a></li>
         <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
@@ -1201,8 +1199,9 @@
 <div class="accent-line"></div>
 
 <!-- ================================================================
-     CASE STUDIES
+     CASE STUDIES — TODO: descomentar cuando haya proyectos reales
 ================================================================ -->
+<!--
 <section class="cases section" id="cases">
     <div class="container">
         <div class="sec-hdr">
@@ -1221,15 +1220,15 @@
                 <div class="case-cols">
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c1_ch">A mid-sized manufacturing company had zero real-time visibility into the health of their production machinery. Maintenance was entirely reactive — teams responded to failures after they occurred, resulting in costly unplanned downtime and lost production capacity across multiple shifts.</p>
+                        <p data-i18n="c1_ch"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c1_sol">We designed a network of custom wireless sensor nodes measuring vibration, temperature and motor current at 1 kHz. Nodes communicate over LoRaWAN to an on-site gateway forwarding data to AWS IoT Core. An InfluxDB backend feeds a Grafana dashboard with per-machine baselines and anomaly detection alerts for predictive maintenance.</p>
+                        <p data-i18n="c1_sol"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c1_out">40% reduction in unplanned downtime in the first quarter. Real-time health visibility across 60+ machines. Maintenance teams now receive actionable alerts 48–72 hours before failure — shifting the operation from reactive to predictive maintenance.</p>
+                        <p data-i18n="c1_out"></p>
                     </div>
                 </div>
                 <div class="case-tags">
@@ -1252,15 +1251,15 @@
                 <div class="case-cols">
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c2_ch">An agricultural cooperative managed irrigation across hundreds of hectares using fixed schedules and manual soil readings. The approach wasted water in over-irrigated zones and underperformed in others, with no data-driven decision making and a heavy operational burden on field teams.</p>
+                        <p data-i18n="c2_ch"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c2_sol">We developed solar-powered sensor nodes measuring soil moisture at multiple depths, temperature, humidity and solar radiation. Nodes transmit over LoRa to a 4G-connected gateway. A Python backend processes sensor data against crop growth models to generate automated, field-specific irrigation schedules integrated with existing pump controls via Modbus RTU.</p>
+                        <p data-i18n="c2_sol"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c2_out">35% reduction in total water consumption. Automated scheduling eliminated manual field readings entirely. Crop yield improved 12% in the first season, attributed to more consistent soil moisture levels across all field zones throughout the growth cycle.</p>
+                        <p data-i18n="c2_out"></p>
                     </div>
                 </div>
                 <div class="case-tags">
@@ -1283,15 +1282,15 @@
                 <div class="case-cols">
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c3_ch">A health tech startup needed a custom BLE wearable to run their proprietary biometric algorithms. Off-the-shelf development boards could not meet their power budget, form factor and sensor fusion requirements. They needed a production-grade hardware platform designed from scratch, with a companion cloud API.</p>
+                        <p data-i18n="c3_ch"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c3_sol">We designed a multi-layer PCB around the NRF52840 integrating a custom sensor suite, a power management subsystem targeting 5-day battery life, and a BLE 5.2 stack with a proprietary GATT profile. Firmware was developed in C on Zephyr RTOS. A companion REST API aggregates data from the BLE gateway and exposes it to the client's mobile backend.</p>
+                        <p data-i18n="c3_sol"></p>
                     </div>
                     <div class="case-col">
                         <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c3_out">Prototype delivered in 4 months from specification. 5.3-day battery life in continuous monitoring mode, exceeding the target. BLE range of 30 m in real-world environments. Hardware passed IEC pre-compliance screening on the first revision, enabling the client to proceed directly to clinical validation.</p>
+                        <p data-i18n="c3_out"></p>
                     </div>
                 </div>
                 <div class="case-tags">
@@ -1310,6 +1309,7 @@
 </section>
 
 <div class="accent-line"></div>
+-->
 
 <!-- ================================================================
      TECH STACK
@@ -1462,14 +1462,13 @@
 
             <div class="founder-card rv">
                 <div class="founder-info">
-                    <div class="founder-name">Manuel Ángel Reyes Resta</div>
                     <div class="founder-role" data-i18n="fc_role">Founder &amp; Lead Engineer</div>
                     <p class="founder-bio" data-i18n="fc_bio">I started Mekriva to give companies direct access to deep engineering expertise — without layers of management, hand-offs, or black boxes. When you work with Mekriva, you work with me.</p>
                     <div class="founder-links">
                         <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" aria-label="Mekriva en LinkedIn">
                             <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
                         </a>
-                        <a href="mailto:hellothere@mekriva.com" class="btn btn-ghost" aria-label="Enviar email a Manuel">
+                        <a href="mailto:hellothere@mekriva.com" class="btn btn-ghost" aria-label="Contactar por email">
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i> hellothere@mekriva.com
                         </a>
                     </div>
