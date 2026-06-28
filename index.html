@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain</title>
   <meta name="description" content="Mekriva is an engineering studio in Seville, Spain with over 10 years of experience in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.">
-  <meta name="keywords" content="embedded systems, firmware engineering, IoT, LoRa, custom hardware, PCB design, STM32, ESP32, cloud software, backend architecture, Seville, Spain, sistemas embebidos, firmware, hardware a medida, diseño PCB, electrónica, Sevilla">
   <meta name="author" content="Mekriva">
   <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="geo.region" content="ES-AN">
+  <meta name="geo.placename" content="Seville">
+  <meta name="format-detection" content="telephone=no">
   <link rel="canonical" href="https://mekriva.com/">
   <link rel="alternate" hreflang="en" href="https://mekriva.com/">
   <link rel="alternate" hreflang="es" href="https://mekriva.com/">
@@ -16,19 +19,22 @@
   <meta property="og:url" content="https://mekriva.com/">
   <meta property="og:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain">
   <meta property="og:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend. From circuit to cloud — over 10 years of experience.">
-  <meta property="og:image" content="https://mekriva.com/logo.png">
-  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://mekriva.com/og-image.png">
+  <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
   <meta property="og:site_name" content="Mekriva">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering">
   <meta name="twitter:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend.">
-  <meta name="twitter:image" content="https://mekriva.com/logo.png">
+  <meta name="twitter:image" content="https://mekriva.com/og-image.png">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
   <style>
     /* === RESET === */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -271,9 +277,10 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=70') center/cover no-repeat;
-      opacity: .05;
-      filter: grayscale(100%);
+      background-image:
+        linear-gradient(rgba(0,194,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,194,255,.025) 1px, transparent 1px);
+      background-size: 64px 64px;
     }
     .hero-glow {
       position: absolute; inset: 0;
@@ -307,11 +314,19 @@
       margin-bottom: 8px;
     }
 
-    .hero-tagline {
-      font-size: clamp(18px, 2.5vw, 26px);
+    .hero-slogan {
+      font-size: clamp(15px, 1.8vw, 20px);
       color: var(--accent);
       font-weight: 500;
-      letter-spacing: -.3px;
+      letter-spacing: .5px;
+      margin-bottom: 18px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: -.1px;
       margin-bottom: 24px;
     }
 
@@ -651,27 +666,104 @@
     }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Mekriva",
-    "description": "Engineering studio in Seville specialising in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture.",
-    "url": "https://mekriva.com",
-    "email": "hellothere@mekriva.com",
-    "address": { "@type": "PostalAddress", "addressLocality": "Sevilla", "addressCountry": "ES" },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Engineering Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Embedded Systems Development" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Firmware & Hardware Engineering" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IoT End-to-End Solutions" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Backend & Cloud Architecture" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Consulting & Architecture" } }
-      ]
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": ["ProfessionalService", "LocalBusiness"],
+      "name": "Mekriva",
+      "description": "Engineering studio in Seville specialising in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.",
+      "url": "https://mekriva.com",
+      "email": "hellothere@mekriva.com",
+      "logo": "https://mekriva.com/og-image.png",
+      "image": "https://mekriva.com/og-image.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sevilla",
+        "addressRegion": "Andalucía",
+        "addressCountry": "ES"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Spain" },
+        { "@type": "AdministrativeArea", "name": "European Union" }
+      ],
+      "knowsLanguage": ["en", "es"],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Engineering Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Embedded Systems Development",
+              "description": "Custom firmware and real-time software for microcontrollers — STM32, ESP32, NRF52, RP2040 — using FreeRTOS, Zephyr or bare-metal approaches. Full BSP stacks, hardware abstraction layers and peripheral drivers."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "PCB Design & Hardware Engineering",
+              "description": "End-to-end electronic design from concept to validated prototype. Multi-layer PCB design in KiCad and Altium, optimised for signal integrity, EMC compliance and Design for Manufacturability."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Device Integration & Connectivity",
+              "description": "Protocol implementation and gateway design for SPI, I2C, UART, CAN, Modbus, BLE 5.x, LoRaWAN, LTE-M and NB-IoT. Wired and wireless interfaces for industrial and IoT applications."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Backend & Cloud Architecture for IoT",
+              "description": "Cloud and backend systems on AWS IoT Core, GCP and Azure for high-frequency telemetry ingestion, device management at scale, MQTT brokers, InfluxDB time-series storage and Grafana dashboards."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "IoT End-to-End Solutions",
+              "description": "Complete IoT products built by a single team — hardware, firmware, connectivity, cloud backend, monitoring dashboards and OTA firmware updates. No integration gaps between vendors."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Technical Consulting & Architecture Review",
+              "description": "Independent technical guidance for embedded systems architecture, technology selection, hardware and firmware audits, due diligence for connected hardware companies and product roadmap definition."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "QA & Testing for Embedded Systems",
+              "description": "Hardware-in-the-loop (HIL) test rigs, firmware regression suites, production verification plans, power consumption profiling and endurance testing for embedded systems and IoT backends."
+            }
+          }
+        ]
+      },
+      "sameAs": ["https://www.linkedin.com/company/mekriva/"]
     },
-    "sameAs": ["https://www.linkedin.com/company/mekriva/"]
-  }
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mekriva",
+      "url": "https://mekriva.com"
+    }
+  ]
   </script>
 </head>
 <body>
@@ -730,12 +822,13 @@
         <i class="fa-solid fa-circle-dot fa-xs" aria-hidden="true"></i>
         <span data-i18n="h_badge">Engineering &amp; Innovation</span>
       </div>
-      <h1 class="hero-title rv d1">Mekriva</h1>
-      <h2 class="hero-tagline rv d2" data-i18n="h_tagline">Embedded Systems &amp; IoT Engineering</h2>
-      <p class="hero-sub rv d3" data-i18n="h_sub">
+      <h1 class="hero-title rv d1">Mek<span style="color:var(--accent)">riva</span></h1>
+      <p class="hero-slogan rv d2" data-i18n="h_slogan">we build your ideas</p>
+      <h2 class="hero-tagline rv d3" data-i18n="h_tagline">Embedded Systems &amp; IoT Engineering</h2>
+      <p class="hero-sub rv d4" data-i18n="h_sub">
         From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.
       </p>
-      <div class="hero-actions rv d4">
+      <div class="hero-actions rv d5">
         <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
         <a href="#services" class="btn btn-ghost" data-i18n="h_explore">Explore services</a>
       </div>
@@ -860,7 +953,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s1d"></p></div>
+        <div class="srv-body"><p data-i18n="s1d">Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -872,7 +965,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s2d"></p></div>
+        <div class="srv-body"><p data-i18n="s2d">End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -884,7 +977,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s3d"></p></div>
+        <div class="srv-body"><p data-i18n="s3d">Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -896,7 +989,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s4d"></p></div>
+        <div class="srv-body"><p data-i18n="s4d">Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -908,7 +1001,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s5d"></p></div>
+        <div class="srv-body"><p data-i18n="s5d">Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -920,7 +1013,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s6d"></p></div>
+        <div class="srv-body"><p data-i18n="s6d">Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -932,7 +1025,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s7d"></p></div>
+        <div class="srv-body"><p data-i18n="s7d">Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give the engineering team a justified level of confidence.</p></div>
       </details>
     </div>
   </div>
@@ -1068,22 +1161,24 @@
         <p class="lbl rv" data-i18n="ct_label">Get in touch</p>
         <h2 class="h2 rv d1" data-i18n="ct_title">Let's talk about your project</h2>
         <p class="lead rv d2" style="margin-bottom:24px" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
-        <div class="contact-detail rv d3">
-          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-          <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
-        </div>
-        <div class="contact-detail rv d4">
-          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-          <span data-i18n="ct_loc">Seville, Spain</span>
-        </div>
-        <div class="contact-detail rv" style="transition-delay:.40s">
-          <i class="fa-solid fa-clock" aria-hidden="true"></i>
-          <span data-i18n="ct_hrs">Mon–Fri, 9:00–18:00 CET</span>
-        </div>
-        <div class="contact-detail rv" style="transition-delay:.50s">
-          <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-          <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">linkedin.com/company/mekriva</a>
-        </div>
+        <address style="font-style:normal">
+          <div class="contact-detail rv d3">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
+          </div>
+          <div class="contact-detail rv d4">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <span data-i18n="ct_loc">Seville, Spain</span>
+          </div>
+          <div class="contact-detail rv" style="transition-delay:.40s">
+            <i class="fa-solid fa-clock" aria-hidden="true"></i>
+            <span data-i18n="ct_hrs">Mon–Fri, 9:00–18:00 CET</span>
+          </div>
+          <div class="contact-detail rv" style="transition-delay:.50s">
+            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">linkedin.com/company/mekriva</a>
+          </div>
+        </address>
       </div>
 
       <div class="c-form rv d1">
@@ -1133,6 +1228,7 @@
     <div class="footer-top">
       <div>
         <a href="#hero" class="footer-logo">Mek<span>riva</span></a>
+        <p style="font-size:13px;color:var(--accent);margin-bottom:10px;letter-spacing:.3px" data-i18n="h_slogan">we build your ideas</p>
         <p class="footer-desc" data-i18n="ft_desc">From circuit to cloud. Engineering that works for your business.</p>
       </div>
       <div class="fc-col">
@@ -1174,6 +1270,7 @@ const t = {
     nav_proj:'Stack', nav_contact:'Contact',
     cta:'Talk to us',
     h_badge:'Engineering & Innovation',
+    h_slogan:'we build your ideas',
     h_tagline:'Embedded Systems & IoT Engineering',
     h_sub:'From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.',
     h_explore:'Explore services',
@@ -1268,6 +1365,7 @@ const t = {
     nav_proj:'Stack', nav_contact:'Contacto',
     cta:'Háblanos',
     h_badge:'Ingeniería e Innovación',
+    h_slogan:'we build your ideas',
     h_tagline:'Sistemas Embebidos, Firmware e Ingeniería IoT',
     h_sub:'Del circuito a la nube — convertimos tus retos tecnológicos en soluciones completas y a medida. Hardware, firmware, IoT y software cloud, todo bajo un mismo techo.',
     h_explore:'Ver servicios',
@@ -1383,6 +1481,15 @@ function applyLang(l) {
     b.setAttribute('aria-pressed', active);
   });
   localStorage.setItem('mk-lang', l);
+  if (l === 'es') {
+    document.title = 'Mekriva — Sistemas Embebidos, Firmware e IoT | Sevilla, España';
+    document.querySelector('meta[name="description"]').content =
+      'Mekriva es un estudio de ingeniería en Sevilla con más de 10 años de experiencia en sistemas embebidos, firmware, diseño de PCB, IoT y arquitectura backend cloud. Del circuito a la nube.';
+  } else {
+    document.title = 'Mekriva — Embedded Systems, Firmware & IoT Engineering | Seville, Spain';
+    document.querySelector('meta[name="description"]').content =
+      'Mekriva is an engineering studio in Seville, Spain with over 10 years of experience in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.';
+  }
 }
 
 document.querySelectorAll('.lang-btn').forEach(b =>
