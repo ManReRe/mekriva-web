@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain</title>
-  <meta name="description" content="Mekriva is an engineering studio in Seville, Spain with over 10 years of experience in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.">
+  <meta name="description" content="Mekriva — embedded systems, firmware &amp; IoT engineering in Seville, Spain. PCB design, RTOS, cloud backend. Over 10 years building hardware-to-cloud solutions.">
   <meta name="author" content="Mekriva">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0a">
@@ -20,13 +20,17 @@
   <meta property="og:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain">
   <meta property="og:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend. From circuit to cloud — over 10 years of experience.">
   <meta property="og:image" content="https://mekriva.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mekriva — we build your ideas">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="es_ES">
   <meta property="og:site_name" content="Mekriva">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering">
   <meta name="twitter:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend.">
   <meta name="twitter:image" content="https://mekriva.com/og-image.png">
+  <meta name="twitter:image:alt" content="Mekriva — we build your ideas">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,9 +46,9 @@
     /* === VARIABLES === */
     :root {
       --bg:          #0a0a0a;
-      --bg-alt:      #0d0d0d;
-      --bg-card:     #111111;
-      --bg-card-h:   #161616;
+      --bg-alt:      #0f0f0f;
+      --bg-card:     #141414;
+      --bg-card-h:   #1c1c1c;
       --accent:      #00C2FF;
       --accent-dim:  rgba(0,194,255,.10);
       --accent-glow: rgba(0,194,255,.22);
@@ -297,13 +301,23 @@
       background: var(--accent-dim);
       border: 1px solid var(--border-a);
       color: var(--accent);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
       border-radius: 100px;
       margin-bottom: 28px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      letter-spacing: .3px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: badge-pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes badge-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .45; transform: scale(.75); }
     }
 
     .hero-title {
@@ -463,7 +477,8 @@
     .srv-item[open] .srv-chev { transform: rotate(180deg); }
 
     .srv-body { padding: 0 24px 24px 82px; }
-    .srv-body p { font-size: 14.5px; color: var(--muted); line-height: 1.85; }
+    .srv-body p { font-size: 14.5px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+    .srv-body p:last-child { margin-bottom: 0; }
 
     @keyframes srv-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
     .srv-item[open] .srv-body { animation: srv-in .2s ease; }
@@ -610,6 +625,7 @@
     }
     .footer-logo { font-size: 20px; font-weight: 700; margin-bottom: 12px; display: block; }
     .footer-logo span { color: var(--accent); }
+    .footer-slogan { font-size: 13px; color: var(--accent); margin-bottom: 10px; letter-spacing: .3px; }
     .footer-desc { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 240px; }
 
     .fc-col h4 {
@@ -674,7 +690,7 @@
       "description": "Engineering studio in Seville specialising in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.",
       "url": "https://mekriva.com",
       "email": "hellothere@mekriva.com",
-      "logo": "https://mekriva.com/og-image.png",
+      "logo": "https://mekriva.com/logo.png",
       "image": "https://mekriva.com/og-image.png",
       "address": {
         "@type": "PostalAddress",
@@ -768,7 +784,7 @@
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <!-- NAV -->
 <nav class="nav" id="nav" aria-label="Navegación principal">
@@ -819,8 +835,8 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge rv">
-        <i class="fa-solid fa-circle-dot fa-xs" aria-hidden="true"></i>
-        <span data-i18n="h_badge">Engineering &amp; Innovation</span>
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span data-i18n="h_badge">Available for new projects</span>
       </div>
       <h1 class="hero-title rv d1">Mek<span style="color:var(--accent)">riva</span></h1>
       <p class="hero-slogan rv d2" data-i18n="h_slogan">we build your ideas</p>
@@ -900,37 +916,6 @@
       </div>
     </div>
 
-    <h3 class="section-sub rv" data-i18n="ab_vals_title">Our values</h3>
-    <div class="two-grid">
-      <div class="card rv">
-        <div class="val-head">
-          <div class="card-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
-          <span class="val-title" data-i18n="v1t">Commitment to quality</span>
-        </div>
-        <p class="val-desc" data-i18n="v1d">Every project goes through real testing under real conditions before it leaves our hands.</p>
-      </div>
-      <div class="card rv d1">
-        <div class="val-head">
-          <div class="card-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
-          <span class="val-title" data-i18n="v2t">Transparency</span>
-        </div>
-        <p class="val-desc" data-i18n="v2d">Continuous project status, no inflated estimates, no fine print. Difficult conversations over late misunderstandings.</p>
-      </div>
-      <div class="card rv d2">
-        <div class="val-head">
-          <div class="card-icon"><i class="fa-solid fa-atom" aria-hidden="true"></i></div>
-          <span class="val-title" data-i18n="v3t">Responsible innovation</span>
-        </div>
-        <p class="val-desc" data-i18n="v3d">We use the right technology for each problem — not the trendiest one.</p>
-      </div>
-      <div class="card rv d3">
-        <div class="val-head">
-          <div class="card-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
-          <span class="val-title" data-i18n="v4t">Long-term thinking</span>
-        </div>
-        <p class="val-desc" data-i18n="v4d">Systems designed to last and scale. Documentation and evolution are part of the brief from day one.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -953,7 +938,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s1d">Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.</p></div>
+        <div class="srv-body" data-i18n="s1d"><p>Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -965,7 +950,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s2d">End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.</p></div>
+        <div class="srv-body" data-i18n="s2d"><p>End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -977,7 +962,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s3d">Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.</p></div>
+        <div class="srv-body" data-i18n="s3d"><p>Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -989,7 +974,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s4d">Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.</p></div>
+        <div class="srv-body" data-i18n="s4d"><p>Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -1001,7 +986,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s5d">Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.</p></div>
+        <div class="srv-body" data-i18n="s5d"><p>Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -1013,7 +998,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s6d">Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices.</p></div>
+        <div class="srv-body" data-i18n="s6d"><p>Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices.</p></div>
       </details>
 
       <details class="srv-item rv">
@@ -1025,7 +1010,7 @@
           </div>
           <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
         </summary>
-        <div class="srv-body"><p data-i18n="s7d">Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give the engineering team a justified level of confidence.</p></div>
+        <div class="srv-body" data-i18n="s7d"><p>Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give the engineering team a justified level of confidence.</p></div>
       </details>
     </div>
   </div>
@@ -1228,7 +1213,7 @@
     <div class="footer-top">
       <div>
         <a href="#hero" class="footer-logo">Mek<span>riva</span></a>
-        <p style="font-size:13px;color:var(--accent);margin-bottom:10px;letter-spacing:.3px" data-i18n="h_slogan">we build your ideas</p>
+        <p class="footer-slogan" data-i18n="h_slogan">we build your ideas</p>
         <p class="footer-desc" data-i18n="ft_desc">From circuit to cloud. Engineering that works for your business.</p>
       </div>
       <div class="fc-col">
@@ -1269,7 +1254,7 @@ const t = {
     nav_about:'About', nav_srv:'Services', nav_how:'Process',
     nav_proj:'Stack', nav_contact:'Contact',
     cta:'Talk to us',
-    h_badge:'Engineering & Innovation',
+    h_badge:'Available for new projects',
     h_slogan:'we build your ideas',
     h_tagline:'Embedded Systems & IoT Engineering',
     h_sub:'From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.',
@@ -1303,25 +1288,25 @@ const t = {
     srv_sub:'Complete technological solutions from the first schematic to the cloud dashboard. No off-the-shelf products — everything custom.',
     s1t:'Embedded Systems Development',
     s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
-    s1d:'Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.',
+    s1d:`<p>Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node or a complex multi-core system managing real-time control loops in parallel, we deliver firmware that is reliable, maintainable and production-ready.</p><p>Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic — covering the full lifecycle from initial bring-up to field-deployed software with OTA update capability.</p><p>We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and handover documentation your team can actually use.</p>`,
     s2t:'Firmware & Hardware Engineering',
     s2h:'PCB design · Bring-up · EMC · DFM · KiCad · Altium',
-    s2d:"End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.",
+    s2d:`<p>End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments.</p><p>We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators.</p><p>EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.</p>`,
     s3t:'Device Integration & Connectivity',
     s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
-    s3d:'Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.',
+    s3d:`<p>Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset.</p><p>For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems.</p><p>In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. All connectivity layers include secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.</p>`,
     s4t:'Backend & Cloud Architecture',
     s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
-    s4d:'Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.',
+    s4d:`<p>Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively.</p><p>Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people.</p><p>DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.</p>`,
     s5t:'IoT End-to-End Solutions',
     s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment',
-    s5d:"Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.",
+    s5d:`<p>Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards.</p><p>This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships.</p><p>A typical end-to-end engagement covers: requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design (LoRaWAN, BLE, LTE-M or WiFi depending on the application), cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.</p>`,
     s6t:'Technical Consulting & Architecture',
     s6h:'Architecture review · Tech roadmap · Due diligence · Risk assessment',
-    s6d:'Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices.',
+    s6d:`<p>Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations.</p><p>Typical engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints.</p><p>We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices or recommendations shaped by what we would prefer to build.</p>`,
     s7t:'QA & Testing',
     s7h:'HIL testing · Regression suites · Load testing · Endurance · Audit',
-    s7d:'Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give the engineering team a justified level of confidence.',
+    s7d:`<p>Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware.</p><p>For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests.</p><p>For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give your engineering team justified confidence.</p>`,
     how_label:'Our process', how_title:'How we work',
     how_sub:'A clear process, no surprises. We work closely with you at every step.',
     p1t:'We understand the problem',
@@ -1364,7 +1349,7 @@ const t = {
     nav_about:'Nosotros', nav_srv:'Servicios', nav_how:'Proceso',
     nav_proj:'Stack', nav_contact:'Contacto',
     cta:'Háblanos',
-    h_badge:'Ingeniería e Innovación',
+    h_badge:'Disponible para nuevos proyectos',
     h_slogan:'we build your ideas',
     h_tagline:'Sistemas Embebidos, Firmware e Ingeniería IoT',
     h_sub:'Del circuito a la nube — convertimos tus retos tecnológicos en soluciones completas y a medida. Hardware, firmware, IoT y software cloud, todo bajo un mismo techo.',
@@ -1398,25 +1383,25 @@ const t = {
     srv_sub:'Soluciones tecnológicas completas desde el primer esquema hasta el panel de control en la nube. Sin productos enlatados — todo a medida.',
     s1t:'Desarrollo de Sistemas Embebidos',
     s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
-    s1d:'Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores — desde C bare-metal hasta arquitecturas basadas en RTOS. Desarrollamos BSP completos, capas de abstracción de hardware, drivers de periféricos e integración de sensores en plataformas STM32, ESP32, NRF52840, RP2040, RISC-V y AVR. Tanto si necesitas un nodo sensor de ultra-bajo consumo como un sistema multicúcleo complejo que gestione bucles de control en tiempo real, tareas de seguridad y comunicaciones inalámbricas en paralelo, entregamos firmware fiable, mantenible y listo para producción. Nuestro trabajo abarca toda la pila software embebida: bootloaders, drivers de dispositivo, middleware, implementaciones de protocolos de comunicación y lógica de aplicación. Usamos FreeRTOS, Zephyr o enfoques bare-metal en función de las restricciones del proyecto — presupuesto de energía, latencia, tamaño de código o estándares de seguridad. Escribimos código limpio y documentado con la testabilidad como requisito: pruebas unitarias al nivel del driver, pipelines de CI para build y test automatizados, y documentación suficiente para que tu equipo pueda mantener y evolucionar el proyecto de forma autónoma tras la entrega.',
+    s1d:`<p>Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores — desde C bare-metal hasta arquitecturas basadas en RTOS. Desarrollamos BSP completos, capas de abstracción de hardware, drivers de periféricos e integración de sensores en plataformas STM32, ESP32, NRF52840, RP2040, RISC-V y AVR. Tanto si necesitas un nodo sensor de ultra-bajo consumo como un sistema multicúcleo complejo, entregamos firmware fiable, mantenible y listo para producción.</p><p>Nuestro trabajo abarca toda la pila software embebida: bootloaders, drivers de dispositivo, middleware, implementaciones de protocolos de comunicación y lógica de aplicación — cubriendo el ciclo completo desde el bring-up inicial hasta el software desplegado en campo con actualización OTA.</p><p>Usamos FreeRTOS, Zephyr o enfoques bare-metal en función de las restricciones del proyecto — presupuesto de energía, latencia, tamaño de código o estándares de seguridad. Escribimos código limpio y documentado con la testabilidad como requisito: pruebas unitarias al nivel del driver, pipelines de CI para build y test automatizados, y documentación de entrega que tu equipo puede usar de verdad.</p>`,
     s2t:'Firmware & Hardware Engineering',
     s2h:'Diseño PCB · Bring-up · EMC · DFM · KiCad · Altium',
-    s2d:'Diseño electrónico integral que cubre todo el ciclo de desarrollo desde el concepto hasta el prototipo validado. Nuestro trabajo abarca diseño de circuitos analógicos y digitales: topologías de alimentación, acondicionamiento de señal, frontends ADC, integración de microcontroladores, layouts RF y diseño PCB mixto-signal orientado a producción. Trabajamos en KiCad y Altium, seleccionando componentes con criterios de disponibilidad, longevidad y resiliencia de la cadena de suministro. Los layouts de PCB se optimizan para integridad de señal, gestión térmica y Diseño para Fabricación — entregamos Gerbers que van directamente a fabricación sin sorpresas. Ensamblamos y hacemos el bring-up de prototipos en nuestro laboratorio, validando la funcionalidad en cada etapa con osciloscopios, analizadores lógicos y generadores de señal. Las pruebas de pre-cumplimiento EMC, el perfilado de consumo energético en condiciones reales y las pruebas de estrés ambiental son estándar antes de dar por completo cualquier diseño.',
+    s2d:`<p>Diseño electrónico integral que cubre todo el ciclo de desarrollo desde el concepto hasta el prototipo validado. Nuestro trabajo abarca diseño de circuitos analógicos y digitales: topologías de alimentación, acondicionamiento de señal, frontends ADC, integración de microcontroladores, layouts RF y diseño PCB mixto-signal orientado a producción.</p><p>Trabajamos en KiCad y Altium, seleccionando componentes con criterios de disponibilidad, longevidad y resiliencia de la cadena de suministro. Los layouts de PCB se optimizan para integridad de señal, gestión térmica y Diseño para Fabricación — entregamos Gerbers que van directamente a fabricación sin sorpresas. Ensamblamos y hacemos el bring-up de prototipos en nuestro laboratorio, validando la funcionalidad en cada etapa.</p><p>Las pruebas de pre-cumplimiento EMC, el perfilado de consumo energético en condiciones reales y las pruebas de estrés ambiental son estándar antes de dar por completo cualquier diseño. También realizamos la fase crítica de bring-up firmware: inicialización de periféricos, ajuste de modos de ahorro de energía y escritura de los drivers de bajo nivel que forman la base del stack software.</p>`,
     s3t:'Integración de Dispositivos y Conectividad',
     s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
-    s3d:'Conexión de dispositivos, sensores y equipos industriales a sistemas más amplios — de forma fiable, eficiente y al nivel de abstracción adecuado. Nos especializamos en la capa de integración entre el hardware y la aplicación: implementación de protocolos, desarrollo de drivers, middleware y diseño de gateways. En el lado cableado, implementamos SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP y protocolos binarios propietarios, gestionando desde el inicio casos límite como contención de bus, validación CRC, recuperación de errores y comportamiento hot-plug. Para conectividad inalámbrica, integramos BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M y NB-IoT, seleccionando la tecnología adecuada según rango, tasa de datos, presupuesto de energía y entorno de despliegue. Diseñamos gateways LoRaWAN, bridges BLE-to-cloud y brokers MQTT que forman la columna vertebral de ecosistemas de productos conectados. En entornos industriales, gestionamos la traducción entre protocolos OT y stacks IT modernos, permitiendo que equipos legados alimenten sistemas cloud sin reemplazar infraestructura existente.',
+    s3d:`<p>Conexión de dispositivos, sensores y equipos industriales a sistemas más amplios — de forma fiable, eficiente y al nivel de abstracción adecuado. En el lado cableado, implementamos SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP y protocolos binarios propietarios, gestionando desde el inicio casos límite como contención de bus, validación CRC, recuperación de errores y comportamiento hot-plug.</p><p>Para conectividad inalámbrica, integramos BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M y NB-IoT, seleccionando la tecnología adecuada según rango, tasa de datos, presupuesto de energía y entorno de despliegue. Diseñamos gateways LoRaWAN, bridges BLE-to-cloud y brokers MQTT que forman la columna vertebral de ecosistemas de productos conectados.</p><p>En entornos industriales, gestionamos la traducción entre protocolos OT y stacks IT modernos, permitiendo que equipos legados alimenten sistemas cloud sin reemplazar infraestructura existente. Toda la capa de conectividad incluye comunicación segura: TLS, aprovisionamiento de certificados, autenticación mutua y actualizaciones OTA cifradas.</p>`,
     s4t:'Backend & Cloud Architecture',
     s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
-    s4d:'Sistemas backend y cloud diseñados específicamente para las exigencias del hardware conectado: ingesta de datos de alta frecuencia, gestión de dispositivos a escala, procesamiento de telemetría en tiempo real y almacenamiento a largo plazo de series temporales. Diseñamos e implementamos APIs REST y MQTT, servidores WebSocket, brokers de mensajería y pipelines de datos que gestionan volúmenes IoT de forma fiable. La infraestructura corre en AWS IoT Core, Google Cloud o Azure IoT Hub según el ecosistema existente y los requisitos de cumplimiento normativo. Para cargas de trabajo de series temporales, seleccionamos InfluxDB, TimescaleDB o servicios gestionados en función de los patrones de consulta, los requisitos de retención y el coste. Construimos dashboards en Grafana o frontends personalizados ligeros. El DevOps es parte del diseño desde el inicio: Docker, Terraform y pipelines de CI/CD con pruebas automatizadas desde el primer despliegue. La seguridad es una restricción arquitectónica: TLS en todas las comunicaciones, autenticación basada en certificados, control de acceso por roles y gestión de secretos.',
+    s4d:`<p>Sistemas backend y cloud diseñados específicamente para las exigencias del hardware conectado: ingesta de datos de alta frecuencia, gestión de dispositivos a escala, procesamiento de telemetría en tiempo real y almacenamiento a largo plazo de series temporales. Diseñamos e implementamos APIs REST y MQTT, servidores WebSocket, brokers de mensajería y pipelines de datos que gestionan volúmenes IoT de forma fiable.</p><p>La infraestructura corre en AWS IoT Core, Google Cloud o Azure IoT Hub según el ecosistema existente y los requisitos de cumplimiento normativo. Para series temporales, seleccionamos InfluxDB, TimescaleDB o servicios gestionados en función de los patrones de consulta y el coste. Construimos dashboards en Grafana o frontends personalizados ligeros con las métricas adecuadas para cada perfil de usuario.</p><p>El DevOps es parte del diseño desde el inicio: Docker, Terraform y pipelines de CI/CD con pruebas automatizadas desde el primer despliegue. La seguridad es una restricción arquitectónica: TLS en todas las comunicaciones, autenticación basada en certificados, control de acceso por roles y gestión de secretos.</p>`,
     s5t:'IoT End-to-End Solutions',
     s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Despliegue en campo',
-    s5d:'Productos IoT completos y listos para producción construidos por un único equipo desde cero — sin lagunas de integración, sin inconsistencias arquitectónicas entre la capa del dispositivo y la cloud. Cubrimos toda la vertical técnica: diseño de hardware, firmware, conectividad segura dispositivo-cloud, ingesta de datos, almacenamiento, analítica y dashboards para operadores. Esta profundidad de integración permite mejores decisiones en cada nivel: elegir el protocolo de comunicación adecuado para el presupuesto de energía, dimensionar la infraestructura cloud para el volumen de datos real, diseñar el mecanismo de actualización OTA antes de que salga el primer prototipo. Un proyecto IoT end-to-end típico con Mekriva cubre: definición de requisitos y arquitectura de sistema, prototipo de hardware y desarrollo de firmware, diseño de la capa de conectividad — LoRaWAN, BLE, LTE-M o WiFi según la aplicación —, backend cloud con registro de dispositivos y API de telemetría, dashboard de monitorización con alertas, y soporte de despliegue en campo.',
+    s5d:`<p>Productos IoT completos y listos para producción construidos por un único equipo desde cero — sin lagunas de integración, sin inconsistencias arquitectónicas entre la capa del dispositivo y la cloud. Cubrimos toda la vertical técnica: diseño de hardware, firmware, conectividad segura dispositivo-cloud, ingesta de datos, almacenamiento, analítica y dashboards para operadores.</p><p>Esta profundidad de integración permite mejores decisiones en cada nivel: elegir el protocolo de comunicación adecuado para el presupuesto de energía, dimensionar la infraestructura cloud para el volumen de datos real, diseñar el mecanismo de actualización OTA antes de que salga el primer prototipo.</p><p>Un proyecto IoT end-to-end típico con Mekriva cubre: definición de requisitos y arquitectura de sistema, prototipo de hardware y desarrollo de firmware, diseño de la capa de conectividad (LoRaWAN, BLE, LTE-M o WiFi según la aplicación), backend cloud con registro de dispositivos y API de telemetría, dashboard de monitorización con alertas, y soporte de despliegue en campo.</p>`,
     s6t:'Consultoría Técnica y Arquitectura',
     s6h:'Revisión de arquitectura · Roadmap tecnológico · Due diligence · Riesgos',
-    s6d:'Orientación técnica independiente para equipos que necesitan claridad en una decisión de ingeniería compleja — sin el sesgo de un proveedor que vende una plataforma o enfoque concreto. Nos involucramos como socio técnico de confianza para revisar arquitecturas existentes, identificar riesgos antes de que se conviertan en problemas costosos y producir recomendaciones concretas y accionables en sistemas embebidos, firmware, hardware, conectividad y arquitectura cloud. Los proyectos de consultoría típicos incluyen: selección de tecnología para un nuevo producto (familia de MCU, RTOS, plataforma cloud, protocolo de comunicación), revisión de arquitectura antes de una inversión de desarrollo significativa, auditoría de hardware y firmware antes de una tirada de producción, due diligence técnica para inversores o adquirentes, y definición de roadmap para productos que necesitan escalar. Somos directos: decimos lo que vemos sin rellenar los informes con buenas prácticas genéricas.',
+    s6d:`<p>Orientación técnica independiente para equipos que necesitan claridad en una decisión de ingeniería compleja — sin el sesgo de un proveedor que vende una plataforma o enfoque concreto. Nos involucramos como socio técnico de confianza para revisar arquitecturas existentes, identificar riesgos antes de que se conviertan en problemas costosos y producir recomendaciones concretas y accionables.</p><p>Los proyectos de consultoría típicos incluyen: selección de tecnología para un nuevo producto (familia de MCU, RTOS, plataforma cloud, protocolo de comunicación), revisión de arquitectura antes de una inversión de desarrollo significativa, auditoría de hardware y firmware antes de una tirada de producción, due diligence técnica para inversores o adquirentes, y definición de roadmap para productos que necesitan escalar.</p><p>Somos directos: decimos lo que vemos — las partes bien diseñadas y las que presentan riesgos — sin rellenar los informes con buenas prácticas genéricas ni recomendaciones condicionadas por lo que preferiríamos construir.</p>`,
     s7t:'QA & Testing',
     s7h:'Testing HIL · Regresión automatizada · Pruebas de carga · Endurance · Auditoría',
-    s7d:'Validación sistemática y basada en evidencias para sistemas embebidos y backends cloud — integrada en el proceso de desarrollo desde la fase de arquitectura. Definimos la estrategia de prueba desde el inicio porque detectar un fallo de diseño durante la revisión del esquema cuesta una fracción de detectarlo en hardware desplegado en campo. Para sistemas embebidos: pruebas unitarias e integración al nivel de firmware, rigs de test hardware-in-the-loop (HIL) que simulan entradas de sensores reales y cargas de actuadores en condiciones controladas, planes de prueba funcional para bring-up de placa y verificación en producción, perfilado de consumo energético y pruebas de endurance. Para sistemas cloud y backend: suites de regresión automatizadas, pipelines de prueba de carga, tests de contrato de API y pruebas de integración contra infraestructura real. También ofrecemos auditorías de QA para equipos con productos en funcionamiento que necesitan mayor confianza en su proceso de validación.',
+    s7d:`<p>Validación sistemática y basada en evidencias para sistemas embebidos y backends cloud — integrada en el proceso de desarrollo desde la fase de arquitectura, no añadida al final cuando los problemas son más caros de corregir. Definimos la estrategia de prueba desde el inicio porque detectar un fallo de diseño durante la revisión del esquema cuesta una fracción de detectarlo en hardware desplegado en campo.</p><p>Para sistemas embebidos: pruebas unitarias e integración al nivel de firmware, rigs de test hardware-in-the-loop (HIL) que simulan entradas de sensores reales y cargas de actuadores en condiciones controladas, planes de prueba funcional para bring-up de placa y verificación en producción, perfilado de consumo energético y pruebas de endurance que exponen modos de fallo invisibles en tests de corta duración.</p><p>Para sistemas cloud y backend: suites de regresión automatizadas, pipelines de prueba de carga, tests de contrato de API y pruebas de integración contra infraestructura real. También ofrecemos auditorías de QA para equipos con productos en funcionamiento que necesitan mayor confianza en su proceso de validación.</p>`,
     how_label:'Nuestro proceso', how_title:'Cómo trabajamos',
     how_sub:'Un proceso claro, sin sorpresas. Trabajamos contigo en cada etapa.',
     p1t:'Entendemos el problema',
@@ -1484,11 +1469,11 @@ function applyLang(l) {
   if (l === 'es') {
     document.title = 'Mekriva — Sistemas Embebidos, Firmware e IoT | Sevilla, España';
     document.querySelector('meta[name="description"]').content =
-      'Mekriva es un estudio de ingeniería en Sevilla con más de 10 años de experiencia en sistemas embebidos, firmware, diseño de PCB, IoT y arquitectura backend cloud. Del circuito a la nube.';
+      'Mekriva — sistemas embebidos, firmware e IoT en Sevilla. Diseño de PCB, RTOS, backend cloud. Más de 10 años construyendo soluciones del circuito a la nube.';
   } else {
     document.title = 'Mekriva — Embedded Systems, Firmware & IoT Engineering | Seville, Spain';
     document.querySelector('meta[name="description"]').content =
-      'Mekriva is an engineering studio in Seville, Spain with over 10 years of experience in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.';
+      'Mekriva — embedded systems, firmware & IoT engineering in Seville, Spain. PCB design, RTOS, cloud backend. Over 10 years building hardware-to-cloud solutions.';
   }
 }
 
@@ -1542,15 +1527,20 @@ document.getElementById('contactForm').addEventListener('submit', async function
   const btn = document.getElementById('formBtn');
   btn.disabled = true; btn.style.opacity = '.6';
   const data = Object.fromEntries(new FormData(this));
-  const res = await fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (res.ok) {
-    this.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  } else {
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      btn.disabled = false; btn.style.opacity = '1';
+      alert(t[lang].form_err);
+    }
+  } catch {
     btn.disabled = false; btn.style.opacity = '1';
     alert(t[lang].form_err);
   }
