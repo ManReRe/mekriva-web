@@ -1,1711 +1,1229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mekriva — Embedded Systems, IoT &amp; Custom Hardware | Seville, Spain</title>
-    <meta name="description" content="Mekriva is an engineering studio in Seville, Spain specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software. From circuit to cloud — we turn your technical challenges into complete, custom solutions.">
-    <meta name="keywords" content="embedded systems, IoT, LoRa, custom hardware, PCB design, firmware, STM32, ESP32, cloud software, engineering, Seville, Spain, sistemas embebidos, hardware a medida, IoT España, diseño PCB, ingeniería electrónica, Sevilla">
-    <meta name="author" content="Mekriva">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://mekriva.com/">
-    <link rel="alternate" hreflang="en" href="https://mekriva.com/">
-    <link rel="alternate" hreflang="es" href="https://mekriva.com/">
-    <link rel="alternate" hreflang="x-default" href="https://mekriva.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mekriva.com/">
-    <meta property="og:title" content="Mekriva — Embedded Systems, IoT &amp; Custom Hardware | Seville, Spain">
-    <meta property="og:description" content="Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software. From circuit to cloud.">
-    <meta property="og:image" content="https://mekriva.com/logo.png">
-    <meta property="og:locale" content="en_GB">
-    <meta property="og:locale:alternate" content="es_ES">
-    <meta property="og:site_name" content="Mekriva">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Mekriva — Embedded Systems, IoT &amp; Custom Hardware">
-    <meta name="twitter:description" content="Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software.">
-    <meta name="twitter:image" content="https://mekriva.com/logo.png">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        /* === RESET & VARIABLES === */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --bg:          #0a0a0a;
-            --bg-card:     #111111;
-            --bg-card-h:   #161616;
-            --bg-alt:      #0d0d0d;
-            --accent:      #00C2FF;
-            --accent-dim:  rgba(0,194,255,.12);
-            --accent-glow: rgba(0,194,255,.28);
-            --text:        #f0f0f0;
-            --muted:       #888;
-            --border:      rgba(255,255,255,.07);
-            --border-a:    rgba(0,194,255,.28);
-            --font:        'Space Grotesk', sans-serif;
-            --nav-h:       68px;
-            --pad:         100px;
-            --r:           12px;
-            --ease:        .3s ease;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a { color: inherit; text-decoration: none; }
-        img { max-width: 100%; display: block; }
-
-        /* === UTILITIES === */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .section    { padding: var(--pad) 0; }
-
-        .sec-label {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 14px;
-        }
-
-        .sec-title {
-            font-size: clamp(30px, 4vw, 52px);
-            font-weight: 700;
-            line-height: 1.12;
-            letter-spacing: -1px;
-            margin-bottom: 18px;
-        }
-
-        .sec-sub {
-            font-size: 17px;
-            color: var(--muted);
-            max-width: 640px;
-            line-height: 1.75;
-        }
-
-        .sec-hdr { margin-bottom: 60px; }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 30px;
-            border-radius: 8px;
-            font-family: var(--font);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all var(--ease);
-        }
-
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover {
-            background: #33cfff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--accent-glow);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--accent);
-            border: 1.5px solid var(--border-a);
-        }
-        .btn-ghost:hover { background: var(--accent-dim); transform: translateY(-2px); }
-
-        .accent-line {
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--accent-glow), transparent);
-        }
-
-        /* === REVEAL ANIMATIONS === */
-        .rv {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity .65s ease, transform .65s ease;
-        }
-        .rv.on { opacity: 1; transform: none; }
-        .d1 { transition-delay: .10s; }
-        .d2 { transition-delay: .20s; }
-        .d3 { transition-delay: .30s; }
-        .d4 { transition-delay: .40s; }
-        .d5 { transition-delay: .50s; }
-        .d6 { transition-delay: .60s; }
-
-        /* ============================================================
-           NAVBAR
-        ============================================================ */
-        .nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            height: var(--nav-h);
-            z-index: 1000;
-            transition: background var(--ease), border-color var(--ease);
-            border-bottom: 1px solid transparent;
-        }
-        .nav.scrolled {
-            background: rgba(10,10,10,.96);
-            backdrop-filter: blur(14px);
-            border-color: var(--border);
-        }
-        .nav .container {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-logo { font-size: 21px; font-weight: 700; letter-spacing: -.5px; }
-        .nav-logo span { color: var(--accent); }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            list-style: none;
-        }
-        .nav-links a {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--muted);
-            transition: color var(--ease);
-        }
-        .nav-links a:hover { color: var(--text); }
-
-        .nav-right { display: flex; align-items: center; gap: 14px; }
-
-        /* Language toggle */
-        .lang-toggle {
-            display: flex;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            font-size: 12px;
-            font-weight: 700;
-        }
-        .lang-btn {
-            padding: 6px 11px;
-            cursor: pointer;
-            color: var(--muted);
-            transition: background var(--ease), color var(--ease);
-            letter-spacing: .5px;
-        }
-        .lang-btn.active { background: var(--accent); color: #000; }
-
-        /* Hamburger */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .hamburger span {
-            display: block;
-            width: 23px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-            transition: all var(--ease);
-        }
-        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-        .mob-menu {
-            display: none;
-            position: fixed;
-            top: var(--nav-h); left: 0; right: 0;
-            background: rgba(10,10,10,.98);
-            backdrop-filter: blur(14px);
-            padding: 28px 24px;
-            border-bottom: 1px solid var(--border);
-            z-index: 999;
-        }
-        .mob-menu.open { display: block; }
-        .mob-menu ul { list-style: none; display: flex; flex-direction: column; gap: 22px; }
-        .mob-menu a { font-size: 17px; font-weight: 500; color: var(--muted); transition: color var(--ease); }
-        .mob-menu a:hover { color: var(--text); }
-        .mob-lang { display: flex; gap: 10px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
-        .mob-lang .lang-btn { border: 1px solid var(--border); border-radius: 6px; padding: 8px 16px; }
-        .mob-lang .lang-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
-
-        /* ============================================================
-           HERO
-        ============================================================ */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: var(--nav-h);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=70') center/cover no-repeat;
-            opacity: .07;
-            filter: grayscale(100%);
-        }
-
-        .hero-glow {
-            position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse 55% 55% at 68% 48%, rgba(0,194,255,.07) 0%, transparent 70%),
-                linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
-        }
-
-        .hero-content { position: relative; z-index: 2; max-width: 800px; }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--accent-dim);
-            border: 1px solid var(--border-a);
-            color: var(--accent);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 6px 16px;
-            border-radius: 100px;
-            margin-bottom: 32px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            font-size: clamp(52px, 8vw, 104px);
-            font-weight: 700;
-            line-height: 1.0;
-            letter-spacing: -3px;
-            margin-bottom: 10px;
-        }
-
-        .hero-tagline {
-            font-size: clamp(20px, 3vw, 30px);
-            color: var(--accent);
-            font-weight: 500;
-            letter-spacing: -.5px;
-            margin-bottom: 28px;
-        }
-
-        .hero-sub {
-            font-size: clamp(15px, 1.8vw, 18px);
-            color: var(--muted);
-            max-width: 540px;
-            line-height: 1.8;
-            margin-bottom: 48px;
-        }
-
-        .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: 36px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--muted);
-            font-size: 13px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            animation: bob 2.2s ease-in-out infinite;
-        }
-        @keyframes bob {
-            0%,100% { transform: translateX(-50%) translateY(0); }
-            50%      { transform: translateX(-50%) translateY(8px); }
-        }
-
-        /* ============================================================
-           SERVICES
-        ============================================================ */
-        .srv-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .srv-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 34px 30px;
-            transition: all var(--ease);
-        }
-        .srv-card:hover {
-            background: var(--bg-card-h);
-            border-color: var(--border-a);
-            transform: translateY(-4px);
-            box-shadow: 0 14px 40px rgba(0,194,255,.07);
-        }
-
-        .srv-icon {
-            width: 50px; height: 50px;
-            background: var(--accent-dim);
-            border: 1px solid var(--border-a);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 19px;
-            color: var(--accent);
-            margin-bottom: 22px;
-        }
-
-        .srv-title { font-size: 17px; font-weight: 600; margin-bottom: 9px; }
-        .srv-desc  { font-size: 14px; color: var(--muted); line-height: 1.7; }
-
-        .srv-card--wide {
-            grid-column: 1 / -1;
-            display: flex;
-            gap: 32px;
-            align-items: flex-start;
-        }
-        .srv-card--wide .srv-icon { flex-shrink: 0; }
-        @media (max-width: 768px) {
-            .srv-card--wide { flex-direction: column; gap: 0; }
-        }
-
-        /* ============================================================
-           HOW WE WORK
-        ============================================================ */
-        .how { background: var(--bg-alt); }
-
-        .how-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .how-step {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 32px 28px;
-            transition: border-color var(--ease);
-        }
-        .how-step:hover { border-color: var(--border-a); }
-
-        .step-num {
-            font-size: 38px;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            -webkit-text-stroke: 1px var(--border-a);
-            color: transparent;
-        }
-
-        .step-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
-        .step-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-        /* ============================================================
-           WHY MEKRIVA
-        ============================================================ */
-        .why-points {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 48px;
-        }
-
-        .why-point {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 24px 26px;
-            transition: border-color var(--ease);
-        }
-        .why-point:hover { border-color: var(--border-a); }
-
-        .wp-icon {
-            width: 38px; height: 38px;
-            background: var(--accent-dim);
-            border: 1px solid var(--border-a);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 15px;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .wp-text strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-        .wp-text p      { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-        /* ============================================================
-           TECH STACK
-        ============================================================ */
-        .projects { background: var(--bg-alt); }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .tech-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 30px 28px;
-            transition: all var(--ease);
-        }
-        .tech-card:hover {
-            background: var(--bg-card-h);
-            border-color: var(--border-a);
-            transform: translateY(-4px);
-            box-shadow: 0 14px 40px rgba(0,194,255,.07);
-        }
-
-        .tech-cat { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-
-        .tech-tag {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--muted);
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 100px;
-            transition: color var(--ease), border-color var(--ease);
-        }
-        .tech-card:hover .tech-tag {
-            color: var(--text);
-            border-color: rgba(255,255,255,.14);
-        }
-
-        /* ============================================================
-           ABOUT
-        ============================================================ */
-        .about-text .sec-sub { margin-bottom: 20px; }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 40px;
-        }
-
-        .stat-box {
-            padding: 22px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-        }
-        .stat-num   { font-size: 34px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 5px; }
-        .stat-label { font-size: 13px; color: var(--muted); }
-
-        /* ============================================================
-           CONTACT
-        ============================================================ */
-        .contact { background: var(--bg-alt); }
-
-        .contact-inner {
-            display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .contact-info .sec-sub { margin-bottom: 36px; }
-
-        .c-detail {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-            color: var(--muted);
-        }
-        .c-detail i { color: var(--accent); width: 18px; text-align: center; }
-        .c-detail a { color: var(--muted); transition: color var(--ease); }
-        .c-detail a:hover { color: var(--accent); }
-
-        .c-form {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 38px;
-        }
-
-        .fg { margin-bottom: 18px; }
-
-        .fg label {
-            display: block;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--muted);
-            margin-bottom: 7px;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-        }
-
-        .fc {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            padding: 11px 15px;
-            font-family: var(--font);
-            font-size: 15px;
-            color: var(--text);
-            outline: none;
-            transition: border-color var(--ease);
-        }
-        .fc:focus { border-color: var(--accent); }
-        .fc::placeholder { color: #3a3a3a; }
-        textarea.fc { resize: vertical; min-height: 110px; }
-
-        .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-        .f-submit { width: 100%; justify-content: center; margin-top: 6px; }
-
-        /* ============================================================
-           FOOTER
-        ============================================================ */
-        .footer {
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            padding: 56px 0 28px;
-        }
-        .footer-legal-link {
-            font-size: 13px;
-            color: var(--muted);
-            transition: color var(--ease);
-        }
-        .footer-legal-link:hover { color: var(--accent); }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1.6fr 1fr 1fr;
-            gap: 56px;
-            margin-bottom: 44px;
-        }
-
-        .footer-logo { font-size: 22px; font-weight: 700; margin-bottom: 14px; display: block; }
-        .footer-logo span { color: var(--accent); }
-        .footer-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 260px; }
-
-        .fc-col h4 {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 18px;
-        }
-
-        .fc-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-        .fc-col a   { font-size: 14px; color: var(--muted); transition: color var(--ease); }
-        .fc-col a:hover { color: var(--accent); }
-        .fc-col span { font-size: 14px; color: var(--muted); }
-
-        .footer-bot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 28px;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        /* ============================================================
-           RESPONSIVE
-        ============================================================ */
-        @media (max-width: 1024px) {
-            .srv-grid    { grid-template-columns: repeat(2, 1fr); }
-            .how-steps   { grid-template-columns: repeat(2, 1fr); }
-            .why-points  { grid-template-columns: 1fr; }
-            .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-            .stat-grid   { grid-template-columns: repeat(2, 1fr); }
-            .footer-top  { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            :root { --pad: 68px; }
-            .nav-links, .nav-right .btn { display: none; }
-            .hamburger { display: flex; }
-            .srv-grid   { grid-template-columns: 1fr; }
-            .how-steps  { grid-template-columns: 1fr; }
-            .tech-grid  { grid-template-columns: 1fr; }
-            .stat-grid  { grid-template-columns: repeat(2, 1fr); }
-            .about-values { grid-template-columns: 1fr; }
-            .f-row      { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; gap: 36px; }
-            .footer-bot { flex-direction: column; gap: 10px; text-align: center; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title { letter-spacing: -2px; }
-            .hero-actions { flex-direction: column; align-items: flex-start; }
-            .c-form { padding: 22px; }
-            .stat-grid { grid-template-columns: 1fr; }
-        }
-
-        /* === SKIP LINK === */
-        .skip-link {
-            position: absolute;
-            left: -9999px;
-            top: 8px;
-            padding: 8px 18px;
-            background: var(--accent);
-            color: #000;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 6px;
-            z-index: 9999;
-            text-decoration: none;
-        }
-        .skip-link:focus { left: 8px; }
-
-        /* === FOUNDER CARD === */
-        .founder-card {
-            display: flex;
-            gap: 28px;
-            align-items: flex-start;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 30px 32px;
-            margin-top: 40px;
-            transition: border-color var(--ease);
-        }
-        .founder-card:hover { border-color: var(--border-a); }
-
-        .founder-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: var(--accent-dim);
-            border: 2px solid var(--border-a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--accent);
-            flex-shrink: 0;
-            letter-spacing: -1px;
-            user-select: none;
-        }
-
-        .founder-info { flex: 1; }
-        .founder-name { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
-        .founder-role { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 12px; letter-spacing: .3px; }
-        .founder-bio  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-        .founder-links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .founder-links .btn { padding: 8px 18px; font-size: 13px; }
-
-        @media (max-width: 480px) {
-            .founder-card { flex-direction: column; gap: 16px; padding: 22px; }
-            .founder-avatar { width: 56px; height: 56px; font-size: 18px; }
-        }
-
-        /* === ABOUT VALUES === */
-        .about-values {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 48px;
-        }
-
-        .about-value {
-            padding: 24px 26px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            transition: border-color var(--ease);
-        }
-        .about-value:hover { border-color: var(--border-a); }
-
-        .av-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .av-icon {
-            width: 34px;
-            height: 34px;
-            background: var(--accent-dim);
-            border: 1px solid var(--border-a);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .av-title { font-size: 15px; font-weight: 600; }
-        .av-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-        @media (max-width: 768px) {
-            .about-values { grid-template-columns: 1fr; }
-        }
-
-        /* ============================================================
-           SERVICE ACCORDION
-        ============================================================ */
-        .srv-list { display: flex; flex-direction: column; gap: 10px; }
-
-        .srv-accordion {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            overflow: hidden;
-            transition: border-color var(--ease);
-        }
-        .srv-accordion[open] { border-color: var(--border-a); }
-
-        .srv-accordion > summary {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 22px 28px;
-            cursor: pointer;
-            list-style: none;
-            user-select: none;
-            transition: background var(--ease);
-        }
-        .srv-accordion > summary::-webkit-details-marker { display: none; }
-        .srv-accordion > summary:hover { background: var(--bg-card-h); }
-
-        .srv-accordion-info { flex: 1; }
-
-        .srv-accordion-title { font-size: 17px; font-weight: 600; }
-
-        .srv-accordion-hint {
-            font-size: 13px;
-            color: var(--muted);
-            margin-top: 3px;
-            line-height: 1.5;
-        }
-        .srv-accordion[open] .srv-accordion-hint { display: none; }
-
-        .srv-accordion-chevron {
-            color: var(--muted);
-            font-size: 13px;
-            flex-shrink: 0;
-            transition: transform var(--ease);
-        }
-        .srv-accordion[open] .srv-accordion-chevron { transform: rotate(180deg); }
-
-        .srv-accordion-body {
-            padding: 0 28px 28px 90px;
-        }
-        .srv-accordion-body p {
-            font-size: 14.5px;
-            color: var(--muted);
-            line-height: 1.85;
-        }
-
-        @keyframes srv-fade {
-            from { opacity: 0; transform: translateY(-6px); }
-            to   { opacity: 1; transform: none; }
-        }
-        .srv-accordion[open] .srv-accordion-body { animation: srv-fade .2s ease; }
-
-        @media (max-width: 768px) {
-            .srv-accordion-body { padding-left: 28px; }
-            .srv-accordion-hint { display: none; }
-        }
-
-        /* ============================================================
-           CASE STUDIES
-        ============================================================ */
-        .cases { background: var(--bg-alt); }
-
-        .case-cards { display: flex; flex-direction: column; gap: 20px; }
-
-        .case-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 36px 38px;
-            transition: border-color var(--ease);
-        }
-        .case-card:hover { border-color: var(--border-a); }
-
-        .case-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-
-        .case-industry {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            background: var(--accent-dim);
-            border: 1px solid var(--border-a);
-            padding: 3px 10px;
-            border-radius: 100px;
-        }
-
-        .case-nda { font-size: 12px; color: var(--muted); }
-
-        .case-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -.5px;
-            margin-bottom: 28px;
-            line-height: 1.2;
-        }
-
-        .case-cols {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            margin-bottom: 24px;
-        }
-
-        .case-col-label {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .case-col p { font-size: 14px; color: var(--muted); line-height: 1.75; }
-
-        .case-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .case-tech-tag {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--muted);
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 100px;
-        }
-
-        @media (max-width: 900px) {
-            .case-cols { grid-template-columns: 1fr; gap: 20px; }
-            .case-card { padding: 26px 24px; }
-            .case-title { font-size: 19px; }
-        }
-    </style>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Mekriva",
-      "description": "Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software.",
-      "url": "https://mekriva.com",
-      "email": "hellothere@mekriva.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Sevilla",
-        "addressCountry": "ES"
-      },
-      "founder": {
-        "@type": "Person",
-        "name": "Mekriva Founder"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Engineering Services",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Embedded Systems" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IoT & LoRa" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Hardware & PCB Design" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Software" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Consulting" } }
-        ]
-      },
-      "sameAs": ["https://www.linkedin.com/company/mekriva/"]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain</title>
+  <meta name="description" content="Mekriva is an engineering studio in Seville, Spain with over 10 years of experience in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture. Full-stack hardware and software from circuit to cloud.">
+  <meta name="keywords" content="embedded systems, firmware engineering, IoT, LoRa, custom hardware, PCB design, STM32, ESP32, cloud software, backend architecture, Seville, Spain, sistemas embebidos, firmware, hardware a medida, diseño PCB, electrónica, Sevilla">
+  <meta name="author" content="Mekriva">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mekriva.com/">
+  <link rel="alternate" hreflang="en" href="https://mekriva.com/">
+  <link rel="alternate" hreflang="es" href="https://mekriva.com/">
+  <link rel="alternate" hreflang="x-default" href="https://mekriva.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mekriva.com/">
+  <meta property="og:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering | Seville, Spain">
+  <meta property="og:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend. From circuit to cloud — over 10 years of experience.">
+  <meta property="og:image" content="https://mekriva.com/logo.png">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:site_name" content="Mekriva">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mekriva — Embedded Systems, Firmware &amp; IoT Engineering">
+  <meta name="twitter:description" content="Engineering studio in Seville specialising in embedded systems, firmware, custom PCB design, IoT and cloud backend.">
+  <meta name="twitter:image" content="https://mekriva.com/logo.png">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* === VARIABLES === */
+    :root {
+      --bg:          #0a0a0a;
+      --bg-alt:      #0e0e0e;
+      --bg-card:     #111111;
+      --bg-card-h:   #161616;
+      --accent:      #00C2FF;
+      --accent-dim:  rgba(0,194,255,.10);
+      --accent-glow: rgba(0,194,255,.22);
+      --text:        #efefef;
+      --muted:       #888;
+      --border:      rgba(255,255,255,.07);
+      --border-a:    rgba(0,194,255,.25);
+      --font:        'Space Grotesk', sans-serif;
+      --nav-h:       64px;
+      --w:           1120px;
+      --pad:         96px;
+      --r:           10px;
+      --ease:        .28s ease;
     }
-    </script>
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* === LAYOUT === */
+    .container { max-width: var(--w); margin: 0 auto; padding: 0 32px; }
+    .section    { padding: var(--pad) 0; }
+    .section-alt { background: var(--bg-alt); }
+
+    /* === TYPOGRAPHY === */
+    .lbl {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .h2 {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -.3px;
+      margin-bottom: 20px;
+      margin-top: 52px;
+    }
+
+    /* === BUTTONS === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all var(--ease);
+      text-decoration: none;
+    }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-primary:hover {
+      background: #33d0ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px var(--accent-glow);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--border-a);
+    }
+    .btn-ghost:hover { background: var(--accent-dim); transform: translateY(-2px); }
+
+    /* === REVEAL === */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .rv.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .10s; }
+    .d2 { transition-delay: .20s; }
+    .d3 { transition-delay: .30s; }
+    .d4 { transition-delay: .40s; }
+    .d5 { transition-delay: .50s; }
+
+    /* === DIVIDER === */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent-glow), transparent);
+    }
+
+    /* === SKIP LINK === */
+    .skip-link {
+      position: absolute; left: -9999px; top: 8px;
+      padding: 8px 18px;
+      background: var(--accent); color: #000;
+      font-weight: 600; font-size: 14px;
+      border-radius: 6px; z-index: 9999;
+    }
+    .skip-link:focus { left: 8px; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 1000;
+      transition: background var(--ease), border-color var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(10,10,10,.96);
+      backdrop-filter: blur(14px);
+      border-color: var(--border);
+    }
+    .nav .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo { font-size: 20px; font-weight: 700; letter-spacing: -.5px; }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color var(--ease); }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .lang-btn {
+      padding: 5px 10px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: background var(--ease), color var(--ease);
+      letter-spacing: .5px;
+      background: none;
+      border: none;
+      font-family: var(--font);
+    }
+    .lang-btn.active { background: var(--accent); color: #000; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--ease);
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mob-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: rgba(10,10,10,.98);
+      backdrop-filter: blur(14px);
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+    }
+    .mob-menu.open { display: block; }
+    .mob-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .mob-menu a { font-size: 16px; font-weight: 500; color: var(--muted); transition: color var(--ease); }
+    .mob-menu a:hover { color: var(--text); }
+    .mob-lang {
+      display: flex; gap: 10px;
+      margin-top: 24px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .mob-lang .lang-btn {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 16px;
+    }
+    .mob-lang .lang-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=70') center/cover no-repeat;
+      opacity: .05;
+      filter: grayscale(100%);
+    }
+    .hero-glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(0,194,255,.06) 0%, transparent 70%),
+        linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 740px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-a);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(56px, 9vw, 108px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      margin-bottom: 8px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(18px, 2.5vw, 26px);
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: -.3px;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 12px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 0;
+    }
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 24px;
+    }
+    .stat-num   { font-size: 34px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    .two-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 24px;
+      transition: border-color var(--ease);
+    }
+    .card:hover { border-color: var(--border-a); }
+
+    .card-icon {
+      width: 36px; height: 36px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-a);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--accent); flex-shrink: 0;
+    }
+
+    /* why cards */
+    .why-card { display: flex; gap: 14px; align-items: flex-start; }
+    .why-text strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .why-text p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* value cards */
+    .val-head {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .val-title { font-size: 14px; font-weight: 600; }
+    .val-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    .srv-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .srv-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: border-color var(--ease);
+    }
+    .srv-item[open] { border-color: var(--border-a); }
+
+    .srv-item > summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background var(--ease);
+    }
+    .srv-item > summary::-webkit-details-marker { display: none; }
+    .srv-item > summary:hover { background: var(--bg-card-h); }
+
+    .srv-icon {
+      width: 42px; height: 42px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-a);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--accent); flex-shrink: 0;
+    }
+
+    .srv-info { flex: 1; }
+    .srv-name { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+    .srv-tags { font-size: 12px; color: var(--muted); }
+    .srv-item[open] .srv-tags { display: none; }
+
+    .srv-chev { color: var(--muted); font-size: 12px; flex-shrink: 0; transition: transform var(--ease); }
+    .srv-item[open] .srv-chev { transform: rotate(180deg); }
+
+    .srv-body { padding: 0 24px 24px 82px; }
+    .srv-body p { font-size: 14.5px; color: var(--muted); line-height: 1.85; }
+
+    @keyframes srv-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    .srv-item[open] .srv-body { animation: srv-in .2s ease; }
+
+    /* ============================================================
+       PROCESS
+    ============================================================ */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .process-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 28px 24px;
+      transition: border-color var(--ease);
+    }
+    .process-card:hover { border-color: var(--border-a); }
+    .process-num {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      -webkit-text-stroke: 1px var(--border-a);
+      color: transparent;
+    }
+    .process-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .process-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ============================================================
+       TECH STACK
+    ============================================================ */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .tech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px 26px;
+      transition: all var(--ease);
+    }
+    .tech-card:hover { background: var(--bg-card-h); border-color: var(--border-a); }
+
+    .tech-head {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .tech-icon {
+      width: 36px; height: 36px;
+      background: var(--accent-dim);
+      border: 1px solid var(--border-a);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--accent); flex-shrink: 0;
+    }
+    .tech-cat { font-size: 15px; font-weight: 600; }
+
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 100px;
+      transition: color var(--ease), border-color var(--ease);
+    }
+    .tech-card:hover .tech-tag { color: var(--text); border-color: rgba(255,255,255,.13); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .contact-detail i { color: var(--accent); width: 18px; text-align: center; }
+    .contact-detail a { color: var(--muted); transition: color var(--ease); }
+    .contact-detail a:hover { color: var(--accent); }
+
+    .c-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 34px;
+    }
+    .fg { margin-bottom: 16px; }
+    .fg label {
+      display: block;
+      font-size: 11px; font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .fc {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 11px 14px;
+      font-family: var(--font);
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--ease);
+    }
+    .fc:focus { border-color: var(--accent); }
+    .fc::placeholder { color: #3a3a3a; }
+    textarea.fc { resize: vertical; min-height: 110px; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .f-submit { width: 100%; justify-content: center; margin-top: 6px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 52px 0 28px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 700; margin-bottom: 12px; display: block; }
+    .footer-logo span { color: var(--accent); }
+    .footer-desc { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 240px; }
+
+    .fc-col h4 {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px;
+    }
+    .fc-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .fc-col a   { font-size: 13px; color: var(--muted); transition: color var(--ease); }
+    .fc-col a:hover { color: var(--accent); }
+    .fc-col span { font-size: 13px; color: var(--muted); }
+
+    .footer-bot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-legal-link { font-size: 12px; color: var(--muted); transition: color var(--ease); }
+    .footer-legal-link:hover { color: var(--accent); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .stat-grid     { grid-template-columns: repeat(2, 1fr); }
+      .two-grid      { grid-template-columns: 1fr; }
+      .process-grid  { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid     { grid-template-columns: repeat(2, 1fr); }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top    { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad: 64px; }
+      .nav-links, .nav-right .btn { display: none; }
+      .hamburger { display: flex; }
+      .process-grid  { grid-template-columns: 1fr; }
+      .tech-grid     { grid-template-columns: 1fr; }
+      .stat-grid     { grid-template-columns: repeat(2, 1fr); }
+      .footer-top    { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bot    { flex-direction: column; gap: 10px; text-align: center; }
+      .srv-body      { padding-left: 24px; }
+      .f-row         { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 20px; }
+      .hero-title { letter-spacing: -2px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .c-form { padding: 22px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Mekriva",
+    "description": "Engineering studio in Seville specialising in embedded systems development, firmware engineering, custom PCB design, IoT solutions and cloud backend architecture.",
+    "url": "https://mekriva.com",
+    "email": "hellothere@mekriva.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Sevilla", "addressCountry": "ES" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Engineering Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Embedded Systems Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Firmware & Hardware Engineering" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IoT End-to-End Solutions" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Backend & Cloud Architecture" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Consulting & Architecture" } }
+      ]
+    },
+    "sameAs": ["https://www.linkedin.com/company/mekriva/"]
+  }
+  </script>
 </head>
 <body>
 
-<!-- ================================================================
-     NAVBAR
-================================================================ -->
 <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
+<!-- NAV -->
 <nav class="nav" id="nav" aria-label="Navegación principal">
-    <div class="container">
-        <a href="#hero" class="nav-logo">Mek<span>riva</span></a>
-        <ul class="nav-links" role="list">
-            <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
-            <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
-            <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-            <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
-            <li><a href="#about"     data-i18n="nav_about">About</a></li>
-            <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
-        </ul>
-        <div class="nav-right">
-            <div class="lang-toggle" role="group" aria-label="Seleccionar idioma">
-                <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
-                <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
-            </div>
-            <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
-        </div>
-        <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobMenu">
-            <span></span><span></span><span></span>
-        </button>
+  <div class="container">
+    <a href="#hero" class="nav-logo">Mek<span>riva</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about"    data-i18n="nav_about">About</a></li>
+      <li><a href="#services" data-i18n="nav_srv">Services</a></li>
+      <li><a href="#process"  data-i18n="nav_how">Process</a></li>
+      <li><a href="#stack"    data-i18n="nav_proj">Stack</a></li>
+      <li><a href="#contact"  data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Seleccionar idioma">
+        <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn"        data-lang="es" aria-pressed="false">ES</button>
+      </div>
+      <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
     </div>
+    <button type="button" class="hamburger" id="hamburger"
+            aria-label="Abrir menú" aria-expanded="false" aria-controls="mobMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu" aria-hidden="true">
-    <ul role="list">
-        <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
-        <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
-        <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-        <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
-        <li><a href="#about"     data-i18n="nav_about">About</a></li>
-        <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
-    </ul>
-    <div class="mob-lang" role="group" aria-label="Seleccionar idioma">
-        <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
-        <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
-    </div>
+  <ul role="list">
+    <li><a href="#about"    data-i18n="nav_about">About</a></li>
+    <li><a href="#services" data-i18n="nav_srv">Services</a></li>
+    <li><a href="#process"  data-i18n="nav_how">Process</a></li>
+    <li><a href="#stack"    data-i18n="nav_proj">Stack</a></li>
+    <li><a href="#contact"  data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="mob-lang" role="group" aria-label="Seleccionar idioma">
+    <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" class="lang-btn"        data-lang="es" aria-pressed="false">ES</button>
+  </div>
 </div>
 
 <main id="main-content">
 
-<!-- ================================================================
-     HERO
-================================================================ -->
+<!-- HERO ============================================================ -->
 <section class="hero" id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-glow"></div>
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge rv">
-                <i class="fa-solid fa-circle-dot fa-xs"></i>
-                <span data-i18n="h_badge">Engineering &amp; Innovation</span>
-            </div>
-            <h1 class="hero-title rv d1">Mekriva</h1>
-            <p class="hero-tagline rv d2" data-i18n="h_tagline">We build your ideas.</p>
-            <p class="hero-sub rv d3" data-i18n="h_sub">
-                From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.
-            </p>
-            <div class="hero-actions rv d4">
-                <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
-                <a href="#services" class="btn btn-ghost" data-i18n="h_explore">Explore services</a>
-            </div>
-        </div>
+  <div class="hero-bg" role="presentation"></div>
+  <div class="hero-glow" role="presentation"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge rv">
+        <i class="fa-solid fa-circle-dot fa-xs" aria-hidden="true"></i>
+        <span data-i18n="h_badge">Engineering &amp; Innovation</span>
+      </div>
+      <h1 class="hero-title rv d1">Mekriva</h1>
+      <p class="hero-tagline rv d2" data-i18n="h_tagline">Embedded Systems &amp; IoT Engineering</p>
+      <p class="hero-sub rv d3" data-i18n="h_sub">
+        From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.
+      </p>
+      <div class="hero-actions rv d4">
+        <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
+        <a href="#services" class="btn btn-ghost" data-i18n="h_explore">Explore services</a>
+      </div>
     </div>
-    <div class="hero-scroll" aria-hidden="true">
-        <i class="fa-solid fa-chevron-down"></i>
-    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
 </section>
 
-<div class="accent-line"></div>
+<div class="divider"></div>
 
-<!-- ================================================================
-     SERVICES
-================================================================ -->
-<section class="section" id="services">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="srv_label">What we do</p>
-            <h2 class="sec-title rv" data-i18n="srv_title">Our services</h2>
-            <p class="sec-sub rv d1" data-i18n="srv_sub">We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.</p>
-        </div>
-        <div class="srv-list">
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s1t">Embedded Systems Development</div>
-                        <div class="srv-accordion-hint" data-i18n="s1h">STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s1d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s2t">Firmware &amp; Hardware Engineering</div>
-                        <div class="srv-accordion-hint" data-i18n="s2h">PCB design · Bring-up · EMC · DFM · KiCad · Altium</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s2d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-network-wired"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s3t">Device Integration &amp; Connectivity</div>
-                        <div class="srv-accordion-hint" data-i18n="s3h">CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s3d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-cloud"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s4t">Backend &amp; Cloud Architecture</div>
-                        <div class="srv-accordion-hint" data-i18n="s4h">AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s4d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s5t">IoT End-to-End Solutions</div>
-                        <div class="srv-accordion-hint" data-i18n="s5h">Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s5d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-compass-drafting"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s6t">Technical Consulting &amp; Architecture</div>
-                        <div class="srv-accordion-hint" data-i18n="s6h">Architecture review · Tech roadmap · Due diligence · Risk assessment</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s6d"></p></div>
-            </details>
-            <details class="srv-accordion rv">
-                <summary>
-                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-flask"></i></div>
-                    <div class="srv-accordion-info">
-                        <div class="srv-accordion-title" data-i18n="s7t">QA &amp; Testing</div>
-                        <div class="srv-accordion-hint" data-i18n="s7h">HIL testing · Regression suites · Load testing · Endurance · Audit</div>
-                    </div>
-                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
-                </summary>
-                <div class="srv-accordion-body"><p data-i18n="s7d"></p></div>
-            </details>
-        </div>
-    </div>
-</section>
-
-<div class="accent-line"></div>
-
-<!-- ================================================================
-     HOW WE WORK
-================================================================ -->
-<section class="how section" id="how">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="how_label">Our process</p>
-            <h2 class="sec-title rv" data-i18n="how_title">How we work</h2>
-            <p class="sec-sub rv d1" data-i18n="how_sub">A clear process, no surprises. We work closely with you at every step.</p>
-        </div>
-        <div class="how-steps">
-            <div class="how-step rv">
-                <div class="step-num">01</div>
-                <h3 class="step-title" data-i18n="p1t">We understand the problem</h3>
-                <p class="step-desc" data-i18n="p1d">We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before we propose anything.</p>
-            </div>
-            <div class="how-step rv d1">
-                <div class="step-num">02</div>
-                <h3 class="step-title" data-i18n="p2t">We design the solution</h3>
-                <p class="step-desc" data-i18n="p2d">We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a single line of code or draw a trace.</p>
-            </div>
-            <div class="how-step rv d2">
-                <div class="step-num">03</div>
-                <h3 class="step-title" data-i18n="p3t">We build it</h3>
-                <p class="step-desc" data-i18n="p3d">We develop hardware and software in parallel, with regular updates and live demos. You always know the current state of the project — no black boxes.</p>
-            </div>
-            <div class="how-step rv d3">
-                <div class="step-num">04</div>
-                <h3 class="step-title" data-i18n="p4t">We deliver &amp; support</h3>
-                <p class="step-desc" data-i18n="p4d">Delivery includes full documentation, source files, and a transition period. We don't just hand it over — we make sure it works in your real environment.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="accent-line"></div>
-
-<!-- ================================================================
-     WHY MEKRIVA
-================================================================ -->
-<section class="section" id="why">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="why_label">Why us</p>
-            <h2 class="sec-title rv" data-i18n="why_title">Not consultants.<br>Engineers.</h2>
-            <p class="sec-sub rv d1" data-i18n="why_sub">We've built real products, shipped real hardware, and debugged at 3am. We bring that experience directly to your project.</p>
-        </div>
-        <div class="why-points">
-            <div class="why-point rv">
-                <div class="wp-icon"><i class="fa-solid fa-bolt"></i></div>
-                <div class="wp-text">
-                    <strong data-i18n="w1t">Real field experience</strong>
-                    <p data-i18n="w1d">Our team has shipped products from prototype to mass production. We know what works under real-world constraints.</p>
-                </div>
-            </div>
-            <div class="why-point rv d1">
-                <div class="wp-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="wp-text">
-                    <strong data-i18n="w2t">Full-stack hardware + software</strong>
-                    <p data-i18n="w2d">From PCB layout to cloud API, we cover the entire stack. No coordination overhead, no finger-pointing between vendors.</p>
-                </div>
-            </div>
-            <div class="why-point rv d2">
-                <div class="wp-icon"><i class="fa-solid fa-sliders"></i></div>
-                <div class="wp-text">
-                    <strong data-i18n="w3t">100% custom solutions</strong>
-                    <p data-i18n="w3d">We don't sell off-the-shelf platforms with your logo on them. Every project is designed from scratch for your specific requirements.</p>
-                </div>
-            </div>
-            <div class="why-point rv d3">
-                <div class="wp-icon"><i class="fa-solid fa-comments"></i></div>
-                <div class="wp-text">
-                    <strong data-i18n="w4t">Direct communication</strong>
-                    <p data-i18n="w4d">You talk directly to the engineers building your product. No account managers, no ticket systems, no middlemen.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="accent-line"></div>
-
-<!-- ================================================================
-     CASE STUDIES — TODO: descomentar cuando haya proyectos reales
-================================================================ -->
-<!--
-<section class="cases section" id="cases">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="cases_label">Case studies</p>
-            <h2 class="sec-title rv" data-i18n="cases_title">Work we're proud of</h2>
-            <p class="sec-sub rv d1" data-i18n="cases_sub">A selection of projects that illustrate the depth and breadth of our engineering work. All clients are under NDA — details are anonymised.</p>
-        </div>
-        <div class="case-cards">
-
-            <article class="case-card rv">
-                <div class="case-header">
-                    <span class="case-industry" data-i18n="c1_industry">Industry 4.0 · Manufacturing</span>
-                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
-                </div>
-                <h3 class="case-title" data-i18n="c1_title">Machine Health Monitoring System</h3>
-                <div class="case-cols">
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c1_ch"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c1_sol"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c1_out"></p>
-                    </div>
-                </div>
-                <div class="case-tags">
-                    <span class="case-tech-tag">STM32L4</span>
-                    <span class="case-tech-tag">FreeRTOS</span>
-                    <span class="case-tech-tag">LoRaWAN</span>
-                    <span class="case-tech-tag">AWS IoT Core</span>
-                    <span class="case-tech-tag">InfluxDB</span>
-                    <span class="case-tech-tag">Grafana</span>
-                    <span class="case-tech-tag">KiCad</span>
-                </div>
-            </article>
-
-            <article class="case-card rv">
-                <div class="case-header">
-                    <span class="case-industry" data-i18n="c2_industry">AgTech · Precision Agriculture</span>
-                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
-                </div>
-                <h3 class="case-title" data-i18n="c2_title">Smart Irrigation Network for Precision Agriculture</h3>
-                <div class="case-cols">
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c2_ch"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c2_sol"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c2_out"></p>
-                    </div>
-                </div>
-                <div class="case-tags">
-                    <span class="case-tech-tag">ESP32</span>
-                    <span class="case-tech-tag">LoRa</span>
-                    <span class="case-tech-tag">Solar + MPPT</span>
-                    <span class="case-tech-tag">Modbus RTU</span>
-                    <span class="case-tech-tag">Python</span>
-                    <span class="case-tech-tag">TimescaleDB</span>
-                    <span class="case-tech-tag">Docker</span>
-                </div>
-            </article>
-
-            <article class="case-card rv">
-                <div class="case-header">
-                    <span class="case-industry" data-i18n="c3_industry">Health Tech · Wearables</span>
-                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
-                </div>
-                <h3 class="case-title" data-i18n="c3_title">Custom BLE Wearable Monitoring Platform</h3>
-                <div class="case-cols">
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
-                        <p data-i18n="c3_ch"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
-                        <p data-i18n="c3_sol"></p>
-                    </div>
-                    <div class="case-col">
-                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
-                        <p data-i18n="c3_out"></p>
-                    </div>
-                </div>
-                <div class="case-tags">
-                    <span class="case-tech-tag">NRF52840</span>
-                    <span class="case-tech-tag">BLE 5.2</span>
-                    <span class="case-tech-tag">Zephyr RTOS</span>
-                    <span class="case-tech-tag">C</span>
-                    <span class="case-tech-tag">REST API</span>
-                    <span class="case-tech-tag">Node.js</span>
-                    <span class="case-tech-tag">KiCad</span>
-                </div>
-            </article>
-
-        </div>
-    </div>
-</section>
-
-<div class="accent-line"></div>
--->
-
-<!-- ================================================================
-     TECH STACK
-================================================================ -->
-<section class="projects section" id="stack">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="tech_label">Our stack</p>
-            <h2 class="sec-title rv" data-i18n="tech_title">What we work with</h2>
-            <p class="sec-sub rv d1" data-i18n="tech_sub">The tools, platforms, and technologies we know inside out — from the chip to the cloud.</p>
-        </div>
-        <div class="tech-grid">
-            <div class="tech-card rv">
-                <div class="srv-icon"><i class="fa-solid fa-microchip"></i></div>
-                <h3 class="tech-cat" data-i18n="tc1t">Microcontrollers</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">STM32</span>
-                    <span class="tech-tag">ESP32</span>
-                    <span class="tech-tag">NRF52840</span>
-                    <span class="tech-tag">RP2040</span>
-                    <span class="tech-tag">RISC-V</span>
-                    <span class="tech-tag">AVR</span>
-                </div>
-            </div>
-            <div class="tech-card rv d1">
-                <div class="srv-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
-                <h3 class="tech-cat" data-i18n="tc2t">Wireless & IoT</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">LoRaWAN</span>
-                    <span class="tech-tag">BLE</span>
-                    <span class="tech-tag">WiFi</span>
-                    <span class="tech-tag">MQTT</span>
-                    <span class="tech-tag">Zigbee</span>
-                    <span class="tech-tag">LTE-M</span>
-                </div>
-            </div>
-            <div class="tech-card rv d2">
-                <div class="srv-icon"><i class="fa-solid fa-memory"></i></div>
-                <h3 class="tech-cat" data-i18n="tc3t">PCB Design</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">KiCad</span>
-                    <span class="tech-tag">Altium</span>
-                    <span class="tech-tag">Multi-layer</span>
-                    <span class="tech-tag">DFM</span>
-                    <span class="tech-tag">SPICE</span>
-                    <span class="tech-tag">EMC</span>
-                </div>
-            </div>
-            <div class="tech-card rv">
-                <div class="srv-icon"><i class="fa-solid fa-code"></i></div>
-                <h3 class="tech-cat" data-i18n="tc4t">Firmware & RTOS</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">C / C++</span>
-                    <span class="tech-tag">FreeRTOS</span>
-                    <span class="tech-tag">Zephyr</span>
-                    <span class="tech-tag">Bare metal</span>
-                    <span class="tech-tag">HAL / LL</span>
-                    <span class="tech-tag">DMA</span>
-                </div>
-            </div>
-            <div class="tech-card rv d1">
-                <div class="srv-icon"><i class="fa-solid fa-cloud"></i></div>
-                <h3 class="tech-cat" data-i18n="tc5t">Cloud & Backend</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">AWS IoT</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">REST API</span>
-                    <span class="tech-tag">InfluxDB</span>
-                    <span class="tech-tag">Grafana</span>
-                    <span class="tech-tag">Docker</span>
-                </div>
-            </div>
-            <div class="tech-card rv d2">
-                <div class="srv-icon"><i class="fa-solid fa-plug"></i></div>
-                <h3 class="tech-cat" data-i18n="tc6t">Protocols & Interfaces</h3>
-                <div class="tech-tags">
-                    <span class="tech-tag">SPI</span>
-                    <span class="tech-tag">I2C</span>
-                    <span class="tech-tag">UART</span>
-                    <span class="tech-tag">CAN</span>
-                    <span class="tech-tag">USB</span>
-                    <span class="tech-tag">Modbus</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="accent-line"></div>
-
-<!-- ================================================================
-     ABOUT
-================================================================ -->
+<!-- ABOUT ============================================================ -->
 <section class="section" id="about">
-    <div class="container">
-        <div class="sec-hdr">
-            <p class="sec-label" data-i18n="ab_label">The team</p>
-            <h2 class="sec-title rv" data-i18n="ab_title">Small team,<br>big expertise.</h2>
-            <p class="sec-sub rv d1" data-i18n="ab_sub1">We are a small team of engineers with over a decade of experience building real technology products. Our work spans the full technical spectrum: from circuit design and the firmware running on the microcontroller, to the APIs and cloud infrastructure that make data actionable. The team that talks to you is the same team that designs, codes, and delivers — no outsourcing, no hand-offs.</p>
-            <p class="sec-sub rv d2" style="margin-top:16px" data-i18n="ab_sub2">This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers thinking about the circuit and the data architecture eliminates friction, accelerates development, and produces more coherent solutions.</p>
-        </div>
-        <div class="stat-grid">
-            <div class="stat-box rv">
-                <div class="stat-num">10+</div>
-                <div class="stat-label" data-i18n="st1">Years combined experience</div>
-            </div>
-            <div class="stat-box rv d1">
-                <div class="stat-num">6+</div>
-                <div class="stat-label" data-i18n="st2">Technologies mastered</div>
-            </div>
-            <div class="stat-box rv d2">
-                <div class="stat-num">8+</div>
-                <div class="stat-label" data-i18n="st3">Industries served</div>
-            </div>
-            <div class="stat-box rv d3">
-                <div class="stat-num">SVQ</div>
-                <div class="stat-label" data-i18n="st4">Based in Seville, Spain</div>
-            </div>
-        </div>
+  <div class="container">
+    <p class="lbl rv" data-i18n="ab_label">About us</p>
+    <h2 class="h2 rv d1" data-i18n="ab_title">Small team,<br>deep expertise.</h2>
+    <p class="lead rv d2" data-i18n="ab_sub1">We are a focused team of engineers with over a decade of experience building real technology products — from the microcontroller firmware to the cloud infrastructure. The same team that talks to you is the one that designs, codes, and delivers.</p>
+    <p class="lead rv d3" data-i18n="ab_sub2">This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers own the circuit and the data architecture eliminates friction and produces more coherent solutions.</p>
 
-        <div class="about-values" style="margin-top:40px">
-            <div class="about-value rv">
-                <div class="av-header">
-                    <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
-                    <span class="av-title" data-i18n="v1t">Commitment to quality</span>
-                </div>
-                <p class="av-desc" data-i18n="v1d">We don't ship something that doesn't work exactly as it should. Every project goes through real testing under real conditions before it leaves our hands.</p>
-            </div>
-            <div class="about-value rv d1">
-                <div class="av-header">
-                    <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></div>
-                    <span class="av-title" data-i18n="v2t">Transparency</span>
-                </div>
-                <p class="av-desc" data-i18n="v2d">We share project status continuously. No surprises at the end, no inflated estimates, no fine print. We prefer difficult conversations over late misunderstandings.</p>
-            </div>
-            <div class="about-value rv d2">
-                <div class="av-header">
-                    <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-atom"></i></div>
-                    <span class="av-title" data-i18n="v3t">Responsible innovation</span>
-                </div>
-                <p class="av-desc" data-i18n="v3d">We use the right technology for each problem, not the trendiest one. Novelty alone is not a value — it is one when it solves a problem better than the alternative.</p>
-            </div>
-            <div class="about-value rv d3">
-                <div class="av-header">
-                    <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
-                    <span class="av-title" data-i18n="v4t">Long-term thinking</span>
-                </div>
-                <p class="av-desc" data-i18n="v4d">We design systems to last and scale. Maintenance, documentation, and product evolution are part of the brief from day one.</p>
-            </div>
-        </div>
-
-        <div class="founder-card rv">
-            <div class="founder-info">
-                <div class="founder-role" data-i18n="fc_role">Founder &amp; Lead Engineer</div>
-                <p class="founder-bio" data-i18n="fc_bio">I started Mekriva to give companies direct access to deep engineering expertise — without layers of management, hand-offs, or black boxes. When you work with Mekriva, you work with me.</p>
-                <div class="founder-links">
-                    <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" aria-label="Mekriva en LinkedIn">
-                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
-                    </a>
-                    <a href="mailto:hellothere@mekriva.com" class="btn btn-ghost" aria-label="Contactar por email">
-                        <i class="fa-solid fa-envelope" aria-hidden="true"></i> hellothere@mekriva.com
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="stat-grid" style="margin-top:48px">
+      <div class="stat-box rv">
+        <div class="stat-num">10+</div>
+        <div class="stat-label" data-i18n="st1">Years combined experience</div>
+      </div>
+      <div class="stat-box rv d1">
+        <div class="stat-num">7</div>
+        <div class="stat-label" data-i18n="st2">Engineering disciplines</div>
+      </div>
+      <div class="stat-box rv d2">
+        <div class="stat-num">8+</div>
+        <div class="stat-label" data-i18n="st3">Industries served</div>
+      </div>
+      <div class="stat-box rv d3">
+        <div class="stat-num">SVQ</div>
+        <div class="stat-label" data-i18n="st4">Based in Seville, Spain</div>
+      </div>
     </div>
+
+    <h3 class="section-sub rv" data-i18n="ab_why_title">What sets us apart</h3>
+    <div class="two-grid">
+      <div class="card why-card rv">
+        <div class="card-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+        <div class="why-text">
+          <strong data-i18n="w1t">Real field experience</strong>
+          <p data-i18n="w1d">Products shipped from prototype to production. We know what works under real-world constraints.</p>
+        </div>
+      </div>
+      <div class="card why-card rv d1">
+        <div class="card-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+        <div class="why-text">
+          <strong data-i18n="w2t">Full-stack hardware + software</strong>
+          <p data-i18n="w2d">From PCB layout to cloud API, we cover the entire stack with no coordination overhead between vendors.</p>
+        </div>
+      </div>
+      <div class="card why-card rv d2">
+        <div class="card-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div>
+        <div class="why-text">
+          <strong data-i18n="w3t">100% custom solutions</strong>
+          <p data-i18n="w3d">No off-the-shelf platforms with your logo. Every project is engineered from scratch for your requirements.</p>
+        </div>
+      </div>
+      <div class="card why-card rv d3">
+        <div class="card-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+        <div class="why-text">
+          <strong data-i18n="w4t">Direct communication</strong>
+          <p data-i18n="w4d">You talk directly to the engineers building your product — no account managers, no middlemen.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-sub rv" data-i18n="ab_vals_title">Our values</h3>
+    <div class="two-grid">
+      <div class="card rv">
+        <div class="val-head">
+          <div class="card-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+          <span class="val-title" data-i18n="v1t">Commitment to quality</span>
+        </div>
+        <p class="val-desc" data-i18n="v1d">Every project goes through real testing under real conditions before it leaves our hands.</p>
+      </div>
+      <div class="card rv d1">
+        <div class="val-head">
+          <div class="card-icon"><i class="fa-solid fa-eye" aria-hidden="true"></i></div>
+          <span class="val-title" data-i18n="v2t">Transparency</span>
+        </div>
+        <p class="val-desc" data-i18n="v2d">Continuous project status, no inflated estimates, no fine print. Difficult conversations over late misunderstandings.</p>
+      </div>
+      <div class="card rv d2">
+        <div class="val-head">
+          <div class="card-icon"><i class="fa-solid fa-atom" aria-hidden="true"></i></div>
+          <span class="val-title" data-i18n="v3t">Responsible innovation</span>
+        </div>
+        <p class="val-desc" data-i18n="v3d">We use the right technology for each problem — not the trendiest one.</p>
+      </div>
+      <div class="card rv d3">
+        <div class="val-head">
+          <div class="card-icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></div>
+          <span class="val-title" data-i18n="v4t">Long-term thinking</span>
+        </div>
+        <p class="val-desc" data-i18n="v4d">Systems designed to last and scale. Documentation and evolution are part of the brief from day one.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="accent-line"></div>
+<div class="divider"></div>
 
-<!-- ================================================================
-     CONTACT
-================================================================ -->
-<section class="contact section" id="contact">
-    <div class="container">
-        <div class="contact-inner">
-            <div class="contact-info">
-                <p class="sec-label" data-i18n="ct_label">Get in touch</p>
-                <h2 class="sec-title rv" data-i18n="ct_title">Let's talk about your project</h2>
-                <p class="sec-sub rv d1" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
-                <div class="c-detail rv d2">
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
-                </div>
-                <div class="c-detail rv d3">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span data-i18n="ct_loc">Seville, Spain</span>
-                </div>
-                <div class="c-detail rv d4">
-                    <i class="fa-solid fa-clock"></i>
-                    <span data-i18n="ct_hrs">Mon–Fri, 9:00–18:00 CET</span>
-                </div>
-                <div class="c-detail rv d5">
-                    <i class="fa-brands fa-linkedin"></i>
-                    <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">linkedin.com/company/mekriva</a>
-                </div>
-            </div>
+<!-- SERVICES ============================================================ -->
+<section class="section section-alt" id="services">
+  <div class="container">
+    <p class="lbl rv" data-i18n="srv_label">What we do</p>
+    <h2 class="h2 rv d1" data-i18n="srv_title">Our services</h2>
+    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="srv_sub">Complete technological solutions from the first schematic to the cloud dashboard. No off-the-shelf products — everything custom.</p>
 
-            <div class="c-form rv d1">
-                <form id="contactForm">
-                    <input type="hidden" name="access_key" value="ca076abd-e241-41ae-9aa7-a2d0b7ce8214">
-                    <input type="hidden" name="subject" data-i18n-subject="true">
-                    <div class="f-row">
-                        <div class="fg">
-                            <label for="f-name" data-i18n="fl_name">Name</label>
-                            <input id="f-name" type="text" name="name" class="fc" required data-ph="fp_name" autocomplete="name">
-                        </div>
-                        <div class="fg">
-                            <label for="f-company" data-i18n="fl_company">Company</label>
-                            <input id="f-company" type="text" name="company" class="fc" data-ph="fp_company" autocomplete="organization">
-                        </div>
-                    </div>
-                    <div class="fg">
-                        <label for="f-email" data-i18n="fl_email">Email</label>
-                        <input id="f-email" type="email" name="email" class="fc" required data-ph="fp_email" autocomplete="email">
-                    </div>
-                    <div class="fg">
-                        <label for="f-message" data-i18n="fl_msg">Message</label>
-                        <textarea id="f-message" name="message" class="fc" required data-ph="fp_msg"></textarea>
-                    </div>
-                    <button type="submit" id="formBtn" class="btn btn-primary f-submit">
-                        <span data-i18n="fl_btn">Send message</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
-                <div id="formSuccess" style="display:none; text-align:center; padding: 40px 0;">
-                    <div style="font-size:36px; color:var(--accent); margin-bottom:16px;">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </div>
-                    <p style="font-size:17px; font-weight:600; margin-bottom:8px;" data-i18n="form_ok_title">Message sent!</p>
-                    <p style="font-size:14px; color:var(--muted);" data-i18n="form_ok_sub">We'll get back to you as soon as possible.</p>
-                </div>
-            </div>
-        </div>
+    <div class="srv-list">
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s1t">Embedded Systems Development</div>
+            <div class="srv-tags" data-i18n="s1h">STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s1d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s2t">Firmware &amp; Hardware Engineering</div>
+            <div class="srv-tags" data-i18n="s2h">PCB design · Bring-up · EMC · DFM · KiCad · Altium</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s2d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s3t">Device Integration &amp; Connectivity</div>
+            <div class="srv-tags" data-i18n="s3h">CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s3d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s4t">Backend &amp; Cloud Architecture</div>
+            <div class="srv-tags" data-i18n="s4h">AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s4d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s5t">IoT End-to-End Solutions</div>
+            <div class="srv-tags" data-i18n="s5h">Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s5d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s6t">Technical Consulting &amp; Architecture</div>
+            <div class="srv-tags" data-i18n="s6h">Architecture review · Tech roadmap · Due diligence · Risk assessment</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s6d"></p></div>
+      </details>
+
+      <details class="srv-item rv">
+        <summary>
+          <div class="srv-icon"><i class="fa-solid fa-flask" aria-hidden="true"></i></div>
+          <div class="srv-info">
+            <div class="srv-name" data-i18n="s7t">QA &amp; Testing</div>
+            <div class="srv-tags" data-i18n="s7h">HIL testing · Regression suites · Load testing · Endurance · Audit</div>
+          </div>
+          <i class="fa-solid fa-chevron-down srv-chev" aria-hidden="true"></i>
+        </summary>
+        <div class="srv-body"><p data-i18n="s7d"></p></div>
+      </details>
     </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESS ============================================================ -->
+<section class="section" id="process">
+  <div class="container">
+    <p class="lbl rv" data-i18n="how_label">Our process</p>
+    <h2 class="h2 rv d1" data-i18n="how_title">How we work</h2>
+    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="how_sub">A clear process, no surprises. We work closely with you at every step.</p>
+
+    <div class="process-grid">
+      <div class="process-card rv">
+        <div class="process-num">01</div>
+        <h3 class="process-title" data-i18n="p1t">We understand the problem</h3>
+        <p class="process-desc" data-i18n="p1d">We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before proposing anything.</p>
+      </div>
+      <div class="process-card rv d1">
+        <div class="process-num">02</div>
+        <h3 class="process-title" data-i18n="p2t">We design the solution</h3>
+        <p class="process-desc" data-i18n="p2d">We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a line of code or draw a trace.</p>
+      </div>
+      <div class="process-card rv d2">
+        <div class="process-num">03</div>
+        <h3 class="process-title" data-i18n="p3t">We build it</h3>
+        <p class="process-desc" data-i18n="p3d">Hardware and software developed in parallel, with regular updates and live demos. You always know the current project state — no black boxes.</p>
+      </div>
+      <div class="process-card rv d3">
+        <div class="process-num">04</div>
+        <h3 class="process-title" data-i18n="p4t">We deliver &amp; support</h3>
+        <p class="process-desc" data-i18n="p4d">Full documentation, source files, and a transition period. We make sure it works in your real environment before we step back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK ============================================================ -->
+<section class="section section-alt" id="stack">
+  <div class="container">
+    <p class="lbl rv" data-i18n="tech_label">Our stack</p>
+    <h2 class="h2 rv d1" data-i18n="tech_title">What we work with</h2>
+    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="tech_sub">The tools, platforms, and technologies we know inside out — from the chip to the cloud.</p>
+
+    <div class="tech-grid">
+      <div class="tech-card rv">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc1t">Microcontrollers</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">STM32</span><span class="tech-tag">ESP32</span>
+          <span class="tech-tag">NRF52840</span><span class="tech-tag">RP2040</span>
+          <span class="tech-tag">RISC-V</span><span class="tech-tag">AVR</span>
+        </div>
+      </div>
+      <div class="tech-card rv d1">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc2t">Wireless &amp; IoT</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">LoRaWAN</span><span class="tech-tag">BLE 5.x</span>
+          <span class="tech-tag">WiFi</span><span class="tech-tag">MQTT</span>
+          <span class="tech-tag">Zigbee</span><span class="tech-tag">LTE-M</span>
+        </div>
+      </div>
+      <div class="tech-card rv d2">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-memory" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc3t">PCB Design</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">KiCad</span><span class="tech-tag">Altium</span>
+          <span class="tech-tag">Multi-layer</span><span class="tech-tag">DFM</span>
+          <span class="tech-tag">SPICE</span><span class="tech-tag">EMC</span>
+        </div>
+      </div>
+      <div class="tech-card rv">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc4t">Firmware &amp; RTOS</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">C / C++</span><span class="tech-tag">FreeRTOS</span>
+          <span class="tech-tag">Zephyr</span><span class="tech-tag">Bare metal</span>
+          <span class="tech-tag">HAL / LL</span><span class="tech-tag">DMA</span>
+        </div>
+      </div>
+      <div class="tech-card rv d1">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc5t">Cloud &amp; Backend</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">AWS IoT</span><span class="tech-tag">Node.js</span>
+          <span class="tech-tag">REST API</span><span class="tech-tag">InfluxDB</span>
+          <span class="tech-tag">Grafana</span><span class="tech-tag">Docker</span>
+        </div>
+      </div>
+      <div class="tech-card rv d2">
+        <div class="tech-head">
+          <div class="tech-icon"><i class="fa-solid fa-plug" aria-hidden="true"></i></div>
+          <h3 class="tech-cat" data-i18n="tc6t">Protocols &amp; Interfaces</h3>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">SPI</span><span class="tech-tag">I2C</span>
+          <span class="tech-tag">UART</span><span class="tech-tag">CAN</span>
+          <span class="tech-tag">USB</span><span class="tech-tag">Modbus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT ============================================================ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <p class="lbl rv" data-i18n="ct_label">Get in touch</p>
+        <h2 class="h2 rv d1" data-i18n="ct_title">Let's talk about your project</h2>
+        <p class="lead rv d2" style="margin-bottom:32px" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
+        <div class="contact-detail rv d3">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
+        </div>
+        <div class="contact-detail rv d4">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <span data-i18n="ct_loc">Seville, Spain</span>
+        </div>
+        <div class="contact-detail rv" style="transition-delay:.40s">
+          <i class="fa-solid fa-clock" aria-hidden="true"></i>
+          <span data-i18n="ct_hrs">Mon–Fri, 9:00–18:00 CET</span>
+        </div>
+        <div class="contact-detail rv" style="transition-delay:.50s">
+          <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+          <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">linkedin.com/company/mekriva</a>
+        </div>
+      </div>
+
+      <div class="c-form rv d1">
+        <form id="contactForm">
+          <input type="hidden" name="access_key" value="ca076abd-e241-41ae-9aa7-a2d0b7ce8214">
+          <input type="hidden" name="subject" data-i18n-subject="true">
+          <div class="f-row">
+            <div class="fg">
+              <label for="f-name" data-i18n="fl_name">Name</label>
+              <input id="f-name" type="text" name="name" class="fc" required data-ph="fp_name" autocomplete="name">
+            </div>
+            <div class="fg">
+              <label for="f-company" data-i18n="fl_company">Company</label>
+              <input id="f-company" type="text" name="company" class="fc" data-ph="fp_company" autocomplete="organization">
+            </div>
+          </div>
+          <div class="fg">
+            <label for="f-email" data-i18n="fl_email">Email</label>
+            <input id="f-email" type="email" name="email" class="fc" required data-ph="fp_email" autocomplete="email">
+          </div>
+          <div class="fg">
+            <label for="f-message" data-i18n="fl_msg">Message</label>
+            <textarea id="f-message" name="message" class="fc" required data-ph="fp_msg"></textarea>
+          </div>
+          <button type="submit" id="formBtn" class="btn btn-primary f-submit">
+            <span data-i18n="fl_btn">Send message</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </form>
+        <div id="formSuccess" style="display:none; text-align:center; padding:40px 0;">
+          <div style="font-size:36px; color:var(--accent); margin-bottom:16px;">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+          </div>
+          <p style="font-size:17px; font-weight:600; margin-bottom:8px;" data-i18n="form_ok_title">Message sent!</p>
+          <p style="font-size:14px; color:var(--muted);" data-i18n="form_ok_sub">We'll get back to you as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 </main>
 
-<!-- ================================================================
-     FOOTER
-================================================================ -->
+<!-- FOOTER ============================================================ -->
 <footer class="footer">
-    <div class="container">
-        <div class="footer-top">
-            <div>
-                <a href="#hero" class="footer-logo">Mek<span>riva</span></a>
-                <p class="footer-desc" data-i18n="ft_desc">From circuit to cloud. Engineering that works for your business.</p>
-            </div>
-            <div class="fc-col">
-                <h4 data-i18n="ft_nav">Navigation</h4>
-                <ul>
-                    <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
-                    <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
-                    <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-                    <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
-                    <li><a href="#about"     data-i18n="nav_about">About</a></li>
-                </ul>
-            </div>
-            <div class="fc-col">
-                <h4 data-i18n="ft_ct">Contact</h4>
-                <ul>
-                    <li><a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a></li>
-                    <li><a href="#contact" data-i18n="ft_form">Contact form</a></li>
-                    <li><a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-
-                    <li><span data-i18n="ct_loc">Seville, Spain</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bot">
-            <span data-i18n="ft_copy">© 2026 Mekriva. All rights reserved.</span>
-            <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
-                <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a>
-                <a href="politica-de-privacidad.html" class="footer-legal-link">Política de Privacidad</a>
-                <span data-i18n="ft_made">Made with precision in Seville.</span>
-            </div>
-        </div>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#hero" class="footer-logo">Mek<span>riva</span></a>
+        <p class="footer-desc" data-i18n="ft_desc">From circuit to cloud. Engineering that works for your business.</p>
+      </div>
+      <div class="fc-col">
+        <h4 data-i18n="ft_nav">Navigation</h4>
+        <ul>
+          <li><a href="#about"    data-i18n="nav_about">About</a></li>
+          <li><a href="#services" data-i18n="nav_srv">Services</a></li>
+          <li><a href="#process"  data-i18n="nav_how">Process</a></li>
+          <li><a href="#stack"    data-i18n="nav_proj">Stack</a></li>
+          <li><a href="#contact"  data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="fc-col">
+        <h4 data-i18n="ft_ct">Contact</h4>
+        <ul>
+          <li><a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a></li>
+          <li><a href="#contact" data-i18n="ft_form">Contact form</a></li>
+          <li><a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><span data-i18n="ct_loc">Seville, Spain</span></li>
+        </ul>
+      </div>
     </div>
+    <div class="footer-bot">
+      <span data-i18n="ft_copy">© 2026 Mekriva. All rights reserved.</span>
+      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
+        <a href="aviso-legal.html" class="footer-legal-link">Aviso Legal</a>
+        <a href="politica-de-privacidad.html" class="footer-legal-link">Política de Privacidad</a>
+        <span data-i18n="ft_made">Made with precision in Seville.</span>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<!-- ================================================================
-     JAVASCRIPT
-================================================================ -->
 <script>
 // ── TRANSLATIONS ──────────────────────────────────────────────────
 const t = {
   en: {
-    nav_srv:'Services', nav_how:'How we work', nav_why:'Why Mekriva',
-    nav_cases:'Cases', nav_proj:'Stack', nav_about:'About', nav_contact:'Contact',
+    nav_about:'About', nav_srv:'Services', nav_how:'Process',
+    nav_proj:'Stack', nav_contact:'Contact',
     cta:'Talk to us',
     h_badge:'Engineering & Innovation',
-    h_tagline:'We build your ideas.',
+    h_tagline:'Embedded Systems & IoT Engineering',
     h_sub:'From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.',
     h_explore:'Explore services',
+    ab_label:'About us',
+    ab_title:'Small team,<br>deep expertise.',
+    ab_sub1:'We are a focused team of engineers with over a decade of experience building real technology products — from the microcontroller firmware to the cloud infrastructure. The same team that talks to you is the one that designs, codes, and delivers.',
+    ab_sub2:'This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers own the circuit and the data architecture eliminates friction and produces more coherent solutions.',
+    ab_why_title:'What sets us apart',
+    ab_vals_title:'Our values',
+    w1t:'Real field experience',
+    w1d:'Products shipped from prototype to production. We know what works under real-world constraints.',
+    w2t:'Full-stack hardware + software',
+    w2d:'From PCB layout to cloud API, we cover the entire stack with no coordination overhead between vendors.',
+    w3t:'100% custom solutions',
+    w3d:"No off-the-shelf platforms with your logo. Every project is engineered from scratch for your requirements.",
+    w4t:'Direct communication',
+    w4d:'You talk directly to the engineers building your product — no account managers, no middlemen.',
+    v1t:'Commitment to quality',
+    v1d:'Every project goes through real testing under real conditions before it leaves our hands.',
+    v2t:'Transparency',
+    v2d:'Continuous project status, no inflated estimates, no fine print. Difficult conversations over late misunderstandings.',
+    v3t:'Responsible innovation',
+    v3d:'We use the right technology for each problem — not the trendiest one.',
+    v4t:'Long-term thinking',
+    v4d:'Systems designed to last and scale. Documentation and evolution are part of the brief from day one.',
+    st1:'Years combined experience', st2:'Engineering disciplines',
+    st3:'Industries served',        st4:'Based in Seville, Spain',
     srv_label:'What we do',
     srv_title:'Our services',
-    srv_sub:'We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.',
+    srv_sub:'Complete technological solutions from the first schematic to the cloud dashboard. No off-the-shelf products — everything custom.',
     s1t:'Embedded Systems Development',
     s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
     s1d:'Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.',
     s2t:'Firmware & Hardware Engineering',
     s2h:'PCB design · Bring-up · EMC · DFM · KiCad · Altium',
-    s2d:'End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product\'s embedded software stack. The result is a documented, validated hardware platform your team can build on with confidence.',
+    s2d:"End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product's embedded software stack.",
     s3t:'Device Integration & Connectivity',
     s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
-    s3d:'Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates. Connectivity is an architectural decision with long-term consequences — we make it deliberately.',
+    s3d:'Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates.',
     s4t:'Backend & Cloud Architecture',
     s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
-    s4d:'Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice. We design for the scale you need today and the scale you will need in two years, without over-engineering for scenarios that may never arrive.',
+    s4d:'Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice.',
     s5t:'IoT End-to-End Solutions',
     s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment',
-    s5d:'Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling. We have built systems for industrial condition monitoring, precision agriculture, environmental sensing and asset tracking — each designed around the specific constraints of the application, never around a generic platform with your logo on it.',
+    s5d:"Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling.",
     s6t:'Technical Consulting & Architecture',
     s6h:'Architecture review · Tech roadmap · Due diligence · Risk assessment',
-    s6d:'Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices. Every deliverable includes a specific finding, the technical reasoning behind it, and a prioritised path forward. If an engagement reveals scope for further development work, we say so and leave the decision to you. We do not manufacture urgency and we do not oversell.',
+    s6d:'Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices.',
     s7t:'QA & Testing',
     s7h:'HIL testing · Regression suites · Load testing · Endurance · Audit',
-    s7d:'Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We treat test coverage as a design constraint, not an optional extra. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing test coverage, identify the highest-risk untested paths and implement the infrastructure needed to give the engineering team — and their customers — a justified level of confidence. Quality is an attribute of the engineering process. It shows in the product.',
-    cases_label:'Case studies',
-    cases_title:"Work we're proud of",
-    cases_sub:'A selection of projects that illustrate the depth and breadth of our engineering work. All clients are under NDA — details are anonymised.',
-    case_nda:'Under NDA',
-    col_ch:'Challenge', col_sol:'Solution', col_out:'Outcomes',
-    c1_industry:'Industry 4.0 · Manufacturing',
-    c1_title:'Machine Health Monitoring System',
-    c1_ch:'A mid-sized manufacturing company had zero real-time visibility into the health of their production machinery. Maintenance was entirely reactive — teams responded to failures after they occurred, resulting in costly unplanned downtime and lost production capacity across multiple shifts.',
-    c1_sol:'We designed a network of custom wireless sensor nodes measuring vibration, temperature and motor current at 1 kHz. Nodes communicate over LoRaWAN to an on-site gateway forwarding data to AWS IoT Core. An InfluxDB backend feeds a Grafana dashboard with per-machine baselines and anomaly detection alerts for predictive maintenance.',
-    c1_out:'40% reduction in unplanned downtime in the first quarter. Real-time health visibility across 60+ machines. Maintenance teams now receive actionable alerts 48–72 hours before failure — shifting the operation from reactive to predictive maintenance.',
-    c2_industry:'AgTech · Precision Agriculture',
-    c2_title:'Smart Irrigation Network for Precision Agriculture',
-    c2_ch:'An agricultural cooperative managed irrigation across hundreds of hectares using fixed schedules and manual soil readings. The approach wasted water in over-irrigated zones and underperformed in others, with no data-driven decision making and a heavy operational burden on field teams.',
-    c2_sol:'We developed solar-powered sensor nodes measuring soil moisture at multiple depths, temperature, humidity and solar radiation. Nodes transmit over LoRa to a 4G-connected gateway. A Python backend processes sensor data against crop growth models to generate automated, field-specific irrigation schedules integrated with existing pump controls via Modbus RTU.',
-    c2_out:'35% reduction in total water consumption. Automated scheduling eliminated manual field readings entirely. Crop yield improved 12% in the first season, attributed to more consistent soil moisture levels across all field zones throughout the growth cycle.',
-    c3_industry:'Health Tech · Wearables',
-    c3_title:'Custom BLE Wearable Monitoring Platform',
-    c3_ch:'A health tech startup needed a custom BLE wearable to run their proprietary biometric algorithms. Off-the-shelf development boards could not meet their power budget, form factor and sensor fusion requirements. They needed a production-grade hardware platform designed from scratch, with a companion cloud API.',
-    c3_sol:'We designed a multi-layer PCB around the NRF52840 integrating a custom sensor suite, a power management subsystem targeting 5-day battery life, and a BLE 5.2 stack with a proprietary GATT profile. Firmware was developed in C on Zephyr RTOS. A companion REST API aggregates data from the BLE gateway and exposes it to the client\'s mobile backend.',
-    c3_out:'Prototype delivered in 4 months from specification. 5.3-day battery life in continuous monitoring mode, exceeding the target. BLE range of 30 m in real-world environments. Hardware passed IEC pre-compliance screening on the first revision, enabling the client to proceed directly to clinical validation.',
+    s7d:'Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing coverage, identify the highest-risk untested paths, and implement the infrastructure needed to give the engineering team a justified level of confidence.',
     how_label:'Our process', how_title:'How we work',
     how_sub:'A clear process, no surprises. We work closely with you at every step.',
     p1t:'We understand the problem',
-    p1d:'We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before we propose anything.',
+    p1d:'We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before proposing anything.',
     p2t:'We design the solution',
-    p2d:'We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a single line of code or draw a trace.',
+    p2d:'We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a line of code or draw a trace.',
     p3t:'We build it',
-    p3d:'We develop hardware and software in parallel, with regular updates and live demos. You always know the current state of the project — no black boxes.',
+    p3d:'Hardware and software developed in parallel, with regular updates and live demos. You always know the current project state — no black boxes.',
     p4t:'We deliver & support',
-    p4d:"Delivery includes full documentation, source files, and a transition period. We don't just hand it over — we make sure it works in your real environment.",
-    why_label:'Why us',
-    why_title:'Not consultants.<br>Engineers.',
-    why_sub:"We've built real products, shipped real hardware, and debugged at 3am. We bring that experience directly to your project.",
-    w1t:'Real field experience',
-    w1d:'Our team has shipped products from prototype to mass production. We know what works under real-world constraints.',
-    w2t:'Full-stack hardware + software',
-    w2d:'From PCB layout to cloud API, we cover the entire stack. No coordination overhead, no finger-pointing between vendors.',
-    w3t:'100% custom solutions',
-    w3d:"We don't sell off-the-shelf platforms with your logo on them. Every project is designed from scratch for your specific requirements.",
-    w4t:'Direct communication',
-    w4d:'You talk directly to the engineers building your product. No account managers, no ticket systems, no middlemen.',
-    tech_label:'Our stack',
-    tech_title:'What we work with',
+    p4d:"Full documentation, source files, and a transition period. We make sure it works in your real environment before we step back.",
+    tech_label:'Our stack', tech_title:'What we work with',
     tech_sub:'The tools, platforms, and technologies we know inside out — from the chip to the cloud.',
-    tc1t:'Microcontrollers',
-    tc2t:'Wireless & IoT',
-    tc3t:'PCB Design',
-    tc4t:'Firmware & RTOS',
-    tc5t:'Cloud & Backend',
-    tc6t:'Protocols & Interfaces',
-    ab_label:'The team',
-    ab_title:'Small team,<br>big expertise.',
-    ab_sub1:'We are a small team of engineers with over a decade of experience building real technology products. Our work spans the full technical spectrum: from circuit design and the firmware running on the microcontroller, to the APIs and cloud infrastructure that make data actionable. The team that talks to you is the same team that designs, codes, and delivers — no outsourcing, no hand-offs.',
-    ab_sub2:'This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers thinking about the circuit and the data architecture eliminates friction, accelerates development, and produces more coherent solutions.',
-    v1t:'Commitment to quality',
-    v1d:"We don't ship something that doesn't work exactly as it should. Every project goes through real testing under real conditions before it leaves our hands.",
-    v2t:'Transparency',
-    v2d:'We share project status continuously. No surprises at the end, no inflated estimates, no fine print. We prefer difficult conversations over late misunderstandings.',
-    v3t:'Responsible innovation',
-    v3d:'We use the right technology for each problem, not the trendiest one. Novelty alone is not a value — it is one when it solves a problem better than the alternative.',
-    v4t:'Long-term thinking',
-    v4d:'We design systems to last and scale. Maintenance, documentation, and product evolution are part of the brief from day one.',
-    st1:'Years combined experience', st2:'Technologies mastered',
-    st3:'Industries served', st4:'Based in Seville, Spain',
-    fc_role:'Founder & Lead Engineer',
-    fc_bio:"I started Mekriva to give companies direct access to deep engineering expertise — without layers of management, hand-offs, or black boxes. When you work with Mekriva, you work with me.",
+    tc1t:'Microcontrollers', tc2t:'Wireless & IoT', tc3t:'PCB Design',
+    tc4t:'Firmware & RTOS',  tc5t:'Cloud & Backend', tc6t:'Protocols & Interfaces',
     ct_label:'Get in touch',
     ct_title:"Let's talk about your project",
     ct_sub:"Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.",
@@ -1725,103 +1243,75 @@ const t = {
     form_err:'Something went wrong. Please try again or email us directly.',
   },
   es: {
-    nav_srv:'Servicios', nav_how:'Cómo trabajamos', nav_why:'Por qué Mekriva',
-    nav_cases:'Casos', nav_proj:'Stack', nav_about:'Nosotros', nav_contact:'Contacto',
+    nav_about:'Nosotros', nav_srv:'Servicios', nav_how:'Proceso',
+    nav_proj:'Stack', nav_contact:'Contacto',
     cta:'Háblanos',
     h_badge:'Ingeniería e Innovación',
-    h_tagline:'Construimos tus ideas.',
+    h_tagline:'Sistemas Embebidos, Firmware e Ingeniería IoT',
     h_sub:'Del circuito a la nube — convertimos tus retos tecnológicos en soluciones completas y a medida. Hardware, firmware, IoT y software cloud, todo bajo un mismo techo.',
     h_explore:'Ver servicios',
+    ab_label:'Sobre nosotros',
+    ab_title:'Equipo pequeño,<br>gran profundidad técnica.',
+    ab_sub1:'Somos un equipo reducido de ingenieros con más de una década de experiencia construyendo productos tecnológicos reales — desde el firmware del microcontrolador hasta la infraestructura cloud. El mismo equipo que te atiende es el que diseña, programa y entrega.',
+    ab_sub2:'Esta capacidad full-stack — hardware, firmware y cloud bajo un mismo techo — es lo que nos distingue. En proyectos IoT y de electrónica industrial, los problemas raramente respetan las fronteras entre capas. Que los mismos ingenieros sean dueños del circuito y de la arquitectura de datos elimina fricciones y produce soluciones más coherentes.',
+    ab_why_title:'Qué nos diferencia',
+    ab_vals_title:'Nuestros valores',
+    w1t:'Experiencia real en campo',
+    w1d:'Productos llevados desde el prototipo hasta la producción. Sabemos qué funciona bajo restricciones del mundo real.',
+    w2t:'Full-stack hardware + software',
+    w2d:'Del diseño de PCB a la API en la nube, cubrimos toda la cadena sin sobrecarga de coordinación entre proveedores.',
+    w3t:'Soluciones 100% a medida',
+    w3d:'No vendemos plataformas genéricas con tu logo. Cada proyecto se ingenia desde cero para tus requisitos específicos.',
+    w4t:'Comunicación directa',
+    w4d:'Hablas directamente con los ingenieros que construyen tu producto — sin gestores de cuenta ni intermediarios.',
+    v1t:'Compromiso con la calidad',
+    v1d:'Cada proyecto pasa por pruebas reales en condiciones reales antes de salir de nuestras manos.',
+    v2t:'Transparencia',
+    v2d:'Estado del proyecto continuo, sin estimaciones infladas, sin letra pequeña. Preferimos las conversaciones difíciles a los malentendidos tardíos.',
+    v3t:'Innovación responsable',
+    v3d:'Usamos la tecnología adecuada para cada problema — no la más de moda.',
+    v4t:'Visión a largo plazo',
+    v4d:'Sistemas diseñados para durar y escalar. La documentación y la evolución forman parte del encargo desde el primer día.',
+    st1:'Años de experiencia combinada', st2:'Disciplinas de ingeniería',
+    st3:'Sectores atendidos',           st4:'Con base en Sevilla, España',
     srv_label:'Qué hacemos',
     srv_title:'Nuestros servicios',
-    srv_sub:'Diseñamos y construimos soluciones tecnológicas completas — desde el primer esquema hasta el panel de control en la nube. Sin productos enlatados, todo a medida.',
+    srv_sub:'Soluciones tecnológicas completas desde el primer esquema hasta el panel de control en la nube. Sin productos enlatados — todo a medida.',
     s1t:'Desarrollo de Sistemas Embebidos',
     s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
     s1d:'Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores — desde C bare-metal hasta arquitecturas basadas en RTOS. Desarrollamos BSP completos, capas de abstracción de hardware, drivers de periféricos e integración de sensores en plataformas STM32, ESP32, NRF52840, RP2040, RISC-V y AVR. Tanto si necesitas un nodo sensor de ultra-bajo consumo como un sistema multicúcleo complejo que gestione bucles de control en tiempo real, tareas de seguridad y comunicaciones inalámbricas en paralelo, entregamos firmware fiable, mantenible y listo para producción. Nuestro trabajo abarca toda la pila software embebida: bootloaders, drivers de dispositivo, middleware, implementaciones de protocolos de comunicación y lógica de aplicación. Usamos FreeRTOS, Zephyr o enfoques bare-metal en función de las restricciones del proyecto — presupuesto de energía, latencia, tamaño de código o estándares de seguridad. Escribimos código limpio y documentado con la testabilidad como requisito: pruebas unitarias al nivel del driver, pipelines de CI para build y test automatizados, y documentación suficiente para que tu equipo pueda mantener y evolucionar el proyecto de forma autónoma tras la entrega.',
     s2t:'Firmware & Hardware Engineering',
     s2h:'Diseño PCB · Bring-up · EMC · DFM · KiCad · Altium',
-    s2d:'Diseño electrónico integral que cubre todo el ciclo de desarrollo desde el concepto hasta el prototipo validado. Nuestro trabajo abarca diseño de circuitos analógicos y digitales: topologías de alimentación, acondicionamiento de señal, frontends ADC, integración de microcontroladores, layouts RF y diseño PCB mixto-signal orientado a producción. Trabajamos en KiCad y Altium, seleccionando componentes con criterios de disponibilidad, longevidad y resiliencia de la cadena de suministro. Los layouts de PCB se optimizan para integridad de señal, gestión térmica y Diseño para Fabricación — entregamos Gerbers que van directamente a fabricación sin sorpresas. Ensamblamos y hacemos el bring-up de prototipos en nuestro laboratorio, validando la funcionalidad en cada etapa con osciloscopios, analizadores lógicos y generadores de señal. Las pruebas de pre-cumplimiento EMC, el perfilado de consumo energético en condiciones reales y las pruebas de estrés ambiental son estándar antes de dar por completo cualquier diseño. En la parte firmware, realizamos la fase crítica de bring-up: inicialización de periféricos, ajuste de modos de bajo consumo, caracterización del comportamiento de sensores y escritura de los drivers de bajo nivel que forman la base de la pila software del producto.',
+    s2d:'Diseño electrónico integral que cubre todo el ciclo de desarrollo desde el concepto hasta el prototipo validado. Nuestro trabajo abarca diseño de circuitos analógicos y digitales: topologías de alimentación, acondicionamiento de señal, frontends ADC, integración de microcontroladores, layouts RF y diseño PCB mixto-signal orientado a producción. Trabajamos en KiCad y Altium, seleccionando componentes con criterios de disponibilidad, longevidad y resiliencia de la cadena de suministro. Los layouts de PCB se optimizan para integridad de señal, gestión térmica y Diseño para Fabricación — entregamos Gerbers que van directamente a fabricación sin sorpresas. Ensamblamos y hacemos el bring-up de prototipos en nuestro laboratorio, validando la funcionalidad en cada etapa con osciloscopios, analizadores lógicos y generadores de señal. Las pruebas de pre-cumplimiento EMC, el perfilado de consumo energético en condiciones reales y las pruebas de estrés ambiental son estándar antes de dar por completo cualquier diseño.',
     s3t:'Integración de Dispositivos y Conectividad',
     s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
-    s3d:'Conexión de dispositivos, sensores y equipos industriales a sistemas más amplios — de forma fiable, eficiente y al nivel de abstracción adecuado. Nos especializamos en la capa de integración entre el hardware y la aplicación: implementación de protocolos, desarrollo de drivers, middleware y diseño de gateways. En el lado cableado, implementamos SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP y protocolos binarios propietarios, gestionando desde el inicio casos límite como contención de bus, validación CRC, recuperación de errores y comportamiento hot-plug. Para conectividad inalámbrica, integramos BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M y NB-IoT, seleccionando la tecnología adecuada según rango, tasa de datos, presupuesto de energía y entorno de despliegue. Diseñamos gateways LoRaWAN, bridges BLE-to-cloud y brokers MQTT que forman la columna vertebral de ecosistemas de productos conectados. En entornos industriales, gestionamos la traducción entre protocolos OT y stacks IT modernos, permitiendo que equipos legados alimenten sistemas cloud sin reemplazar infraestructura existente. También implementamos comunicación segura: TLS, aprovisionamiento de certificados, autenticación mutua y actualizaciones OTA cifradas. La conectividad es una decisión arquitectónica con consecuencias a largo plazo.',
+    s3d:'Conexión de dispositivos, sensores y equipos industriales a sistemas más amplios — de forma fiable, eficiente y al nivel de abstracción adecuado. Nos especializamos en la capa de integración entre el hardware y la aplicación: implementación de protocolos, desarrollo de drivers, middleware y diseño de gateways. En el lado cableado, implementamos SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP y protocolos binarios propietarios, gestionando desde el inicio casos límite como contención de bus, validación CRC, recuperación de errores y comportamiento hot-plug. Para conectividad inalámbrica, integramos BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M y NB-IoT, seleccionando la tecnología adecuada según rango, tasa de datos, presupuesto de energía y entorno de despliegue. Diseñamos gateways LoRaWAN, bridges BLE-to-cloud y brokers MQTT que forman la columna vertebral de ecosistemas de productos conectados. En entornos industriales, gestionamos la traducción entre protocolos OT y stacks IT modernos, permitiendo que equipos legados alimenten sistemas cloud sin reemplazar infraestructura existente.',
     s4t:'Backend & Cloud Architecture',
     s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
-    s4d:'Sistemas backend y cloud diseñados específicamente para las exigencias del hardware conectado: ingesta de datos de alta frecuencia, gestión de dispositivos a escala, procesamiento de telemetría en tiempo real y almacenamiento a largo plazo de series temporales. Diseñamos e implementamos APIs REST y MQTT, servidores WebSocket, brokers de mensajería y pipelines de datos que gestionan volúmenes IoT de forma fiable. La infraestructura corre en AWS IoT Core, Google Cloud o Azure IoT Hub según el ecosistema existente y los requisitos de cumplimiento normativo. Para cargas de trabajo de series temporales, seleccionamos InfluxDB, TimescaleDB o servicios gestionados en función de los patrones de consulta, los requisitos de retención y el coste. Construimos dashboards en Grafana o frontends personalizados ligeros que muestran las métricas adecuadas a las personas adecuadas. El DevOps es parte del diseño desde el inicio: los servicios se conteinerizan con Docker, la infraestructura se gestiona como código con Terraform, y los pipelines de CI/CD con pruebas automatizadas se configuran desde el primer despliegue. La seguridad es una restricción arquitectónica: TLS en todas las comunicaciones, autenticación basada en certificados, control de acceso por roles y gestión de secretos son prácticas estándar. Diseñamos para la escala que necesitas hoy y la que necesitarás en dos años, sin sobre-ingeniería.',
+    s4d:'Sistemas backend y cloud diseñados específicamente para las exigencias del hardware conectado: ingesta de datos de alta frecuencia, gestión de dispositivos a escala, procesamiento de telemetría en tiempo real y almacenamiento a largo plazo de series temporales. Diseñamos e implementamos APIs REST y MQTT, servidores WebSocket, brokers de mensajería y pipelines de datos que gestionan volúmenes IoT de forma fiable. La infraestructura corre en AWS IoT Core, Google Cloud o Azure IoT Hub según el ecosistema existente y los requisitos de cumplimiento normativo. Para cargas de trabajo de series temporales, seleccionamos InfluxDB, TimescaleDB o servicios gestionados en función de los patrones de consulta, los requisitos de retención y el coste. Construimos dashboards en Grafana o frontends personalizados ligeros. El DevOps es parte del diseño desde el inicio: Docker, Terraform y pipelines de CI/CD con pruebas automatizadas desde el primer despliegue. La seguridad es una restricción arquitectónica: TLS en todas las comunicaciones, autenticación basada en certificados, control de acceso por roles y gestión de secretos.',
     s5t:'IoT End-to-End Solutions',
     s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Despliegue en campo',
-    s5d:'Productos IoT completos y listos para producción construidos por un único equipo desde cero — sin lagunas de integración, sin inconsistencias arquitectónicas entre la capa del dispositivo y la cloud, sin culpas cruzadas entre proveedores cuando algo no funciona. Cubrimos toda la vertical técnica: diseño de hardware, firmware, conectividad segura dispositivo-cloud, ingesta de datos, almacenamiento, analítica y dashboards para operadores. Esta profundidad de integración permite mejores decisiones en cada nivel: elegir el protocolo de comunicación adecuado para el presupuesto de energía, dimensionar la infraestructura cloud para el volumen de datos real, diseñar el mecanismo de actualización OTA antes de que salga el primer prototipo. Un proyecto IoT end-to-end típico con Mekriva cubre: definición de requisitos y arquitectura de sistema, prototipo de hardware y desarrollo de firmware, diseño de la capa de conectividad — LoRaWAN, BLE, LTE-M o WiFi según la aplicación —, backend cloud con registro de dispositivos y API de telemetría, dashboard de monitorización con alertas, y soporte de despliegue en campo con herramientas de puesta en marcha. Hemos construido sistemas para monitorización de condición industrial, agricultura de precisión, medición ambiental y seguimiento de activos — cada uno diseñado para las restricciones específicas de la aplicación, nunca sobre una plataforma genérica con tu logo encima.',
+    s5d:'Productos IoT completos y listos para producción construidos por un único equipo desde cero — sin lagunas de integración, sin inconsistencias arquitectónicas entre la capa del dispositivo y la cloud. Cubrimos toda la vertical técnica: diseño de hardware, firmware, conectividad segura dispositivo-cloud, ingesta de datos, almacenamiento, analítica y dashboards para operadores. Esta profundidad de integración permite mejores decisiones en cada nivel: elegir el protocolo de comunicación adecuado para el presupuesto de energía, dimensionar la infraestructura cloud para el volumen de datos real, diseñar el mecanismo de actualización OTA antes de que salga el primer prototipo. Un proyecto IoT end-to-end típico con Mekriva cubre: definición de requisitos y arquitectura de sistema, prototipo de hardware y desarrollo de firmware, diseño de la capa de conectividad — LoRaWAN, BLE, LTE-M o WiFi según la aplicación —, backend cloud con registro de dispositivos y API de telemetría, dashboard de monitorización con alertas, y soporte de despliegue en campo.',
     s6t:'Consultoría Técnica y Arquitectura',
     s6h:'Revisión de arquitectura · Roadmap tecnológico · Due diligence · Riesgos',
-    s6d:'Orientación técnica independiente para equipos que necesitan claridad en una decisión de ingeniería compleja — sin el sesgo de un proveedor que vende una plataforma o enfoque concreto. Nos involucramos como socio técnico de confianza para revisar arquitecturas existentes, identificar riesgos antes de que se conviertan en problemas costosos y producir recomendaciones concretas y accionables en sistemas embebidos, firmware, hardware, conectividad y arquitectura cloud. Los proyectos de consultoría típicos incluyen: selección de tecnología para un nuevo producto (familia de MCU, RTOS, plataforma cloud, protocolo de comunicación), revisión de arquitectura antes de una inversión de desarrollo significativa, auditoría de hardware y firmware antes de una tirada de producción, due diligence técnica para inversores o adquirentes que evalúan una empresa de hardware conectado, y definición de roadmap para productos que necesitan escalar más allá de sus restricciones de diseño iniciales. Somos directos. Decimos lo que vemos — las partes bien diseñadas y las que conllevan riesgo — sin rellenar los informes con buenas prácticas genéricas. Cada entregable incluye un hallazgo específico, el razonamiento técnico detrás de él y una hoja de ruta priorizada. Si un encargo revela margen para trabajo de desarrollo posterior, lo decimos y dejamos la decisión en tus manos.',
+    s6d:'Orientación técnica independiente para equipos que necesitan claridad en una decisión de ingeniería compleja — sin el sesgo de un proveedor que vende una plataforma o enfoque concreto. Nos involucramos como socio técnico de confianza para revisar arquitecturas existentes, identificar riesgos antes de que se conviertan en problemas costosos y producir recomendaciones concretas y accionables en sistemas embebidos, firmware, hardware, conectividad y arquitectura cloud. Los proyectos de consultoría típicos incluyen: selección de tecnología para un nuevo producto (familia de MCU, RTOS, plataforma cloud, protocolo de comunicación), revisión de arquitectura antes de una inversión de desarrollo significativa, auditoría de hardware y firmware antes de una tirada de producción, due diligence técnica para inversores o adquirentes, y definición de roadmap para productos que necesitan escalar. Somos directos: decimos lo que vemos sin rellenar los informes con buenas prácticas genéricas.',
     s7t:'QA & Testing',
     s7h:'Testing HIL · Regresión automatizada · Pruebas de carga · Endurance · Auditoría',
-    s7d:'Validación sistemática y basada en evidencias para sistemas embebidos y backends cloud — integrada en el proceso de desarrollo desde la fase de arquitectura, no añadida al final cuando los problemas son más caros de corregir. Definimos la estrategia de prueba desde el inicio porque detectar un fallo de diseño durante la revisión del esquema cuesta una fracción de detectarlo en hardware desplegado en campo. Para sistemas embebidos, nuestra práctica de QA incluye pruebas unitarias e integración al nivel de firmware, rigs de test hardware-in-the-loop (HIL) que simulan entradas de sensores reales y cargas de actuadores en condiciones controladas, planes de prueba funcional para el bring-up de placa y verificación en producción, perfilado de consumo energético y pruebas de endurance que exponen modos de fallo invisibles en pruebas de corta duración. Para sistemas cloud y backend, construimos suites de regresión automatizadas, pipelines de prueba de carga, tests de contrato de API y pruebas de integración que corren contra infraestructura real. Tratamos la cobertura de pruebas como una restricción de diseño, no un opcional. También ofrecemos auditorías de QA para equipos con productos en funcionamiento que carecen de confianza en su proceso de validación: revisamos la cobertura existente, identificamos los caminos sin probar de mayor riesgo e implementamos la infraestructura necesaria. La calidad es un atributo del proceso de ingeniería. Se nota en el producto.',
-    cases_label:'Casos de estudio',
-    cases_title:'Proyectos de los que estamos orgullosos',
-    cases_sub:'Una selección de proyectos que ilustran la profundidad y el alcance de nuestro trabajo de ingeniería. Todos los clientes están bajo NDA — los detalles han sido anonimizados.',
-    case_nda:'Bajo NDA',
-    col_ch:'Reto', col_sol:'Solución', col_out:'Resultados',
-    c1_industry:'Industria 4.0 · Manufactura',
-    c1_title:'Sistema de monitorización de salud de maquinaria',
-    c1_ch:'Una empresa manufacturera de tamaño medio no tenía visibilidad en tiempo real sobre el estado de su maquinaria de producción. El mantenimiento era completamente reactivo — los equipos respondían a los fallos una vez ocurridos, lo que generaba costosas paradas no planificadas y pérdida de capacidad productiva en múltiples turnos.',
-    c1_sol:'Diseñamos una red de nodos sensores inalámbricos personalizados que miden vibración, temperatura y consumo de corriente del motor a 1 kHz. Los nodos se comunican por LoRaWAN con un gateway en planta que reenvía los datos a AWS IoT Core. Un backend de series temporales en InfluxDB alimenta un dashboard Grafana con baselines por máquina y alertas de detección de anomalías para mantenimiento predictivo.',
-    c1_out:'Reducción del 40% en paradas no planificadas durante el primer trimestre de operación. Visibilidad del estado en tiempo real de más de 60 máquinas. Los equipos de mantenimiento reciben alertas accionables 48-72 horas antes de un fallo, pasando de mantenimiento reactivo a predictivo.',
-    c2_industry:'AgTech · Agricultura de precisión',
-    c2_title:'Red de riego inteligente para agricultura de precisión',
-    c2_ch:'Una cooperativa agrícola gestionaba el riego de cientos de hectáreas con calendarios fijos y lecturas manuales de suelo. El enfoque derrochaba agua en zonas sobreirrigadas y obtenía rendimientos subóptimos en otras, sin toma de decisiones basada en datos y con una carga operativa elevada sobre los equipos de campo.',
-    c2_sol:'Desarrollamos nodos sensores de alimentación solar que miden humedad del suelo a varias profundidades, temperatura, humedad relativa y radiación solar. Los nodos transmiten por LoRa a un gateway conectado por 4G. Un backend en Python procesa los datos de sensores contra modelos de crecimiento de cultivos para generar calendarios de riego automatizados por parcela, integrados con la infraestructura de control de bombas existente vía Modbus RTU.',
-    c2_out:'Reducción del 35% en el consumo total de agua. La programación automática del riego eliminó por completo las lecturas manuales en campo. El rendimiento de los cultivos mejoró un 12% en la primera temporada, atribuido a niveles de humedad del suelo más consistentes en todas las zonas durante el ciclo de crecimiento.',
-    c3_industry:'Health Tech · Wearables',
-    c3_title:'Plataforma wearable BLE a medida para monitorización',
-    c3_ch:'Una startup de health tech necesitaba una plataforma wearable BLE personalizada para ejecutar sus algoritmos biométricos propietarios. Las placas de desarrollo estándar no cumplían sus requisitos de consumo, factor de forma e integración de sensores. Necesitaban una plataforma hardware de grado producción diseñada desde cero, con una API cloud complementaria.',
-    c3_sol:'Diseñamos una PCB multicapa basada en el NRF52840 integrando un conjunto de sensores personalizado, un subsistema de gestión de energía con objetivo de 5 días de batería y una pila BLE 5.2 con perfil GATT propio. El firmware se desarrolló en C sobre Zephyr RTOS. Una API REST complementaria agrega los datos del gateway BLE y los expone al backend de la aplicación móvil del cliente.',
-    c3_out:'Prototipo entregado en 4 meses desde la especificación inicial. 5,3 días de autonomía en modo de monitorización continua, superando el objetivo. Alcance BLE de 30 m en entornos reales. El hardware superó el pre-screening IEC en la primera revisión, permitiendo al cliente avanzar directamente hacia la validación clínica.',
+    s7d:'Validación sistemática y basada en evidencias para sistemas embebidos y backends cloud — integrada en el proceso de desarrollo desde la fase de arquitectura. Definimos la estrategia de prueba desde el inicio porque detectar un fallo de diseño durante la revisión del esquema cuesta una fracción de detectarlo en hardware desplegado en campo. Para sistemas embebidos: pruebas unitarias e integración al nivel de firmware, rigs de test hardware-in-the-loop (HIL) que simulan entradas de sensores reales y cargas de actuadores en condiciones controladas, planes de prueba funcional para bring-up de placa y verificación en producción, perfilado de consumo energético y pruebas de endurance. Para sistemas cloud y backend: suites de regresión automatizadas, pipelines de prueba de carga, tests de contrato de API y pruebas de integración contra infraestructura real. También ofrecemos auditorías de QA para equipos con productos en funcionamiento que necesitan mayor confianza en su proceso de validación.',
     how_label:'Nuestro proceso', how_title:'Cómo trabajamos',
     how_sub:'Un proceso claro, sin sorpresas. Trabajamos contigo en cada etapa.',
     p1t:'Entendemos el problema',
     p1d:'Empezamos con una conversación técnica profunda. Escuchamos tu reto, hacemos las preguntas correctas y nos aseguramos de entender bien lo que necesitas antes de proponer nada.',
     p2t:'Diseñamos la solución',
-    p2d:'Proponemos un plan técnico concreto: arquitectura, tecnologías, plazos y coste. Tú validas cada decisión antes de que escribamos una sola línea de código o dibujemos una pista.',
+    p2d:'Proponemos un plan técnico concreto: arquitectura, tecnologías, plazos y coste. Tú validas cada decisión antes de que escribamos una sola línea de código.',
     p3t:'Lo construimos',
-    p3d:'Desarrollamos hardware y software en paralelo, con actualizaciones y demos periódicos. Siempre sabrás el estado actual del proyecto — sin cajas negras.',
+    p3d:'Hardware y software desarrollados en paralelo, con actualizaciones y demos periódicos. Siempre sabrás el estado actual del proyecto — sin cajas negras.',
     p4t:'Entregamos y damos soporte',
-    p4d:'La entrega incluye documentación completa, archivos fuente y un período de transición. No te lo entregamos y desaparecemos — nos aseguramos de que funcione en tu entorno real.',
-    why_label:'Por qué nosotros',
-    why_title:'No somos consultores.<br>Somos ingenieros.',
-    why_sub:'Hemos construido productos reales, enviado hardware real y depurado a las 3 de la madrugada. Traemos esa experiencia directamente a tu proyecto.',
-    w1t:'Experiencia real en campo',
-    w1d:'Nuestro equipo ha llevado productos desde el prototipo hasta la producción en serie. Sabemos qué funciona bajo restricciones del mundo real.',
-    w2t:'Full-stack hardware + software',
-    w2d:'Del diseño de PCB a la API en la nube, cubrimos toda la cadena. Sin sobrecarga de coordinación ni culpas cruzadas entre proveedores.',
-    w3t:'Soluciones 100% a medida',
-    w3d:'No vendemos plataformas genéricas con tu logo encima. Cada proyecto se diseña desde cero para tus requisitos específicos.',
-    w4t:'Comunicación directa',
-    w4d:'Hablas directamente con los ingenieros que construyen tu producto. Sin gestores de cuenta, sin sistemas de tickets, sin intermediarios.',
-    tech_label:'Nuestro stack',
-    tech_title:'Con qué trabajamos',
+    p4d:'Documentación completa, archivos fuente y un período de transición. Nos aseguramos de que funcione en tu entorno real antes de dar un paso atrás.',
+    tech_label:'Nuestro stack', tech_title:'Con qué trabajamos',
     tech_sub:'Las herramientas, plataformas y tecnologías que dominamos — del chip a la nube.',
-    tc1t:'Microcontroladores',
-    tc2t:'Wireless & IoT',
-    tc3t:'Diseño de PCB',
-    tc4t:'Firmware & RTOS',
-    tc5t:'Cloud & Backend',
-    tc6t:'Protocolos e Interfaces',
-    ab_label:'El equipo',
-    ab_title:'Equipo pequeño,<br>gran experiencia.',
-    ab_sub1:'Somos un equipo pequeño de ingenieros con más de una década de experiencia construyendo productos tecnológicos reales. Nuestro trabajo abarca todo el espectro técnico: desde el diseño de circuitos y el firmware que corre en el microcontrolador, hasta las APIs e infraestructura cloud que convierten los datos en algo accionable. El equipo que te atiende es el mismo que diseña, programa y entrega — sin subcontrataciones, sin traspasos.',
-    ab_sub2:'Esta capacidad full-stack —hardware, firmware y cloud bajo un mismo techo— es lo que nos distingue. En proyectos IoT y de electrónica industrial, los problemas raramente respetan las fronteras entre capas. Que los mismos ingenieros piensen el circuito y la arquitectura de datos elimina fricciones, acelera el desarrollo y produce soluciones más coherentes.',
-    v1t:'Compromiso con la calidad',
-    v1d:'No entregamos algo que no funcione exactamente como debe. Cada proyecto pasa por pruebas reales en condiciones reales antes de salir de nuestras manos.',
-    v2t:'Transparencia',
-    v2d:'Compartimos el estado del proyecto de forma continua. Sin sorpresas al final, sin estimaciones infladas, sin letra pequeña. Preferimos las conversaciones difíciles a los malentendidos tardíos.',
-    v3t:'Innovación responsable',
-    v3d:'Usamos la tecnología adecuada para cada problema, no la más de moda. La novedad por sí sola no es un valor — lo es cuando resuelve un problema mejor que la alternativa.',
-    v4t:'Visión a largo plazo',
-    v4d:'Diseñamos sistemas para que duren y escalen. El mantenimiento, la documentación y la evolución del producto forman parte del encargo desde el primer día.',
-    st1:'Años de experiencia combinada', st2:'Tecnologías dominadas',
-    st3:'Sectores atendidos', st4:'Con base en Sevilla, España',
-    fc_role:'Fundador e Ingeniero Principal',
-    fc_bio:"Creé Mekriva para dar a las empresas acceso directo a experiencia técnica profunda — sin capas de gestión, traspasos ni cajas negras. Cuando trabajas con Mekriva, trabajas conmigo.",
+    tc1t:'Microcontroladores', tc2t:'Wireless & IoT', tc3t:'Diseño de PCB',
+    tc4t:'Firmware & RTOS',   tc5t:'Cloud & Backend', tc6t:'Protocolos e Interfaces',
     ct_label:'Contacta con nosotros',
     ct_title:'Hablemos de tu proyecto',
     ct_sub:'Cuéntanos en qué estás trabajando. Sin compromisos, sin argumentario de ventas — solo una conversación técnica para ver si encajamos.',
@@ -1842,7 +1332,7 @@ const t = {
   }
 };
 
-// ── LANGUAGE SWITCH ───────────────────────────────────────────────
+// ── LANGUAGE ──────────────────────────────────────────────────────
 let lang = localStorage.getItem('mk-lang') ||
            (navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en');
 
@@ -1850,30 +1340,21 @@ function applyLang(l) {
   lang = l;
   document.documentElement.lang = l;
   const tr = t[l];
-
-  // Text nodes
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.getAttribute('data-i18n');
     if (tr[k] != null) el.innerHTML = tr[k];
   });
-
-  // Input/textarea placeholders
   document.querySelectorAll('[data-ph]').forEach(el => {
     const k = el.getAttribute('data-ph');
     if (tr[k] != null) el.placeholder = tr[k];
   });
-
-  // Hidden subject field
   const subj = document.querySelector('[data-i18n-subject]');
   if (subj) subj.value = tr.form_subject || '';
-
-  // Toggle buttons
   document.querySelectorAll('.lang-btn').forEach(b => {
     const active = b.dataset.lang === l;
     b.classList.toggle('active', active);
     b.setAttribute('aria-pressed', active);
   });
-
   localStorage.setItem('mk-lang', l);
 }
 
@@ -1881,7 +1362,7 @@ document.querySelectorAll('.lang-btn').forEach(b =>
   b.addEventListener('click', () => applyLang(b.dataset.lang))
 );
 
-// ── NAVBAR SCROLL ─────────────────────────────────────────────────
+// ── NAVBAR ────────────────────────────────────────────────────────
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () =>
   nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true }
@@ -1912,41 +1393,31 @@ mobMenu.querySelectorAll('a').forEach(a =>
 // ── SCROLL REVEAL ─────────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('on');
-      obs.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -44px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-// Hero elements reveal immediately
 document.querySelectorAll('.hero .rv').forEach(el => {
   setTimeout(() => el.classList.add('on'), 80);
 });
-
-// All others via observer
 document.querySelectorAll('.rv:not(.hero .rv)').forEach(el => obs.observe(el));
 
-// ── FORM SUBMIT ───────────────────────────────────────────────────
+// ── FORM ──────────────────────────────────────────────────────────
 document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('formBtn');
-  btn.disabled = true;
-  btn.style.opacity = '.6';
-
+  btn.disabled = true; btn.style.opacity = '.6';
   const data = Object.fromEntries(new FormData(this));
-  const res  = await fetch('https://api.web3forms.com/submit', {
-    method:  'POST',
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body:    JSON.stringify(data),
+    body: JSON.stringify(data),
   });
-
   if (res.ok) {
     this.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   } else {
-    btn.disabled = false;
-    btn.style.opacity = '1';
+    btn.disabled = false; btn.style.opacity = '1';
     alert(t[lang].form_err);
   }
 });
