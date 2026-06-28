@@ -366,6 +366,17 @@
         .srv-title { font-size: 17px; font-weight: 600; margin-bottom: 9px; }
         .srv-desc  { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
+        .srv-card--wide {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        .srv-card--wide .srv-icon { flex-shrink: 0; }
+        @media (max-width: 768px) {
+            .srv-card--wide { flex-direction: column; gap: 0; }
+        }
+
         /* ============================================================
            HOW WE WORK
         ============================================================ */
@@ -403,33 +414,7 @@
         /* ============================================================
            WHY MEKRIVA
         ============================================================ */
-        .why-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .why-img {
-            border-radius: var(--r);
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 4/3;
-        }
-        .why-img img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: grayscale(25%);
-            transition: transform .6s ease;
-        }
-        .why-img:hover img { transform: scale(1.04); }
-        .why-img::after {
-            content: '';
-            position: absolute; inset: 0;
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            pointer-events: none;
-        }
+        .why-inner { max-width: 720px; }
 
         .why-points { display: flex; flex-direction: column; gap: 26px; margin-top: 36px; }
 
@@ -639,7 +624,7 @@
             .how-step:nth-child(2) { border-right: none; }
             .how-step:nth-child(3) { border-top: 1px solid var(--border); }
             .how-step:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
-            .why-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+            .contact-inner { grid-template-columns: 1fr; gap: 48px; }
             .stat-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-top { grid-template-columns: 1fr 1fr; }
         }
@@ -724,6 +709,206 @@
             .founder-card { flex-direction: column; gap: 16px; padding: 22px; }
             .founder-avatar { width: 56px; height: 56px; font-size: 18px; }
         }
+
+        /* === ABOUT VALUES === */
+        .about-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 48px;
+        }
+
+        .about-value {
+            padding: 24px 26px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            transition: border-color var(--ease);
+        }
+        .about-value:hover { border-color: var(--border-a); }
+
+        .av-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .av-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border-a);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .av-title { font-size: 15px; font-weight: 600; }
+        .av-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+        @media (max-width: 768px) {
+            .about-values { grid-template-columns: 1fr; }
+        }
+
+        /* ============================================================
+           SERVICE ACCORDION
+        ============================================================ */
+        .srv-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .srv-accordion {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            transition: border-color var(--ease);
+        }
+        .srv-accordion[open] { border-color: var(--border-a); }
+
+        .srv-accordion > summary {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px 28px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            transition: background var(--ease);
+        }
+        .srv-accordion > summary::-webkit-details-marker { display: none; }
+        .srv-accordion > summary:hover { background: var(--bg-card-h); }
+
+        .srv-accordion-info { flex: 1; }
+
+        .srv-accordion-title { font-size: 17px; font-weight: 600; }
+
+        .srv-accordion-hint {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 3px;
+            line-height: 1.5;
+        }
+        .srv-accordion[open] .srv-accordion-hint { display: none; }
+
+        .srv-accordion-chevron {
+            color: var(--muted);
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: transform var(--ease);
+        }
+        .srv-accordion[open] .srv-accordion-chevron { transform: rotate(180deg); }
+
+        .srv-accordion-body {
+            padding: 0 28px 28px 90px;
+        }
+        .srv-accordion-body p {
+            font-size: 14.5px;
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        @keyframes srv-fade {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: none; }
+        }
+        .srv-accordion[open] .srv-accordion-body { animation: srv-fade .2s ease; }
+
+        @media (max-width: 768px) {
+            .srv-accordion-body { padding-left: 28px; }
+            .srv-accordion-hint { display: none; }
+        }
+
+        /* ============================================================
+           CASE STUDIES
+        ============================================================ */
+        .cases { background: var(--bg-alt); }
+
+        .case-cards { display: flex; flex-direction: column; gap: 20px; }
+
+        .case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 36px 38px;
+            transition: border-color var(--ease);
+        }
+        .case-card:hover { border-color: var(--border-a); }
+
+        .case-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .case-industry {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--border-a);
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+
+        .case-nda { font-size: 12px; color: var(--muted); }
+
+        .case-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            margin-bottom: 28px;
+            line-height: 1.2;
+        }
+
+        .case-cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 24px;
+        }
+
+        .case-col-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .case-col p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .case-tech-tag {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        @media (max-width: 900px) {
+            .case-cols { grid-template-columns: 1fr; gap: 20px; }
+            .case-card { padding: 26px 24px; }
+            .case-title { font-size: 19px; }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -770,7 +955,8 @@
             <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
             <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
             <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-            <li><a href="#projects"  data-i18n="nav_proj">Projects</a></li>
+            <li><a href="#cases"     data-i18n="nav_cases">Cases</a></li>
+            <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
             <li><a href="#about"     data-i18n="nav_about">About</a></li>
             <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
         </ul>
@@ -793,7 +979,8 @@
         <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
         <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
         <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
-        <li><a href="#projects"  data-i18n="nav_proj">Projects</a></li>
+        <li><a href="#cases"     data-i18n="nav_cases">Cases</a></li>
+        <li><a href="#stack"     data-i18n="nav_proj">Stack</a></li>
         <li><a href="#about"     data-i18n="nav_about">About</a></li>
         <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
     </ul>
@@ -845,37 +1032,84 @@
             <h2 class="sec-title rv" data-i18n="srv_title">Our services</h2>
             <p class="sec-sub rv d1" data-i18n="srv_sub">We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.</p>
         </div>
-        <div class="srv-grid">
-            <div class="srv-card rv">
-                <div class="srv-icon"><i class="fa-solid fa-microchip"></i></div>
-                <h3 class="srv-title" data-i18n="s1t">Embedded Systems</h3>
-                <p class="srv-desc" data-i18n="s1d">Custom firmware and real-time software for microcontrollers and microprocessors (STM32, ESP32, NRF52, RISC-V, and more). From bare metal to RTOS.</p>
-            </div>
-            <div class="srv-card rv d1">
-                <div class="srv-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
-                <h3 class="srv-title" data-i18n="s2t">IoT &amp; LoRa</h3>
-                <p class="srv-desc" data-i18n="s2d">Connected device networks, LoRaWAN architectures, MQTT gateways, and end-to-end IoT solutions designed for reliability and low power consumption.</p>
-            </div>
-            <div class="srv-card rv d2">
-                <div class="srv-icon"><i class="fa-solid fa-memory"></i></div>
-                <h3 class="srv-title" data-i18n="s3t">Custom Hardware</h3>
-                <p class="srv-desc" data-i18n="s3d">PCB design, schematic capture, component selection, and prototype-to-production support. We design the exact hardware your project needs.</p>
-            </div>
-            <div class="srv-card rv">
-                <div class="srv-icon"><i class="fa-solid fa-cloud"></i></div>
-                <h3 class="srv-title" data-i18n="s4t">Cloud Software</h3>
-                <p class="srv-desc" data-i18n="s4d">Backend APIs, real-time dashboards, data pipelines, and cloud infrastructure tailored to your IoT ecosystem or industrial application.</p>
-            </div>
-            <div class="srv-card rv d1">
-                <div class="srv-icon"><i class="fa-solid fa-satellite-dish"></i></div>
-                <h3 class="srv-title" data-i18n="s5t">Sensing &amp; Instrumentation</h3>
-                <p class="srv-desc" data-i18n="s5d">Custom sensor integration, signal conditioning, ADC design, and data acquisition systems for industrial, environmental, and scientific applications.</p>
-            </div>
-            <div class="srv-card rv d2">
-                <div class="srv-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                <h3 class="srv-title" data-i18n="s6t">Technical Consulting</h3>
-                <p class="srv-desc" data-i18n="s6d">Technology assessment, architecture review, feasibility studies, and technical due diligence. We help you make the right technical decisions from day one.</p>
-            </div>
+        <div class="srv-list">
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s1t">Embedded Systems Development</div>
+                        <div class="srv-accordion-hint" data-i18n="s1h">STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s1d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s2t">Firmware &amp; Hardware Engineering</div>
+                        <div class="srv-accordion-hint" data-i18n="s2h">PCB design · Bring-up · EMC · DFM · KiCad · Altium</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s2d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-network-wired"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s3t">Device Integration &amp; Connectivity</div>
+                        <div class="srv-accordion-hint" data-i18n="s3h">CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s3d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-cloud"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s4t">Backend &amp; Cloud Architecture</div>
+                        <div class="srv-accordion-hint" data-i18n="s4h">AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s4d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s5t">IoT End-to-End Solutions</div>
+                        <div class="srv-accordion-hint" data-i18n="s5h">Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s5d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s6t">Technical Consulting &amp; Architecture</div>
+                        <div class="srv-accordion-hint" data-i18n="s6h">Architecture review · Tech roadmap · Due diligence · Risk assessment</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s6d"></p></div>
+            </details>
+            <details class="srv-accordion rv">
+                <summary>
+                    <div class="srv-icon srv-accordion-icon" aria-hidden="true"><i class="fa-solid fa-flask"></i></div>
+                    <div class="srv-accordion-info">
+                        <div class="srv-accordion-title" data-i18n="s7t">QA &amp; Testing</div>
+                        <div class="srv-accordion-hint" data-i18n="s7h">HIL testing · Regression suites · Load testing · Endurance · Audit</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down srv-accordion-chevron" aria-hidden="true"></i>
+                </summary>
+                <div class="srv-accordion-body"><p data-i18n="s7d"></p></div>
+            </details>
         </div>
     </div>
 </section>
@@ -925,10 +1159,6 @@
 <section class="section" id="why">
     <div class="container">
         <div class="why-inner">
-            <div class="why-img rv">
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80"
-                     alt="Engineer working on hardware" loading="lazy">
-            </div>
             <div>
                 <p class="sec-label" data-i18n="why_label">Why us</p>
                 <h2 class="sec-title rv" data-i18n="why_title">Not consultants.<br>Engineers.</h2>
@@ -971,9 +1201,120 @@
 <div class="accent-line"></div>
 
 <!-- ================================================================
+     CASE STUDIES
+================================================================ -->
+<section class="cases section" id="cases">
+    <div class="container">
+        <div class="sec-hdr">
+            <p class="sec-label" data-i18n="cases_label">Case studies</p>
+            <h2 class="sec-title rv" data-i18n="cases_title">Work we're proud of</h2>
+            <p class="sec-sub rv d1" data-i18n="cases_sub">A selection of projects that illustrate the depth and breadth of our engineering work. All clients are under NDA — details are anonymised.</p>
+        </div>
+        <div class="case-cards">
+
+            <article class="case-card rv">
+                <div class="case-header">
+                    <span class="case-industry" data-i18n="c1_industry">Industry 4.0 · Manufacturing</span>
+                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
+                </div>
+                <h3 class="case-title" data-i18n="c1_title">Machine Health Monitoring System</h3>
+                <div class="case-cols">
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
+                        <p data-i18n="c1_ch">A mid-sized manufacturing company had zero real-time visibility into the health of their production machinery. Maintenance was entirely reactive — teams responded to failures after they occurred, resulting in costly unplanned downtime and lost production capacity across multiple shifts.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
+                        <p data-i18n="c1_sol">We designed a network of custom wireless sensor nodes measuring vibration, temperature and motor current at 1 kHz. Nodes communicate over LoRaWAN to an on-site gateway forwarding data to AWS IoT Core. An InfluxDB backend feeds a Grafana dashboard with per-machine baselines and anomaly detection alerts for predictive maintenance.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
+                        <p data-i18n="c1_out">40% reduction in unplanned downtime in the first quarter. Real-time health visibility across 60+ machines. Maintenance teams now receive actionable alerts 48–72 hours before failure — shifting the operation from reactive to predictive maintenance.</p>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tech-tag">STM32L4</span>
+                    <span class="case-tech-tag">FreeRTOS</span>
+                    <span class="case-tech-tag">LoRaWAN</span>
+                    <span class="case-tech-tag">AWS IoT Core</span>
+                    <span class="case-tech-tag">InfluxDB</span>
+                    <span class="case-tech-tag">Grafana</span>
+                    <span class="case-tech-tag">KiCad</span>
+                </div>
+            </article>
+
+            <article class="case-card rv">
+                <div class="case-header">
+                    <span class="case-industry" data-i18n="c2_industry">AgTech · Precision Agriculture</span>
+                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
+                </div>
+                <h3 class="case-title" data-i18n="c2_title">Smart Irrigation Network for Precision Agriculture</h3>
+                <div class="case-cols">
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
+                        <p data-i18n="c2_ch">An agricultural cooperative managed irrigation across hundreds of hectares using fixed schedules and manual soil readings. The approach wasted water in over-irrigated zones and underperformed in others, with no data-driven decision making and a heavy operational burden on field teams.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
+                        <p data-i18n="c2_sol">We developed solar-powered sensor nodes measuring soil moisture at multiple depths, temperature, humidity and solar radiation. Nodes transmit over LoRa to a 4G-connected gateway. A Python backend processes sensor data against crop growth models to generate automated, field-specific irrigation schedules integrated with existing pump controls via Modbus RTU.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
+                        <p data-i18n="c2_out">35% reduction in total water consumption. Automated scheduling eliminated manual field readings entirely. Crop yield improved 12% in the first season, attributed to more consistent soil moisture levels across all field zones throughout the growth cycle.</p>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tech-tag">ESP32</span>
+                    <span class="case-tech-tag">LoRa</span>
+                    <span class="case-tech-tag">Solar + MPPT</span>
+                    <span class="case-tech-tag">Modbus RTU</span>
+                    <span class="case-tech-tag">Python</span>
+                    <span class="case-tech-tag">TimescaleDB</span>
+                    <span class="case-tech-tag">Docker</span>
+                </div>
+            </article>
+
+            <article class="case-card rv">
+                <div class="case-header">
+                    <span class="case-industry" data-i18n="c3_industry">Health Tech · Wearables</span>
+                    <span class="case-nda" data-i18n="case_nda">Under NDA</span>
+                </div>
+                <h3 class="case-title" data-i18n="c3_title">Custom BLE Wearable Monitoring Platform</h3>
+                <div class="case-cols">
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_ch">Challenge</p>
+                        <p data-i18n="c3_ch">A health tech startup needed a custom BLE wearable to run their proprietary biometric algorithms. Off-the-shelf development boards could not meet their power budget, form factor and sensor fusion requirements. They needed a production-grade hardware platform designed from scratch, with a companion cloud API.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_sol">Solution</p>
+                        <p data-i18n="c3_sol">We designed a multi-layer PCB around the NRF52840 integrating a custom sensor suite, a power management subsystem targeting 5-day battery life, and a BLE 5.2 stack with a proprietary GATT profile. Firmware was developed in C on Zephyr RTOS. A companion REST API aggregates data from the BLE gateway and exposes it to the client's mobile backend.</p>
+                    </div>
+                    <div class="case-col">
+                        <p class="case-col-label" data-i18n="col_out">Outcomes</p>
+                        <p data-i18n="c3_out">Prototype delivered in 4 months from specification. 5.3-day battery life in continuous monitoring mode, exceeding the target. BLE range of 30 m in real-world environments. Hardware passed IEC pre-compliance screening on the first revision, enabling the client to proceed directly to clinical validation.</p>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tech-tag">NRF52840</span>
+                    <span class="case-tech-tag">BLE 5.2</span>
+                    <span class="case-tech-tag">Zephyr RTOS</span>
+                    <span class="case-tech-tag">C</span>
+                    <span class="case-tech-tag">REST API</span>
+                    <span class="case-tech-tag">Node.js</span>
+                    <span class="case-tech-tag">KiCad</span>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
      TECH STACK
 ================================================================ -->
-<section class="projects section" id="projects">
+<section class="projects section" id="stack">
     <div class="container">
         <div class="sec-hdr">
             <p class="sec-label" data-i18n="tech_label">Our stack</p>
@@ -1067,8 +1408,8 @@
         <div class="about-inner">
             <p class="sec-label" data-i18n="ab_label">The team</p>
             <h2 class="sec-title rv" data-i18n="ab_title">Small team,<br>big expertise.</h2>
-            <p class="sec-sub rv d1" data-i18n="ab_sub1">We're a small, agile team of engineers based in Seville, Spain. No layers of management — just experienced engineers who care deeply about building things that actually work.</p>
-            <p class="sec-sub rv d2" style="margin-top:16px" data-i18n="ab_sub2">Mekriva was born from the belief that companies deserve a technical partner who speaks their language and is genuinely invested in their success — not a vendor that disappears after the invoice.</p>
+            <p class="sec-sub rv d1" data-i18n="ab_sub1">We are a small team of engineers with over a decade of experience building real technology products. Our work spans the full technical spectrum: from circuit design and the firmware running on the microcontroller, to the APIs and cloud infrastructure that make data actionable. The team that talks to you is the same team that designs, codes, and delivers — no outsourcing, no hand-offs.</p>
+            <p class="sec-sub rv d2" style="margin-top:16px" data-i18n="ab_sub2">This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers thinking about the circuit and the data architecture eliminates friction, accelerates development, and produces more coherent solutions.</p>
             <div class="stat-grid">
                 <div class="stat-box rv">
                     <div class="stat-num">10+</div>
@@ -1085,6 +1426,37 @@
                 <div class="stat-box rv d3">
                     <div class="stat-num">SVQ</div>
                     <div class="stat-label" data-i18n="st4">Based in Seville, Spain</div>
+                </div>
+            </div>
+
+            <div class="about-values">
+                <div class="about-value rv">
+                    <div class="av-header">
+                        <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+                        <span class="av-title" data-i18n="v1t">Commitment to quality</span>
+                    </div>
+                    <p class="av-desc" data-i18n="v1d">We don't ship something that doesn't work exactly as it should. Every project goes through real testing under real conditions before it leaves our hands.</p>
+                </div>
+                <div class="about-value rv d1">
+                    <div class="av-header">
+                        <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-eye"></i></div>
+                        <span class="av-title" data-i18n="v2t">Transparency</span>
+                    </div>
+                    <p class="av-desc" data-i18n="v2d">We share project status continuously. No surprises at the end, no inflated estimates, no fine print. We prefer difficult conversations over late misunderstandings.</p>
+                </div>
+                <div class="about-value rv d2">
+                    <div class="av-header">
+                        <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-atom"></i></div>
+                        <span class="av-title" data-i18n="v3t">Responsible innovation</span>
+                    </div>
+                    <p class="av-desc" data-i18n="v3d">We use the right technology for each problem, not the trendiest one. Novelty alone is not a value — it is one when it solves a problem better than the alternative.</p>
+                </div>
+                <div class="about-value rv d3">
+                    <div class="av-header">
+                        <div class="av-icon" aria-hidden="true"><i class="fa-solid fa-seedling"></i></div>
+                        <span class="av-title" data-i18n="v4t">Long-term thinking</span>
+                    </div>
+                    <p class="av-desc" data-i18n="v4d">We design systems to last and scale. Maintenance, documentation, and product evolution are part of the brief from day one.</p>
                 </div>
             </div>
 
@@ -1204,6 +1576,7 @@
                     <li><a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a></li>
                     <li><a href="#contact" data-i18n="ft_form">Contact form</a></li>
                     <li><a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+
                     <li><span data-i18n="ct_loc">Seville, Spain</span></li>
                 </ul>
             </div>
@@ -1227,7 +1600,7 @@
 const t = {
   en: {
     nav_srv:'Services', nav_how:'How we work', nav_why:'Why Mekriva',
-    nav_proj:'Stack', nav_about:'About', nav_contact:'Contact',
+    nav_cases:'Cases', nav_proj:'Stack', nav_about:'About', nav_contact:'Contact',
     cta:'Talk to us',
     h_badge:'Engineering & Innovation',
     h_tagline:'We build your ideas.',
@@ -1236,18 +1609,47 @@ const t = {
     srv_label:'What we do',
     srv_title:'Our services',
     srv_sub:'We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.',
-    s1t:'Embedded Systems',
-    s1d:'Custom firmware and real-time software for microcontrollers and microprocessors (STM32, ESP32, NRF52, RISC-V, and more). From bare metal to RTOS.',
-    s2t:'IoT & LoRa',
-    s2d:'Connected device networks, LoRaWAN architectures, MQTT gateways, and end-to-end IoT solutions designed for reliability and low power consumption.',
-    s3t:'Custom Hardware',
-    s3d:'PCB design, schematic capture, component selection, and prototype-to-production support. We design the exact hardware your project needs.',
-    s4t:'Cloud Software',
-    s4d:'Backend APIs, real-time dashboards, data pipelines, and cloud infrastructure tailored to your IoT ecosystem or industrial application.',
-    s5t:'Sensing & Instrumentation',
-    s5d:'Custom sensor integration, signal conditioning, ADC design, and data acquisition systems for industrial, environmental, and scientific applications.',
-    s6t:'Technical Consulting',
-    s6d:'Technology assessment, architecture review, feasibility studies, and technical due diligence. We help you make the right technical decisions from day one.',
+    s1t:'Embedded Systems Development',
+    s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
+    s1d:'Custom firmware and real-time software for microcontrollers and microprocessors — from bare-metal C to RTOS-based architectures. We develop full BSP stacks, hardware abstraction layers, peripheral drivers and sensor integration across STM32, ESP32, NRF52840, RP2040, RISC-V and AVR platforms. Whether you need an ultra-low-power sensor node consuming microamps in sleep or a complex multi-core system managing real-time control loops, safety tasks and wireless communications in parallel, we deliver firmware that is reliable, maintainable and production-ready. Our work spans the full embedded software stack: bootloaders, device drivers, middleware, communication protocol implementations and application logic. We use FreeRTOS, Zephyr or bare-metal approaches depending on the constraints — power budget, latency requirements, code size limits or safety standards. We write clean, documented code with testability in mind: unit tests at the driver level, CI pipelines for automated build and test, and documentation sufficient for your team to maintain and evolve the project independently after delivery.',
+    s2t:'Firmware & Hardware Engineering',
+    s2h:'PCB design · Bring-up · EMC · DFM · KiCad · Altium',
+    s2d:'End-to-end electronic design covering the complete development cycle from concept to validated prototype. Our hardware engineering spans analog and digital circuit design: power supply topologies, signal conditioning circuits, ADC front-ends, microcontroller integration, RF layouts and mixed-signal PCB design for production environments. We work in KiCad and Altium, selecting components with availability, longevity and supply chain resilience in mind. PCB layouts are optimised for signal integrity, thermal management and Design for Manufacturability — we deliver Gerbers that go straight to fabrication without surprises. We assemble and bring up prototypes in-house, validating functionality at each stage with oscilloscopes, logic analysers and signal generators. EMC pre-compliance testing, power consumption profiling under real operating conditions and environmental stress screening are standard before any design is considered complete. On the firmware side, we perform the critical bring-up phase: initialising peripherals, tuning power modes, characterising sensor behaviour and writing the low-level drivers that form the foundation of the product\'s embedded software stack. The result is a documented, validated hardware platform your team can build on with confidence.',
+    s3t:'Device Integration & Connectivity',
+    s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
+    s3d:'Connecting devices, sensors and industrial equipment to broader systems — reliably, efficiently and at the right abstraction level. We specialise in the integration layer between the hardware and the application: protocol implementation, driver development, middleware and gateway design. On the wired side, we implement SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP and custom binary protocols, handling edge cases like bus contention, CRC validation, error recovery and hot-plug behaviour correctly from the outset. For wireless connectivity, we integrate BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M and NB-IoT — selecting the right technology based on range, data rate, power budget and deployment environment. We design LoRaWAN gateways, BLE-to-cloud bridges and MQTT brokers that serve as the backbone of connected product ecosystems. In industrial environments, we handle the translation between OT protocols and modern IT stacks, enabling legacy equipment to feed data into cloud systems without requiring infrastructure replacement. We also implement secure communication: TLS, certificate provisioning, mutual authentication and encrypted OTA firmware updates. Connectivity is an architectural decision with long-term consequences — we make it deliberately.',
+    s4t:'Backend & Cloud Architecture',
+    s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
+    s4d:'Cloud and backend systems designed specifically for the demands of connected hardware: high-frequency data ingestion, device management at scale, real-time telemetry processing and long-term time-series storage. We design and implement REST and MQTT APIs, WebSocket servers, message brokers and data pipelines that handle IoT data volumes reliably and cost-effectively. Infrastructure runs on AWS IoT Core, Google Cloud or Azure IoT Hub — whichever platform fits your existing ecosystem and compliance requirements. For time-series workloads, we select InfluxDB, TimescaleDB or managed cloud services based on query patterns, retention needs and cost. We build dashboards in Grafana or lightweight custom frontends that surface the right metrics to the right people. DevOps is built in from the start: services are containerised with Docker, infrastructure is managed as code with Terraform, and CI/CD pipelines with automated testing are configured from the first deployment. Security is an architectural constraint — TLS everywhere, certificate-based device authentication, role-based access control and secrets management are standard practice. We design for the scale you need today and the scale you will need in two years, without over-engineering for scenarios that may never arrive.',
+    s5t:'IoT End-to-End Solutions',
+    s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Field deployment',
+    s5d:'Complete, production-ready IoT products built by a single team from first principles — no integration gaps, no architectural inconsistencies between the device layer and the cloud, no finger-pointing between vendors when something does not work. We own the full technical vertical: hardware design, firmware, secure device-to-cloud connectivity, data ingestion, storage, analytics and operator-facing dashboards. This integration depth enables better decisions at every level: choosing the right communication protocol for the power budget, sizing cloud infrastructure for the actual data volume, designing the OTA update mechanism before the first prototype ships. A typical end-to-end IoT engagement covers requirements definition and system architecture, hardware prototype and firmware development, connectivity layer design — LoRaWAN, BLE, LTE-M or WiFi depending on the application — cloud backend with device registry and telemetry API, monitoring dashboard with alerting, and field deployment support including commissioning tooling. We have built systems for industrial condition monitoring, precision agriculture, environmental sensing and asset tracking — each designed around the specific constraints of the application, never around a generic platform with your logo on it.',
+    s6t:'Technical Consulting & Architecture',
+    s6h:'Architecture review · Tech roadmap · Due diligence · Risk assessment',
+    s6d:'Independent technical guidance for teams that need clarity on a complex engineering decision — without the bias of a vendor selling a particular platform or approach. We engage as a trusted technical partner to review existing system architectures, identify risks before they become expensive problems, and produce concrete, actionable recommendations covering embedded systems, firmware, hardware, connectivity and cloud architecture. Typical consulting engagements include: technology selection for a new product (MCU family, RTOS, cloud platform, communication protocol), architecture review before a significant development investment, hardware and firmware audit before a production run, technical due diligence for investors or acquirers evaluating a connected hardware company, and roadmap definition for products that need to scale beyond their initial design constraints. We are direct. We tell you what we see — the parts that are well-designed and the parts that carry risk — without padding reports with generic best practices. Every deliverable includes a specific finding, the technical reasoning behind it, and a prioritised path forward. If an engagement reveals scope for further development work, we say so and leave the decision to you. We do not manufacture urgency and we do not oversell.',
+    s7t:'QA & Testing',
+    s7h:'HIL testing · Regression suites · Load testing · Endurance · Audit',
+    s7d:'Systematic, evidence-based validation for embedded systems and cloud backends — integrated into the development process from the architecture phase, not added at the end when problems are most expensive to fix. We define the test strategy early because catching a design flaw during schematic review costs a fraction of catching it in field-deployed hardware. For embedded systems, our QA practice covers unit and integration testing at the firmware level, hardware-in-the-loop (HIL) test rigs that simulate real sensor inputs and actuator loads under controlled conditions, functional test plans for board bring-up and production verification, power consumption profiling and endurance testing that exposes failure modes invisible in short-duration tests. For cloud and backend systems, we build automated regression suites, load testing pipelines, API contract tests and integration tests that run against real infrastructure. We treat test coverage as a design constraint, not an optional extra. We also offer QA audits for teams with working products that lack confidence in their validation process: we review existing test coverage, identify the highest-risk untested paths and implement the infrastructure needed to give the engineering team — and their customers — a justified level of confidence. Quality is an attribute of the engineering process. It shows in the product.',
+    cases_label:'Case studies',
+    cases_title:"Work we're proud of",
+    cases_sub:'A selection of projects that illustrate the depth and breadth of our engineering work. All clients are under NDA — details are anonymised.',
+    case_nda:'Under NDA',
+    col_ch:'Challenge', col_sol:'Solution', col_out:'Outcomes',
+    c1_industry:'Industry 4.0 · Manufacturing',
+    c1_title:'Machine Health Monitoring System',
+    c1_ch:'A mid-sized manufacturing company had zero real-time visibility into the health of their production machinery. Maintenance was entirely reactive — teams responded to failures after they occurred, resulting in costly unplanned downtime and lost production capacity across multiple shifts.',
+    c1_sol:'We designed a network of custom wireless sensor nodes measuring vibration, temperature and motor current at 1 kHz. Nodes communicate over LoRaWAN to an on-site gateway forwarding data to AWS IoT Core. An InfluxDB backend feeds a Grafana dashboard with per-machine baselines and anomaly detection alerts for predictive maintenance.',
+    c1_out:'40% reduction in unplanned downtime in the first quarter. Real-time health visibility across 60+ machines. Maintenance teams now receive actionable alerts 48–72 hours before failure — shifting the operation from reactive to predictive maintenance.',
+    c2_industry:'AgTech · Precision Agriculture',
+    c2_title:'Smart Irrigation Network for Precision Agriculture',
+    c2_ch:'An agricultural cooperative managed irrigation across hundreds of hectares using fixed schedules and manual soil readings. The approach wasted water in over-irrigated zones and underperformed in others, with no data-driven decision making and a heavy operational burden on field teams.',
+    c2_sol:'We developed solar-powered sensor nodes measuring soil moisture at multiple depths, temperature, humidity and solar radiation. Nodes transmit over LoRa to a 4G-connected gateway. A Python backend processes sensor data against crop growth models to generate automated, field-specific irrigation schedules integrated with existing pump controls via Modbus RTU.',
+    c2_out:'35% reduction in total water consumption. Automated scheduling eliminated manual field readings entirely. Crop yield improved 12% in the first season, attributed to more consistent soil moisture levels across all field zones throughout the growth cycle.',
+    c3_industry:'Health Tech · Wearables',
+    c3_title:'Custom BLE Wearable Monitoring Platform',
+    c3_ch:'A health tech startup needed a custom BLE wearable to run their proprietary biometric algorithms. Off-the-shelf development boards could not meet their power budget, form factor and sensor fusion requirements. They needed a production-grade hardware platform designed from scratch, with a companion cloud API.',
+    c3_sol:'We designed a multi-layer PCB around the NRF52840 integrating a custom sensor suite, a power management subsystem targeting 5-day battery life, and a BLE 5.2 stack with a proprietary GATT profile. Firmware was developed in C on Zephyr RTOS. A companion REST API aggregates data from the BLE gateway and exposes it to the client\'s mobile backend.',
+    c3_out:'Prototype delivered in 4 months from specification. 5.3-day battery life in continuous monitoring mode, exceeding the target. BLE range of 30 m in real-world environments. Hardware passed IEC pre-compliance screening on the first revision, enabling the client to proceed directly to clinical validation.',
     how_label:'Our process', how_title:'How we work',
     how_sub:'A clear process, no surprises. We work closely with you at every step.',
     p1t:'We understand the problem',
@@ -1280,8 +1682,16 @@ const t = {
     tc6t:'Protocols & Interfaces',
     ab_label:'The team',
     ab_title:'Small team,<br>big expertise.',
-    ab_sub1:"We're a small, agile team of engineers based in Seville, Spain. No layers of management — just experienced engineers who care deeply about building things that actually work.",
-    ab_sub2:"Mekriva was born from the belief that companies deserve a technical partner who speaks their language and is genuinely invested in their success — not a vendor that disappears after the invoice.",
+    ab_sub1:'We are a small team of engineers with over a decade of experience building real technology products. Our work spans the full technical spectrum: from circuit design and the firmware running on the microcontroller, to the APIs and cloud infrastructure that make data actionable. The team that talks to you is the same team that designs, codes, and delivers — no outsourcing, no hand-offs.',
+    ab_sub2:'This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers thinking about the circuit and the data architecture eliminates friction, accelerates development, and produces more coherent solutions.',
+    v1t:'Commitment to quality',
+    v1d:"We don't ship something that doesn't work exactly as it should. Every project goes through real testing under real conditions before it leaves our hands.",
+    v2t:'Transparency',
+    v2d:'We share project status continuously. No surprises at the end, no inflated estimates, no fine print. We prefer difficult conversations over late misunderstandings.',
+    v3t:'Responsible innovation',
+    v3d:'We use the right technology for each problem, not the trendiest one. Novelty alone is not a value — it is one when it solves a problem better than the alternative.',
+    v4t:'Long-term thinking',
+    v4d:'We design systems to last and scale. Maintenance, documentation, and product evolution are part of the brief from day one.',
     st1:'Years combined experience', st2:'Technologies mastered',
     st3:'Industries served', st4:'Based in Seville, Spain',
     fc_role:'Founder & Lead Engineer',
@@ -1306,7 +1716,7 @@ const t = {
   },
   es: {
     nav_srv:'Servicios', nav_how:'Cómo trabajamos', nav_why:'Por qué Mekriva',
-    nav_proj:'Stack', nav_about:'Nosotros', nav_contact:'Contacto',
+    nav_cases:'Casos', nav_proj:'Stack', nav_about:'Nosotros', nav_contact:'Contacto',
     cta:'Háblanos',
     h_badge:'Ingeniería e Innovación',
     h_tagline:'Construimos tus ideas.',
@@ -1315,18 +1725,47 @@ const t = {
     srv_label:'Qué hacemos',
     srv_title:'Nuestros servicios',
     srv_sub:'Diseñamos y construimos soluciones tecnológicas completas — desde el primer esquema hasta el panel de control en la nube. Sin productos enlatados, todo a medida.',
-    s1t:'Sistemas Embebidos',
-    s1d:'Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores (STM32, ESP32, NRF52, RISC-V y más). Desde bare metal hasta RTOS.',
-    s2t:'IoT & LoRa',
-    s2d:'Redes de dispositivos conectados, arquitecturas LoRaWAN, gateways MQTT y soluciones IoT de extremo a extremo diseñadas para la fiabilidad y el bajo consumo.',
-    s3t:'Hardware a Medida',
-    s3d:'Diseño de PCB, captura de esquemas, selección de componentes y soporte de prototipo a producción. Diseñamos exactamente el hardware que tu proyecto necesita.',
-    s4t:'Software Cloud',
-    s4d:'APIs backend, dashboards en tiempo real, pipelines de datos e infraestructura cloud adaptada a tu ecosistema IoT o aplicación industrial.',
-    s5t:'Sensórica e Instrumentación',
-    s5d:'Integración de sensores personalizados, acondicionamiento de señal, diseño ADC y sistemas de adquisición de datos para aplicaciones industriales, medioambientales y científicas.',
-    s6t:'Consultoría Técnica',
-    s6d:'Evaluación tecnológica, revisión de arquitecturas, estudios de viabilidad y due diligence técnica. Te ayudamos a tomar las decisiones correctas desde el primer día.',
+    s1t:'Desarrollo de Sistemas Embebidos',
+    s1h:'STM32 · ESP32 · NRF52 · FreeRTOS · Zephyr · Bare-metal',
+    s1d:'Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores — desde C bare-metal hasta arquitecturas basadas en RTOS. Desarrollamos BSP completos, capas de abstracción de hardware, drivers de periféricos e integración de sensores en plataformas STM32, ESP32, NRF52840, RP2040, RISC-V y AVR. Tanto si necesitas un nodo sensor de ultra-bajo consumo como un sistema multicúcleo complejo que gestione bucles de control en tiempo real, tareas de seguridad y comunicaciones inalámbricas en paralelo, entregamos firmware fiable, mantenible y listo para producción. Nuestro trabajo abarca toda la pila software embebida: bootloaders, drivers de dispositivo, middleware, implementaciones de protocolos de comunicación y lógica de aplicación. Usamos FreeRTOS, Zephyr o enfoques bare-metal en función de las restricciones del proyecto — presupuesto de energía, latencia, tamaño de código o estándares de seguridad. Escribimos código limpio y documentado con la testabilidad como requisito: pruebas unitarias al nivel del driver, pipelines de CI para build y test automatizados, y documentación suficiente para que tu equipo pueda mantener y evolucionar el proyecto de forma autónoma tras la entrega.',
+    s2t:'Firmware & Hardware Engineering',
+    s2h:'Diseño PCB · Bring-up · EMC · DFM · KiCad · Altium',
+    s2d:'Diseño electrónico integral que cubre todo el ciclo de desarrollo desde el concepto hasta el prototipo validado. Nuestro trabajo abarca diseño de circuitos analógicos y digitales: topologías de alimentación, acondicionamiento de señal, frontends ADC, integración de microcontroladores, layouts RF y diseño PCB mixto-signal orientado a producción. Trabajamos en KiCad y Altium, seleccionando componentes con criterios de disponibilidad, longevidad y resiliencia de la cadena de suministro. Los layouts de PCB se optimizan para integridad de señal, gestión térmica y Diseño para Fabricación — entregamos Gerbers que van directamente a fabricación sin sorpresas. Ensamblamos y hacemos el bring-up de prototipos en nuestro laboratorio, validando la funcionalidad en cada etapa con osciloscopios, analizadores lógicos y generadores de señal. Las pruebas de pre-cumplimiento EMC, el perfilado de consumo energético en condiciones reales y las pruebas de estrés ambiental son estándar antes de dar por completo cualquier diseño. En la parte firmware, realizamos la fase crítica de bring-up: inicialización de periféricos, ajuste de modos de bajo consumo, caracterización del comportamiento de sensores y escritura de los drivers de bajo nivel que forman la base de la pila software del producto.',
+    s3t:'Integración de Dispositivos y Conectividad',
+    s3h:'CAN · SPI · I2C · UART · BLE · LoRaWAN · Modbus · LTE-M',
+    s3d:'Conexión de dispositivos, sensores y equipos industriales a sistemas más amplios — de forma fiable, eficiente y al nivel de abstracción adecuado. Nos especializamos en la capa de integración entre el hardware y la aplicación: implementación de protocolos, desarrollo de drivers, middleware y diseño de gateways. En el lado cableado, implementamos SPI, I2C, UART, RS-232, RS-485, CAN, CANopen, Modbus RTU/TCP y protocolos binarios propietarios, gestionando desde el inicio casos límite como contención de bus, validación CRC, recuperación de errores y comportamiento hot-plug. Para conectividad inalámbrica, integramos BLE 5.x, WiFi, LoRaWAN, Zigbee, Thread, LTE-M y NB-IoT, seleccionando la tecnología adecuada según rango, tasa de datos, presupuesto de energía y entorno de despliegue. Diseñamos gateways LoRaWAN, bridges BLE-to-cloud y brokers MQTT que forman la columna vertebral de ecosistemas de productos conectados. En entornos industriales, gestionamos la traducción entre protocolos OT y stacks IT modernos, permitiendo que equipos legados alimenten sistemas cloud sin reemplazar infraestructura existente. También implementamos comunicación segura: TLS, aprovisionamiento de certificados, autenticación mutua y actualizaciones OTA cifradas. La conectividad es una decisión arquitectónica con consecuencias a largo plazo.',
+    s4t:'Backend & Cloud Architecture',
+    s4h:'AWS · GCP · Azure · MQTT · InfluxDB · Docker · Terraform',
+    s4d:'Sistemas backend y cloud diseñados específicamente para las exigencias del hardware conectado: ingesta de datos de alta frecuencia, gestión de dispositivos a escala, procesamiento de telemetría en tiempo real y almacenamiento a largo plazo de series temporales. Diseñamos e implementamos APIs REST y MQTT, servidores WebSocket, brokers de mensajería y pipelines de datos que gestionan volúmenes IoT de forma fiable. La infraestructura corre en AWS IoT Core, Google Cloud o Azure IoT Hub según el ecosistema existente y los requisitos de cumplimiento normativo. Para cargas de trabajo de series temporales, seleccionamos InfluxDB, TimescaleDB o servicios gestionados en función de los patrones de consulta, los requisitos de retención y el coste. Construimos dashboards en Grafana o frontends personalizados ligeros que muestran las métricas adecuadas a las personas adecuadas. El DevOps es parte del diseño desde el inicio: los servicios se conteinerizan con Docker, la infraestructura se gestiona como código con Terraform, y los pipelines de CI/CD con pruebas automatizadas se configuran desde el primer despliegue. La seguridad es una restricción arquitectónica: TLS en todas las comunicaciones, autenticación basada en certificados, control de acceso por roles y gestión de secretos son prácticas estándar. Diseñamos para la escala que necesitas hoy y la que necesitarás en dos años, sin sobre-ingeniería.',
+    s5t:'IoT End-to-End Solutions',
+    s5h:'Hardware · Firmware · Cloud · Dashboards · OTA · Despliegue en campo',
+    s5d:'Productos IoT completos y listos para producción construidos por un único equipo desde cero — sin lagunas de integración, sin inconsistencias arquitectónicas entre la capa del dispositivo y la cloud, sin culpas cruzadas entre proveedores cuando algo no funciona. Cubrimos toda la vertical técnica: diseño de hardware, firmware, conectividad segura dispositivo-cloud, ingesta de datos, almacenamiento, analítica y dashboards para operadores. Esta profundidad de integración permite mejores decisiones en cada nivel: elegir el protocolo de comunicación adecuado para el presupuesto de energía, dimensionar la infraestructura cloud para el volumen de datos real, diseñar el mecanismo de actualización OTA antes de que salga el primer prototipo. Un proyecto IoT end-to-end típico con Mekriva cubre: definición de requisitos y arquitectura de sistema, prototipo de hardware y desarrollo de firmware, diseño de la capa de conectividad — LoRaWAN, BLE, LTE-M o WiFi según la aplicación —, backend cloud con registro de dispositivos y API de telemetría, dashboard de monitorización con alertas, y soporte de despliegue en campo con herramientas de puesta en marcha. Hemos construido sistemas para monitorización de condición industrial, agricultura de precisión, medición ambiental y seguimiento de activos — cada uno diseñado para las restricciones específicas de la aplicación, nunca sobre una plataforma genérica con tu logo encima.',
+    s6t:'Consultoría Técnica y Arquitectura',
+    s6h:'Revisión de arquitectura · Roadmap tecnológico · Due diligence · Riesgos',
+    s6d:'Orientación técnica independiente para equipos que necesitan claridad en una decisión de ingeniería compleja — sin el sesgo de un proveedor que vende una plataforma o enfoque concreto. Nos involucramos como socio técnico de confianza para revisar arquitecturas existentes, identificar riesgos antes de que se conviertan en problemas costosos y producir recomendaciones concretas y accionables en sistemas embebidos, firmware, hardware, conectividad y arquitectura cloud. Los proyectos de consultoría típicos incluyen: selección de tecnología para un nuevo producto (familia de MCU, RTOS, plataforma cloud, protocolo de comunicación), revisión de arquitectura antes de una inversión de desarrollo significativa, auditoría de hardware y firmware antes de una tirada de producción, due diligence técnica para inversores o adquirentes que evalúan una empresa de hardware conectado, y definición de roadmap para productos que necesitan escalar más allá de sus restricciones de diseño iniciales. Somos directos. Decimos lo que vemos — las partes bien diseñadas y las que conllevan riesgo — sin rellenar los informes con buenas prácticas genéricas. Cada entregable incluye un hallazgo específico, el razonamiento técnico detrás de él y una hoja de ruta priorizada. Si un encargo revela margen para trabajo de desarrollo posterior, lo decimos y dejamos la decisión en tus manos.',
+    s7t:'QA & Testing',
+    s7h:'Testing HIL · Regresión automatizada · Pruebas de carga · Endurance · Auditoría',
+    s7d:'Validación sistemática y basada en evidencias para sistemas embebidos y backends cloud — integrada en el proceso de desarrollo desde la fase de arquitectura, no añadida al final cuando los problemas son más caros de corregir. Definimos la estrategia de prueba desde el inicio porque detectar un fallo de diseño durante la revisión del esquema cuesta una fracción de detectarlo en hardware desplegado en campo. Para sistemas embebidos, nuestra práctica de QA incluye pruebas unitarias e integración al nivel de firmware, rigs de test hardware-in-the-loop (HIL) que simulan entradas de sensores reales y cargas de actuadores en condiciones controladas, planes de prueba funcional para el bring-up de placa y verificación en producción, perfilado de consumo energético y pruebas de endurance que exponen modos de fallo invisibles en pruebas de corta duración. Para sistemas cloud y backend, construimos suites de regresión automatizadas, pipelines de prueba de carga, tests de contrato de API y pruebas de integración que corren contra infraestructura real. Tratamos la cobertura de pruebas como una restricción de diseño, no un opcional. También ofrecemos auditorías de QA para equipos con productos en funcionamiento que carecen de confianza en su proceso de validación: revisamos la cobertura existente, identificamos los caminos sin probar de mayor riesgo e implementamos la infraestructura necesaria. La calidad es un atributo del proceso de ingeniería. Se nota en el producto.',
+    cases_label:'Casos de estudio',
+    cases_title:'Proyectos de los que estamos orgullosos',
+    cases_sub:'Una selección de proyectos que ilustran la profundidad y el alcance de nuestro trabajo de ingeniería. Todos los clientes están bajo NDA — los detalles han sido anonimizados.',
+    case_nda:'Bajo NDA',
+    col_ch:'Reto', col_sol:'Solución', col_out:'Resultados',
+    c1_industry:'Industria 4.0 · Manufactura',
+    c1_title:'Sistema de monitorización de salud de maquinaria',
+    c1_ch:'Una empresa manufacturera de tamaño medio no tenía visibilidad en tiempo real sobre el estado de su maquinaria de producción. El mantenimiento era completamente reactivo — los equipos respondían a los fallos una vez ocurridos, lo que generaba costosas paradas no planificadas y pérdida de capacidad productiva en múltiples turnos.',
+    c1_sol:'Diseñamos una red de nodos sensores inalámbricos personalizados que miden vibración, temperatura y consumo de corriente del motor a 1 kHz. Los nodos se comunican por LoRaWAN con un gateway en planta que reenvía los datos a AWS IoT Core. Un backend de series temporales en InfluxDB alimenta un dashboard Grafana con baselines por máquina y alertas de detección de anomalías para mantenimiento predictivo.',
+    c1_out:'Reducción del 40% en paradas no planificadas durante el primer trimestre de operación. Visibilidad del estado en tiempo real de más de 60 máquinas. Los equipos de mantenimiento reciben alertas accionables 48-72 horas antes de un fallo, pasando de mantenimiento reactivo a predictivo.',
+    c2_industry:'AgTech · Agricultura de precisión',
+    c2_title:'Red de riego inteligente para agricultura de precisión',
+    c2_ch:'Una cooperativa agrícola gestionaba el riego de cientos de hectáreas con calendarios fijos y lecturas manuales de suelo. El enfoque derrochaba agua en zonas sobreirrigadas y obtenía rendimientos subóptimos en otras, sin toma de decisiones basada en datos y con una carga operativa elevada sobre los equipos de campo.',
+    c2_sol:'Desarrollamos nodos sensores de alimentación solar que miden humedad del suelo a varias profundidades, temperatura, humedad relativa y radiación solar. Los nodos transmiten por LoRa a un gateway conectado por 4G. Un backend en Python procesa los datos de sensores contra modelos de crecimiento de cultivos para generar calendarios de riego automatizados por parcela, integrados con la infraestructura de control de bombas existente vía Modbus RTU.',
+    c2_out:'Reducción del 35% en el consumo total de agua. La programación automática del riego eliminó por completo las lecturas manuales en campo. El rendimiento de los cultivos mejoró un 12% en la primera temporada, atribuido a niveles de humedad del suelo más consistentes en todas las zonas durante el ciclo de crecimiento.',
+    c3_industry:'Health Tech · Wearables',
+    c3_title:'Plataforma wearable BLE a medida para monitorización',
+    c3_ch:'Una startup de health tech necesitaba una plataforma wearable BLE personalizada para ejecutar sus algoritmos biométricos propietarios. Las placas de desarrollo estándar no cumplían sus requisitos de consumo, factor de forma e integración de sensores. Necesitaban una plataforma hardware de grado producción diseñada desde cero, con una API cloud complementaria.',
+    c3_sol:'Diseñamos una PCB multicapa basada en el NRF52840 integrando un conjunto de sensores personalizado, un subsistema de gestión de energía con objetivo de 5 días de batería y una pila BLE 5.2 con perfil GATT propio. El firmware se desarrolló en C sobre Zephyr RTOS. Una API REST complementaria agrega los datos del gateway BLE y los expone al backend de la aplicación móvil del cliente.',
+    c3_out:'Prototipo entregado en 4 meses desde la especificación inicial. 5,3 días de autonomía en modo de monitorización continua, superando el objetivo. Alcance BLE de 30 m en entornos reales. El hardware superó el pre-screening IEC en la primera revisión, permitiendo al cliente avanzar directamente hacia la validación clínica.',
     how_label:'Nuestro proceso', how_title:'Cómo trabajamos',
     how_sub:'Un proceso claro, sin sorpresas. Trabajamos contigo en cada etapa.',
     p1t:'Entendemos el problema',
@@ -1359,8 +1798,16 @@ const t = {
     tc6t:'Protocolos e Interfaces',
     ab_label:'El equipo',
     ab_title:'Equipo pequeño,<br>gran experiencia.',
-    ab_sub1:'Somos un equipo pequeño y ágil de ingenieros con base en Sevilla, España. Sin capas de gestión — solo ingenieros con experiencia que se preocupan por construir cosas que realmente funcionan.',
-    ab_sub2:'Mekriva nació de la convicción de que las empresas merecen un socio técnico que hable su idioma y esté genuinamente comprometido con su éxito — no un proveedor que desaparece tras la factura.',
+    ab_sub1:'Somos un equipo pequeño de ingenieros con más de una década de experiencia construyendo productos tecnológicos reales. Nuestro trabajo abarca todo el espectro técnico: desde el diseño de circuitos y el firmware que corre en el microcontrolador, hasta las APIs e infraestructura cloud que convierten los datos en algo accionable. El equipo que te atiende es el mismo que diseña, programa y entrega — sin subcontrataciones, sin traspasos.',
+    ab_sub2:'Esta capacidad full-stack —hardware, firmware y cloud bajo un mismo techo— es lo que nos distingue. En proyectos IoT y de electrónica industrial, los problemas raramente respetan las fronteras entre capas. Que los mismos ingenieros piensen el circuito y la arquitectura de datos elimina fricciones, acelera el desarrollo y produce soluciones más coherentes.',
+    v1t:'Compromiso con la calidad',
+    v1d:'No entregamos algo que no funcione exactamente como debe. Cada proyecto pasa por pruebas reales en condiciones reales antes de salir de nuestras manos.',
+    v2t:'Transparencia',
+    v2d:'Compartimos el estado del proyecto de forma continua. Sin sorpresas al final, sin estimaciones infladas, sin letra pequeña. Preferimos las conversaciones difíciles a los malentendidos tardíos.',
+    v3t:'Innovación responsable',
+    v3d:'Usamos la tecnología adecuada para cada problema, no la más de moda. La novedad por sí sola no es un valor — lo es cuando resuelve un problema mejor que la alternativa.',
+    v4t:'Visión a largo plazo',
+    v4d:'Diseñamos sistemas para que duren y escalen. El mantenimiento, la documentación y la evolución del producto forman parte del encargo desde el primer día.',
     st1:'Años de experiencia combinada', st2:'Tecnologías dominadas',
     st3:'Sectores atendidos', st4:'Con base en Sevilla, España',
     fc_role:'Fundador e Ingeniero Principal',
