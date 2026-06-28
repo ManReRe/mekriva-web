@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mekriva — We build your ideas</title>
-    <meta name="description" content="Mekriva is a team of engineers specializing in embedded systems, IoT, LoRa, custom hardware, and cloud software. We turn your ideas into complete technological solutions.">
+    <title>Mekriva — Embedded Systems, IoT &amp; Custom Hardware | Seville, Spain</title>
+    <meta name="description" content="Mekriva is an engineering studio in Seville, Spain specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software. From circuit to cloud — we turn your technical challenges into complete, custom solutions.">
+    <meta name="keywords" content="embedded systems, IoT, LoRa, custom hardware, PCB design, firmware, STM32, ESP32, cloud software, engineering, Seville, Spain, sistemas embebidos, hardware a medida, IoT España, diseño PCB, ingeniería electrónica, Sevilla">
+    <meta name="author" content="Mekriva">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mekriva.com/">
+    <link rel="alternate" hreflang="en" href="https://mekriva.com/">
+    <link rel="alternate" hreflang="es" href="https://mekriva.com/">
+    <link rel="alternate" hreflang="x-default" href="https://mekriva.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mekriva.com/">
+    <meta property="og:title" content="Mekriva — Embedded Systems, IoT &amp; Custom Hardware | Seville, Spain">
+    <meta property="og:description" content="Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software. From circuit to cloud.">
+    <meta property="og:image" content="https://mekriva.com/logo.png">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:site_name" content="Mekriva">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Mekriva — Embedded Systems, IoT &amp; Custom Hardware">
+    <meta name="twitter:description" content="Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software.">
+    <meta name="twitter:image" content="https://mekriva.com/logo.png">
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -646,17 +665,108 @@
             .c-form { padding: 22px; }
             .stat-grid { grid-template-columns: 1fr; }
         }
+
+        /* === SKIP LINK === */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 8px;
+            padding: 8px 18px;
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 6px;
+            z-index: 9999;
+            text-decoration: none;
+        }
+        .skip-link:focus { left: 8px; }
+
+        /* === FOUNDER CARD === */
+        .founder-card {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 30px 32px;
+            margin-top: 40px;
+            transition: border-color var(--ease);
+        }
+        .founder-card:hover { border-color: var(--border-a); }
+
+        .founder-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--accent-dim);
+            border: 2px solid var(--border-a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            flex-shrink: 0;
+            letter-spacing: -1px;
+            user-select: none;
+        }
+
+        .founder-info { flex: 1; }
+        .founder-name { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
+        .founder-role { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 12px; letter-spacing: .3px; }
+        .founder-bio  { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+        .founder-links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .founder-links .btn { padding: 8px 18px; font-size: 13px; }
+
+        @media (max-width: 480px) {
+            .founder-card { flex-direction: column; gap: 16px; padding: 22px; }
+            .founder-avatar { width: 56px; height: 56px; font-size: 18px; }
+        }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Mekriva",
+      "description": "Engineering studio in Seville specialising in embedded systems, IoT, LoRa, custom PCB design, firmware and cloud software.",
+      "url": "https://mekriva.com",
+      "email": "hellothere@mekriva.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Sevilla",
+        "addressCountry": "ES"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Manuel Ángel Reyes Resta"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Engineering Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Embedded Systems" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IoT & LoRa" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Hardware & PCB Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Software" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technical Consulting" } }
+        ]
+      },
+      "sameAs": ["https://www.linkedin.com/company/mekriva/"]
+    }
+    </script>
 </head>
 <body>
 
 <!-- ================================================================
      NAVBAR
 ================================================================ -->
-<nav class="nav" id="nav">
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<nav class="nav" id="nav" aria-label="Navegación principal">
     <div class="container">
         <a href="#hero" class="nav-logo">Mek<span>riva</span></a>
-        <ul class="nav-links">
+        <ul class="nav-links" role="list">
             <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
             <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
             <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
@@ -665,21 +775,21 @@
             <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
         </ul>
         <div class="nav-right">
-            <div class="lang-toggle">
-                <div class="lang-btn active" data-lang="en">EN</div>
-                <div class="lang-btn" data-lang="es">ES</div>
+            <div class="lang-toggle" role="group" aria-label="Seleccionar idioma">
+                <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+                <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
             </div>
             <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
         </div>
-        <div class="hamburger" id="hamburger" role="button" aria-label="Menu">
+        <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobMenu">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mob-menu" id="mobMenu">
-    <ul>
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+    <ul role="list">
         <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
         <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
         <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
@@ -687,11 +797,13 @@
         <li><a href="#about"     data-i18n="nav_about">About</a></li>
         <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
     </ul>
-    <div class="mob-lang">
-        <div class="lang-btn active" data-lang="en">EN</div>
-        <div class="lang-btn" data-lang="es">ES</div>
+    <div class="mob-lang" role="group" aria-label="Seleccionar idioma">
+        <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
     </div>
 </div>
+
+<main id="main-content">
 
 <!-- ================================================================
      HERO
@@ -716,7 +828,7 @@
             </div>
         </div>
     </div>
-    <div class="hero-scroll">
+    <div class="hero-scroll" aria-hidden="true">
         <i class="fa-solid fa-chevron-down"></i>
     </div>
 </section>
@@ -975,6 +1087,22 @@
                     <div class="stat-label" data-i18n="st4">Based in Seville, Spain</div>
                 </div>
             </div>
+
+            <div class="founder-card rv">
+                <div class="founder-info">
+                    <div class="founder-name">Manuel Ángel Reyes Resta</div>
+                    <div class="founder-role" data-i18n="fc_role">Founder &amp; Lead Engineer</div>
+                    <p class="founder-bio" data-i18n="fc_bio">I started Mekriva to give companies direct access to deep engineering expertise — without layers of management, hand-offs, or black boxes. When you work with Mekriva, you work with me.</p>
+                    <div class="founder-links">
+                        <a href="https://www.linkedin.com/company/mekriva/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" aria-label="Mekriva en LinkedIn">
+                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
+                        </a>
+                        <a href="mailto:hellothere@mekriva.com" class="btn btn-ghost" aria-label="Enviar email a Manuel">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i> hellothere@mekriva.com
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1015,21 +1143,21 @@
                     <input type="hidden" name="subject" data-i18n-subject="true">
                     <div class="f-row">
                         <div class="fg">
-                            <label data-i18n="fl_name">Name</label>
-                            <input type="text" name="name" class="fc" required data-ph="fp_name">
+                            <label for="f-name" data-i18n="fl_name">Name</label>
+                            <input id="f-name" type="text" name="name" class="fc" required data-ph="fp_name" autocomplete="name">
                         </div>
                         <div class="fg">
-                            <label data-i18n="fl_company">Company</label>
-                            <input type="text" name="company" class="fc" data-ph="fp_company">
+                            <label for="f-company" data-i18n="fl_company">Company</label>
+                            <input id="f-company" type="text" name="company" class="fc" data-ph="fp_company" autocomplete="organization">
                         </div>
                     </div>
                     <div class="fg">
-                        <label data-i18n="fl_email">Email</label>
-                        <input type="email" name="email" class="fc" required data-ph="fp_email">
+                        <label for="f-email" data-i18n="fl_email">Email</label>
+                        <input id="f-email" type="email" name="email" class="fc" required data-ph="fp_email" autocomplete="email">
                     </div>
                     <div class="fg">
-                        <label data-i18n="fl_msg">Message</label>
-                        <textarea name="message" class="fc" required data-ph="fp_msg"></textarea>
+                        <label for="f-message" data-i18n="fl_msg">Message</label>
+                        <textarea id="f-message" name="message" class="fc" required data-ph="fp_msg"></textarea>
                     </div>
                     <button type="submit" id="formBtn" class="btn btn-primary f-submit">
                         <span data-i18n="fl_btn">Send message</span>
@@ -1047,6 +1175,8 @@
         </div>
     </div>
 </section>
+
+</main>
 
 <!-- ================================================================
      FOOTER
@@ -1154,6 +1284,8 @@ const t = {
     ab_sub2:"Mekriva was born from the belief that companies deserve a technical partner who speaks their language and is genuinely invested in their success — not a vendor that disappears after the invoice.",
     st1:'Years combined experience', st2:'Technologies mastered',
     st3:'Industries served', st4:'Based in Seville, Spain',
+    fc_role:'Founder & Lead Engineer',
+    fc_bio:"I started Mekriva to give companies direct access to deep engineering expertise — without layers of management, hand-offs, or black boxes. When you work with Mekriva, you work with me.",
     ct_label:'Get in touch',
     ct_title:"Let's talk about your project",
     ct_sub:"Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.",
@@ -1231,6 +1363,8 @@ const t = {
     ab_sub2:'Mekriva nació de la convicción de que las empresas merecen un socio técnico que hable su idioma y esté genuinamente comprometido con su éxito — no un proveedor que desaparece tras la factura.',
     st1:'Años de experiencia combinada', st2:'Tecnologías dominadas',
     st3:'Sectores atendidos', st4:'Con base en Sevilla, España',
+    fc_role:'Fundador e Ingeniero Principal',
+    fc_bio:"Creé Mekriva para dar a las empresas acceso directo a experiencia técnica profunda — sin capas de gestión, traspasos ni cajas negras. Cuando trabajas con Mekriva, trabajas conmigo.",
     ct_label:'Contacta con nosotros',
     ct_title:'Hablemos de tu proyecto',
     ct_sub:'Cuéntanos en qué estás trabajando. Sin compromisos, sin argumentario de ventas — solo una conversación técnica para ver si encajamos.',
@@ -1277,9 +1411,11 @@ function applyLang(l) {
   if (subj) subj.value = tr.form_subject || '';
 
   // Toggle buttons
-  document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('active', b.dataset.lang === l)
-  );
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    const active = b.dataset.lang === l;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', active);
+  });
 
   localStorage.setItem('mk-lang', l);
 }
@@ -1299,14 +1435,20 @@ const hbg     = document.getElementById('hamburger');
 const mobMenu = document.getElementById('mobMenu');
 
 hbg.addEventListener('click', () => {
-  hbg.classList.toggle('open');
+  const isOpen = hbg.classList.toggle('open');
   mobMenu.classList.toggle('open');
+  hbg.setAttribute('aria-expanded', isOpen);
+  hbg.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+  mobMenu.setAttribute('aria-hidden', !isOpen);
 });
 
 mobMenu.querySelectorAll('a').forEach(a =>
   a.addEventListener('click', () => {
     hbg.classList.remove('open');
     mobMenu.classList.remove('open');
+    hbg.setAttribute('aria-expanded', 'false');
+    hbg.setAttribute('aria-label', 'Abrir menú');
+    mobMenu.setAttribute('aria-hidden', 'true');
   })
 );
 
