@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mekriva — We build your ideas</title>
+    <meta name="description" content="Mekriva is a team of engineers specializing in embedded systems, IoT, LoRa, custom hardware, and cloud software. We turn your ideas into complete technological solutions.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* === RESET & VARIABLES === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:          #0a0a0a;
+            --bg-card:     #111111;
+            --bg-card-h:   #161616;
+            --bg-alt:      #0d0d0d;
+            --accent:      #00C2FF;
+            --accent-dim:  rgba(0,194,255,.12);
+            --accent-glow: rgba(0,194,255,.28);
+            --text:        #f0f0f0;
+            --muted:       #888;
+            --border:      rgba(255,255,255,.07);
+            --border-a:    rgba(0,194,255,.28);
+            --font:        'Space Grotesk', sans-serif;
+            --nav-h:       68px;
+            --pad:         100px;
+            --r:           12px;
+            --ease:        .3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        /* === UTILITIES === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .section    { padding: var(--pad) 0; }
+
+        .sec-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .sec-title {
+            font-size: clamp(30px, 4vw, 52px);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+        }
+
+        .sec-sub {
+            font-size: 17px;
+            color: var(--muted);
+            max-width: 580px;
+            line-height: 1.75;
+        }
+
+        .sec-hdr { margin-bottom: 60px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all var(--ease);
+        }
+
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover {
+            background: #33cfff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--accent);
+            border: 1.5px solid var(--border-a);
+        }
+        .btn-ghost:hover { background: var(--accent-dim); transform: translateY(-2px); }
+
+        .accent-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-glow), transparent);
+        }
+
+        /* === REVEAL ANIMATIONS === */
+        .rv {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+        .rv.on { opacity: 1; transform: none; }
+        .d1 { transition-delay: .10s; }
+        .d2 { transition-delay: .20s; }
+        .d3 { transition-delay: .30s; }
+        .d4 { transition-delay: .40s; }
+        .d5 { transition-delay: .50s; }
+        .d6 { transition-delay: .60s; }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            z-index: 1000;
+            transition: background var(--ease), border-color var(--ease);
+            border-bottom: 1px solid transparent;
+        }
+        .nav.scrolled {
+            background: rgba(10,10,10,.96);
+            backdrop-filter: blur(14px);
+            border-color: var(--border);
+        }
+        .nav .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo { font-size: 21px; font-weight: 700; letter-spacing: -.5px; }
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            transition: color var(--ease);
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-right { display: flex; align-items: center; gap: 14px; }
+
+        /* Language toggle */
+        .lang-toggle {
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .lang-btn {
+            padding: 6px 11px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: background var(--ease), color var(--ease);
+            letter-spacing: .5px;
+        }
+        .lang-btn.active { background: var(--accent); color: #000; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 23px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all var(--ease);
+        }
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .mob-menu {
+            display: none;
+            position: fixed;
+            top: var(--nav-h); left: 0; right: 0;
+            background: rgba(10,10,10,.98);
+            backdrop-filter: blur(14px);
+            padding: 28px 24px;
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+        }
+        .mob-menu.open { display: block; }
+        .mob-menu ul { list-style: none; display: flex; flex-direction: column; gap: 22px; }
+        .mob-menu a { font-size: 17px; font-weight: 500; color: var(--muted); transition: color var(--ease); }
+        .mob-menu a:hover { color: var(--text); }
+        .mob-lang { display: flex; gap: 10px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+        .mob-lang .lang-btn { border: 1px solid var(--border); border-radius: 6px; padding: 8px 16px; }
+        .mob-lang .lang-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--nav-h);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1800&q=70') center/cover no-repeat;
+            opacity: .07;
+            filter: grayscale(100%);
+        }
+
+        .hero-glow {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 55% 55% at 68% 48%, rgba(0,194,255,.07) 0%, transparent 70%),
+                linear-gradient(to bottom, transparent 55%, var(--bg) 100%);
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border-a);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 32px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: clamp(52px, 8vw, 104px);
+            font-weight: 700;
+            line-height: 1.0;
+            letter-spacing: -3px;
+            margin-bottom: 10px;
+        }
+
+        .hero-tagline {
+            font-size: clamp(20px, 3vw, 30px);
+            color: var(--accent);
+            font-weight: 500;
+            letter-spacing: -.5px;
+            margin-bottom: 28px;
+        }
+
+        .hero-sub {
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: var(--muted);
+            max-width: 540px;
+            line-height: 1.8;
+            margin-bottom: 48px;
+        }
+
+        .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--muted);
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: bob 2.2s ease-in-out infinite;
+        }
+        @keyframes bob {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ============================================================
+           SERVICES
+        ============================================================ */
+        .srv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .srv-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 34px 30px;
+            transition: all var(--ease);
+        }
+        .srv-card:hover {
+            background: var(--bg-card-h);
+            border-color: var(--border-a);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(0,194,255,.07);
+        }
+
+        .srv-icon {
+            width: 50px; height: 50px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border-a);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 19px;
+            color: var(--accent);
+            margin-bottom: 22px;
+        }
+
+        .srv-title { font-size: 17px; font-weight: 600; margin-bottom: 9px; }
+        .srv-desc  { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+        /* ============================================================
+           HOW WE WORK
+        ============================================================ */
+        .how { background: var(--bg-alt); }
+
+        .how-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+        }
+
+        .how-step {
+            padding: 40px 28px;
+            border-right: 1px solid var(--border);
+            position: relative;
+        }
+        .how-step:last-child { border-right: none; }
+
+        .step-num {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent-dim);
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            -webkit-text-stroke: 1px var(--border-a);
+            color: transparent;
+        }
+
+        .step-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+        .step-desc  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+        /* ============================================================
+           WHY MEKRIVA
+        ============================================================ */
+        .why-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .why-img {
+            border-radius: var(--r);
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 4/3;
+        }
+        .why-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(25%);
+            transition: transform .6s ease;
+        }
+        .why-img:hover img { transform: scale(1.04); }
+        .why-img::after {
+            content: '';
+            position: absolute; inset: 0;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            pointer-events: none;
+        }
+
+        .why-points { display: flex; flex-direction: column; gap: 26px; margin-top: 36px; }
+
+        .why-point { display: flex; gap: 16px; align-items: flex-start; }
+
+        .wp-icon {
+            width: 38px; height: 38px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border-a);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .wp-text strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .wp-text p      { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+        /* ============================================================
+           TECH STACK
+        ============================================================ */
+        .projects { background: var(--bg-alt); }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 30px 28px;
+            transition: all var(--ease);
+        }
+        .tech-card:hover {
+            background: var(--bg-card-h);
+            border-color: var(--border-a);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 40px rgba(0,194,255,.07);
+        }
+
+        .tech-cat { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tech-tag {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 100px;
+            transition: color var(--ease), border-color var(--ease);
+        }
+        .tech-card:hover .tech-tag {
+            color: var(--text);
+            border-color: rgba(255,255,255,.14);
+        }
+
+        /* ============================================================
+           ABOUT
+        ============================================================ */
+        .about-inner { max-width: 720px; }
+
+        .about-text .sec-sub { margin-bottom: 20px; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            padding: 22px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+        }
+        .stat-num   { font-size: 34px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 5px; }
+        .stat-label { font-size: 13px; color: var(--muted); }
+
+        /* ============================================================
+           CONTACT
+        ============================================================ */
+        .contact { background: var(--bg-alt); }
+
+        .contact-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-info .sec-sub { margin-bottom: 36px; }
+
+        .c-detail {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--muted);
+        }
+        .c-detail i { color: var(--accent); width: 18px; text-align: center; }
+        .c-detail a { color: var(--muted); transition: color var(--ease); }
+        .c-detail a:hover { color: var(--accent); }
+
+        .c-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 38px;
+        }
+
+        .fg { margin-bottom: 18px; }
+
+        .fg label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--muted);
+            margin-bottom: 7px;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .fc {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 11px 15px;
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--text);
+            outline: none;
+            transition: border-color var(--ease);
+        }
+        .fc:focus { border-color: var(--accent); }
+        .fc::placeholder { color: #3a3a3a; }
+        textarea.fc { resize: vertical; min-height: 110px; }
+
+        .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .f-submit { width: 100%; justify-content: center; margin-top: 6px; }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 56px 0 28px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 56px;
+            margin-bottom: 44px;
+        }
+
+        .footer-logo { font-size: 22px; font-weight: 700; margin-bottom: 14px; display: block; }
+        .footer-logo span { color: var(--accent); }
+        .footer-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 260px; }
+
+        .fc-col h4 {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .fc-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+        .fc-col a   { font-size: 14px; color: var(--muted); transition: color var(--ease); }
+        .fc-col a:hover { color: var(--accent); }
+        .fc-col span { font-size: 14px; color: var(--muted); }
+
+        .footer-bot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .srv-grid  { grid-template-columns: repeat(2, 1fr); }
+            .how-steps { grid-template-columns: repeat(2, 1fr); border-radius: var(--r); }
+            .how-step:nth-child(2) { border-right: none; }
+            .how-step:nth-child(3) { border-top: 1px solid var(--border); }
+            .how-step:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+            .why-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --pad: 68px; }
+            .nav-links, .nav-right .btn { display: none; }
+            .hamburger { display: flex; }
+            .srv-grid { grid-template-columns: 1fr; }
+            .how-steps { grid-template-columns: 1fr; }
+            .how-step { border-right: none !important; border-top: 1px solid var(--border); }
+            .how-step:first-child { border-top: none; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .f-row { grid-template-columns: 1fr; }
+            .footer-top { grid-template-columns: 1fr; gap: 36px; }
+            .footer-bot { flex-direction: column; gap: 10px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { letter-spacing: -2px; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+            .c-form { padding: 22px; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
+<nav class="nav" id="nav">
+    <div class="container">
+        <a href="#hero" class="nav-logo">Mek<span>riva</span></a>
+        <ul class="nav-links">
+            <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
+            <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
+            <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
+            <li><a href="#projects"  data-i18n="nav_proj">Projects</a></li>
+            <li><a href="#about"     data-i18n="nav_about">About</a></li>
+            <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-toggle">
+                <div class="lang-btn active" data-lang="en">EN</div>
+                <div class="lang-btn" data-lang="es">ES</div>
+            </div>
+            <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
+        </div>
+        <div class="hamburger" id="hamburger" role="button" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+    <ul>
+        <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
+        <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
+        <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
+        <li><a href="#projects"  data-i18n="nav_proj">Projects</a></li>
+        <li><a href="#about"     data-i18n="nav_about">About</a></li>
+        <li><a href="#contact"   data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="mob-lang">
+        <div class="lang-btn active" data-lang="en">EN</div>
+        <div class="lang-btn" data-lang="es">ES</div>
+    </div>
+</div>
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge rv">
+                <i class="fa-solid fa-circle-dot fa-xs"></i>
+                <span data-i18n="h_badge">Engineering &amp; Innovation</span>
+            </div>
+            <h1 class="hero-title rv d1">Mekriva</h1>
+            <p class="hero-tagline rv d2" data-i18n="h_tagline">We build your ideas.</p>
+            <p class="hero-sub rv d3" data-i18n="h_sub">
+                From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.
+            </p>
+            <div class="hero-actions rv d4">
+                <a href="#contact" class="btn btn-primary" data-i18n="cta">Talk to us</a>
+                <a href="#services" class="btn btn-ghost" data-i18n="h_explore">Explore services</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     SERVICES
+================================================================ -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="sec-hdr">
+            <p class="sec-label" data-i18n="srv_label">What we do</p>
+            <h2 class="sec-title rv" data-i18n="srv_title">Our services</h2>
+            <p class="sec-sub rv d1" data-i18n="srv_sub">We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.</p>
+        </div>
+        <div class="srv-grid">
+            <div class="srv-card rv">
+                <div class="srv-icon"><i class="fa-solid fa-microchip"></i></div>
+                <h3 class="srv-title" data-i18n="s1t">Embedded Systems</h3>
+                <p class="srv-desc" data-i18n="s1d">Custom firmware and real-time software for microcontrollers and microprocessors (STM32, ESP32, NRF52, RISC-V, and more). From bare metal to RTOS.</p>
+            </div>
+            <div class="srv-card rv d1">
+                <div class="srv-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                <h3 class="srv-title" data-i18n="s2t">IoT &amp; LoRa</h3>
+                <p class="srv-desc" data-i18n="s2d">Connected device networks, LoRaWAN architectures, MQTT gateways, and end-to-end IoT solutions designed for reliability and low power consumption.</p>
+            </div>
+            <div class="srv-card rv d2">
+                <div class="srv-icon"><i class="fa-solid fa-memory"></i></div>
+                <h3 class="srv-title" data-i18n="s3t">Custom Hardware</h3>
+                <p class="srv-desc" data-i18n="s3d">PCB design, schematic capture, component selection, and prototype-to-production support. We design the exact hardware your project needs.</p>
+            </div>
+            <div class="srv-card rv">
+                <div class="srv-icon"><i class="fa-solid fa-cloud"></i></div>
+                <h3 class="srv-title" data-i18n="s4t">Cloud Software</h3>
+                <p class="srv-desc" data-i18n="s4d">Backend APIs, real-time dashboards, data pipelines, and cloud infrastructure tailored to your IoT ecosystem or industrial application.</p>
+            </div>
+            <div class="srv-card rv d1">
+                <div class="srv-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                <h3 class="srv-title" data-i18n="s5t">Sensing &amp; Instrumentation</h3>
+                <p class="srv-desc" data-i18n="s5d">Custom sensor integration, signal conditioning, ADC design, and data acquisition systems for industrial, environmental, and scientific applications.</p>
+            </div>
+            <div class="srv-card rv d2">
+                <div class="srv-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <h3 class="srv-title" data-i18n="s6t">Technical Consulting</h3>
+                <p class="srv-desc" data-i18n="s6d">Technology assessment, architecture review, feasibility studies, and technical due diligence. We help you make the right technical decisions from day one.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     HOW WE WORK
+================================================================ -->
+<section class="how section" id="how">
+    <div class="container">
+        <div class="sec-hdr">
+            <p class="sec-label" data-i18n="how_label">Our process</p>
+            <h2 class="sec-title rv" data-i18n="how_title">How we work</h2>
+            <p class="sec-sub rv d1" data-i18n="how_sub">A clear process, no surprises. We work closely with you at every step.</p>
+        </div>
+        <div class="how-steps">
+            <div class="how-step rv">
+                <div class="step-num">01</div>
+                <h3 class="step-title" data-i18n="p1t">We understand the problem</h3>
+                <p class="step-desc" data-i18n="p1d">We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before we propose anything.</p>
+            </div>
+            <div class="how-step rv d1">
+                <div class="step-num">02</div>
+                <h3 class="step-title" data-i18n="p2t">We design the solution</h3>
+                <p class="step-desc" data-i18n="p2d">We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a single line of code or draw a trace.</p>
+            </div>
+            <div class="how-step rv d2">
+                <div class="step-num">03</div>
+                <h3 class="step-title" data-i18n="p3t">We build it</h3>
+                <p class="step-desc" data-i18n="p3d">We develop hardware and software in parallel, with regular updates and live demos. You always know the current state of the project — no black boxes.</p>
+            </div>
+            <div class="how-step rv d3">
+                <div class="step-num">04</div>
+                <h3 class="step-title" data-i18n="p4t">We deliver &amp; support</h3>
+                <p class="step-desc" data-i18n="p4d">Delivery includes full documentation, source files, and a transition period. We don't just hand it over — we make sure it works in your real environment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     WHY MEKRIVA
+================================================================ -->
+<section class="section" id="why">
+    <div class="container">
+        <div class="why-inner">
+            <div class="why-img rv">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80"
+                     alt="Engineer working on hardware" loading="lazy">
+            </div>
+            <div>
+                <p class="sec-label" data-i18n="why_label">Why us</p>
+                <h2 class="sec-title rv" data-i18n="why_title">Not consultants.<br>Engineers.</h2>
+                <p class="sec-sub rv d1" data-i18n="why_sub">We've built real products, shipped real hardware, and debugged at 3am. We bring that experience directly to your project.</p>
+                <div class="why-points">
+                    <div class="why-point rv d1">
+                        <div class="wp-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="wp-text">
+                            <strong data-i18n="w1t">Real field experience</strong>
+                            <p data-i18n="w1d">Our team has shipped products from prototype to mass production. We know what works under real-world constraints.</p>
+                        </div>
+                    </div>
+                    <div class="why-point rv d2">
+                        <div class="wp-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="wp-text">
+                            <strong data-i18n="w2t">Full-stack hardware + software</strong>
+                            <p data-i18n="w2d">From PCB layout to cloud API, we cover the entire stack. No coordination overhead, no finger-pointing between vendors.</p>
+                        </div>
+                    </div>
+                    <div class="why-point rv d3">
+                        <div class="wp-icon"><i class="fa-solid fa-sliders"></i></div>
+                        <div class="wp-text">
+                            <strong data-i18n="w3t">100% custom solutions</strong>
+                            <p data-i18n="w3d">We don't sell off-the-shelf platforms with your logo on them. Every project is designed from scratch for your specific requirements.</p>
+                        </div>
+                    </div>
+                    <div class="why-point rv d4">
+                        <div class="wp-icon"><i class="fa-solid fa-comments"></i></div>
+                        <div class="wp-text">
+                            <strong data-i18n="w4t">Direct communication</strong>
+                            <p data-i18n="w4d">You talk directly to the engineers building your product. No account managers, no ticket systems, no middlemen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     TECH STACK
+================================================================ -->
+<section class="projects section" id="projects">
+    <div class="container">
+        <div class="sec-hdr">
+            <p class="sec-label" data-i18n="tech_label">Our stack</p>
+            <h2 class="sec-title rv" data-i18n="tech_title">What we work with</h2>
+            <p class="sec-sub rv d1" data-i18n="tech_sub">The tools, platforms, and technologies we know inside out — from the chip to the cloud.</p>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-card rv">
+                <div class="srv-icon"><i class="fa-solid fa-microchip"></i></div>
+                <h3 class="tech-cat" data-i18n="tc1t">Microcontrollers</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">STM32</span>
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">NRF52840</span>
+                    <span class="tech-tag">RP2040</span>
+                    <span class="tech-tag">RISC-V</span>
+                    <span class="tech-tag">AVR</span>
+                </div>
+            </div>
+            <div class="tech-card rv d1">
+                <div class="srv-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+                <h3 class="tech-cat" data-i18n="tc2t">Wireless & IoT</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">LoRaWAN</span>
+                    <span class="tech-tag">BLE</span>
+                    <span class="tech-tag">WiFi</span>
+                    <span class="tech-tag">MQTT</span>
+                    <span class="tech-tag">Zigbee</span>
+                    <span class="tech-tag">LTE-M</span>
+                </div>
+            </div>
+            <div class="tech-card rv d2">
+                <div class="srv-icon"><i class="fa-solid fa-memory"></i></div>
+                <h3 class="tech-cat" data-i18n="tc3t">PCB Design</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">KiCad</span>
+                    <span class="tech-tag">Altium</span>
+                    <span class="tech-tag">Multi-layer</span>
+                    <span class="tech-tag">DFM</span>
+                    <span class="tech-tag">SPICE</span>
+                    <span class="tech-tag">EMC</span>
+                </div>
+            </div>
+            <div class="tech-card rv">
+                <div class="srv-icon"><i class="fa-solid fa-code"></i></div>
+                <h3 class="tech-cat" data-i18n="tc4t">Firmware & RTOS</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">C / C++</span>
+                    <span class="tech-tag">FreeRTOS</span>
+                    <span class="tech-tag">Zephyr</span>
+                    <span class="tech-tag">Bare metal</span>
+                    <span class="tech-tag">HAL / LL</span>
+                    <span class="tech-tag">DMA</span>
+                </div>
+            </div>
+            <div class="tech-card rv d1">
+                <div class="srv-icon"><i class="fa-solid fa-cloud"></i></div>
+                <h3 class="tech-cat" data-i18n="tc5t">Cloud & Backend</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">AWS IoT</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">REST API</span>
+                    <span class="tech-tag">InfluxDB</span>
+                    <span class="tech-tag">Grafana</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+            <div class="tech-card rv d2">
+                <div class="srv-icon"><i class="fa-solid fa-plug"></i></div>
+                <h3 class="tech-cat" data-i18n="tc6t">Protocols & Interfaces</h3>
+                <div class="tech-tags">
+                    <span class="tech-tag">SPI</span>
+                    <span class="tech-tag">I2C</span>
+                    <span class="tech-tag">UART</span>
+                    <span class="tech-tag">CAN</span>
+                    <span class="tech-tag">USB</span>
+                    <span class="tech-tag">Modbus</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     ABOUT
+================================================================ -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="about-inner">
+            <p class="sec-label" data-i18n="ab_label">The team</p>
+            <h2 class="sec-title rv" data-i18n="ab_title">Small team,<br>big expertise.</h2>
+            <p class="sec-sub rv d1" data-i18n="ab_sub1">We're a small, agile team of engineers based in Seville, Spain. No layers of management — just experienced engineers who care deeply about building things that actually work.</p>
+            <p class="sec-sub rv d2" style="margin-top:16px" data-i18n="ab_sub2">Mekriva was born from the belief that companies deserve a technical partner who speaks their language and is genuinely invested in their success — not a vendor that disappears after the invoice.</p>
+            <div class="stat-grid">
+                <div class="stat-box rv">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label" data-i18n="st1">Years combined experience</div>
+                </div>
+                <div class="stat-box rv d1">
+                    <div class="stat-num">6+</div>
+                    <div class="stat-label" data-i18n="st2">Technologies mastered</div>
+                </div>
+                <div class="stat-box rv d2">
+                    <div class="stat-num">8+</div>
+                    <div class="stat-label" data-i18n="st3">Industries served</div>
+                </div>
+                <div class="stat-box rv d3">
+                    <div class="stat-num">SVQ</div>
+                    <div class="stat-label" data-i18n="st4">Based in Seville, Spain</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="accent-line"></div>
+
+<!-- ================================================================
+     CONTACT
+================================================================ -->
+<section class="contact section" id="contact">
+    <div class="container">
+        <div class="contact-inner">
+            <div class="contact-info">
+                <p class="sec-label" data-i18n="ct_label">Get in touch</p>
+                <h2 class="sec-title rv" data-i18n="ct_title">Let's talk about your project</h2>
+                <p class="sec-sub rv d1" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
+                <div class="c-detail rv d2">
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
+                </div>
+                <div class="c-detail rv d3">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span data-i18n="ct_loc">Seville, Spain</span>
+                </div>
+                <div class="c-detail rv d4">
+                    <i class="fa-solid fa-clock"></i>
+                    <span data-i18n="ct_hrs">Mon–Fri, 9:00–18:00 CET</span>
+                </div>
+            </div>
+
+            <div class="c-form rv d1">
+                <!--
+                    FORMSPREE SETUP
+                    ──────────────
+                    1. Go to https://formspree.io and create a free account.
+                    2. Create a new form and copy the action URL (e.g. https://formspree.io/f/xabcdefg).
+                    3. Paste it into the action attribute below.
+                    4. That's it — submissions will arrive in your email inbox.
+                -->
+                <form id="contactForm" action="" method="POST">
+                    <input type="hidden" name="_subject" data-i18n-subject="true">
+                    <div class="f-row">
+                        <div class="fg">
+                            <label data-i18n="fl_name">Name</label>
+                            <input type="text" name="name" class="fc" required data-ph="fp_name">
+                        </div>
+                        <div class="fg">
+                            <label data-i18n="fl_company">Company</label>
+                            <input type="text" name="company" class="fc" data-ph="fp_company">
+                        </div>
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="fl_email">Email</label>
+                        <input type="email" name="email" class="fc" required data-ph="fp_email">
+                    </div>
+                    <div class="fg">
+                        <label data-i18n="fl_msg">Message</label>
+                        <textarea name="message" class="fc" required data-ph="fp_msg"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary f-submit">
+                        <span data-i18n="fl_btn">Send message</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div>
+                <a href="#hero" class="footer-logo">Mek<span>riva</span></a>
+                <p class="footer-desc" data-i18n="ft_desc">From circuit to cloud. Engineering that works for your business.</p>
+            </div>
+            <div class="fc-col">
+                <h4 data-i18n="ft_nav">Navigation</h4>
+                <ul>
+                    <li><a href="#services"  data-i18n="nav_srv">Services</a></li>
+                    <li><a href="#how"       data-i18n="nav_how">How we work</a></li>
+                    <li><a href="#why"       data-i18n="nav_why">Why Mekriva</a></li>
+                    <li><a href="#projects"  data-i18n="nav_proj">Projects</a></li>
+                    <li><a href="#about"     data-i18n="nav_about">About</a></li>
+                </ul>
+            </div>
+            <div class="fc-col">
+                <h4 data-i18n="ft_ct">Contact</h4>
+                <ul>
+                    <li><a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a></li>
+                    <li><a href="#contact" data-i18n="ft_form">Contact form</a></li>
+                    <li><span data-i18n="ct_loc">Seville, Spain</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bot">
+            <span data-i18n="ft_copy">© 2025 Mekriva. All rights reserved.</span>
+            <span data-i18n="ft_made">Made with precision in Seville.</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+<script>
+// ── TRANSLATIONS ──────────────────────────────────────────────────
+const t = {
+  en: {
+    nav_srv:'Services', nav_how:'How we work', nav_why:'Why Mekriva',
+    nav_proj:'Stack', nav_about:'About', nav_contact:'Contact',
+    cta:'Talk to us',
+    h_badge:'Engineering & Innovation',
+    h_tagline:'We build your ideas.',
+    h_sub:'From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.',
+    h_explore:'Explore services',
+    srv_label:'What we do',
+    srv_title:'Our services',
+    srv_sub:'We design and build complete technological solutions — from the first schematic to the cloud dashboard. No off-the-shelf products, everything custom.',
+    s1t:'Embedded Systems',
+    s1d:'Custom firmware and real-time software for microcontrollers and microprocessors (STM32, ESP32, NRF52, RISC-V, and more). From bare metal to RTOS.',
+    s2t:'IoT & LoRa',
+    s2d:'Connected device networks, LoRaWAN architectures, MQTT gateways, and end-to-end IoT solutions designed for reliability and low power consumption.',
+    s3t:'Custom Hardware',
+    s3d:'PCB design, schematic capture, component selection, and prototype-to-production support. We design the exact hardware your project needs.',
+    s4t:'Cloud Software',
+    s4d:'Backend APIs, real-time dashboards, data pipelines, and cloud infrastructure tailored to your IoT ecosystem or industrial application.',
+    s5t:'Sensing & Instrumentation',
+    s5d:'Custom sensor integration, signal conditioning, ADC design, and data acquisition systems for industrial, environmental, and scientific applications.',
+    s6t:'Technical Consulting',
+    s6d:'Technology assessment, architecture review, feasibility studies, and technical due diligence. We help you make the right technical decisions from day one.',
+    how_label:'Our process', how_title:'How we work',
+    how_sub:'A clear process, no surprises. We work closely with you at every step.',
+    p1t:'We understand the problem',
+    p1d:'We start with a deep technical conversation. We listen to your challenge, ask the right questions, and make sure we fully understand what you need before we propose anything.',
+    p2t:'We design the solution',
+    p2d:'We propose a concrete technical plan: architecture, technologies, timeline, and cost. You validate every decision before we write a single line of code or draw a trace.',
+    p3t:'We build it',
+    p3d:'We develop hardware and software in parallel, with regular updates and live demos. You always know the current state of the project — no black boxes.',
+    p4t:'We deliver & support',
+    p4d:"Delivery includes full documentation, source files, and a transition period. We don't just hand it over — we make sure it works in your real environment.",
+    why_label:'Why us',
+    why_title:'Not consultants.<br>Engineers.',
+    why_sub:"We've built real products, shipped real hardware, and debugged at 3am. We bring that experience directly to your project.",
+    w1t:'Real field experience',
+    w1d:'Our team has shipped products from prototype to mass production. We know what works under real-world constraints.',
+    w2t:'Full-stack hardware + software',
+    w2d:'From PCB layout to cloud API, we cover the entire stack. No coordination overhead, no finger-pointing between vendors.',
+    w3t:'100% custom solutions',
+    w3d:"We don't sell off-the-shelf platforms with your logo on them. Every project is designed from scratch for your specific requirements.",
+    w4t:'Direct communication',
+    w4d:'You talk directly to the engineers building your product. No account managers, no ticket systems, no middlemen.',
+    tech_label:'Our stack',
+    tech_title:'What we work with',
+    tech_sub:'The tools, platforms, and technologies we know inside out — from the chip to the cloud.',
+    tc1t:'Microcontrollers',
+    tc2t:'Wireless & IoT',
+    tc3t:'PCB Design',
+    tc4t:'Firmware & RTOS',
+    tc5t:'Cloud & Backend',
+    tc6t:'Protocols & Interfaces',
+    ab_label:'The team',
+    ab_title:'Small team,<br>big expertise.',
+    ab_sub1:"We're a small, agile team of engineers based in Seville, Spain. No layers of management — just experienced engineers who care deeply about building things that actually work.",
+    ab_sub2:"Mekriva was born from the belief that companies deserve a technical partner who speaks their language and is genuinely invested in their success — not a vendor that disappears after the invoice.",
+    st1:'Years combined experience', st2:'Technologies mastered',
+    st3:'Industries served', st4:'Based in Seville, Spain',
+    ct_label:'Get in touch',
+    ct_title:"Let's talk about your project",
+    ct_sub:"Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.",
+    ct_loc:'Seville, Spain', ct_hrs:'Mon–Fri, 9:00–18:00 CET',
+    fl_name:'Name', fl_company:'Company', fl_email:'Email',
+    fl_msg:'Message', fl_btn:'Send message',
+    fp_name:'Your name', fp_company:'Your company (optional)',
+    fp_email:'you@company.com',
+    fp_msg:"Tell us about your project — what are you trying to build or solve?",
+    form_subject:'New enquiry from Mekriva website',
+    ft_desc:'From circuit to cloud. Engineering that works for your business.',
+    ft_nav:'Navigation', ft_ct:'Contact', ft_form:'Contact form',
+    ft_copy:'© 2025 Mekriva. All rights reserved.',
+    ft_made:'Made with precision in Seville.',
+    no_action:'Form not configured. Add your Formspree endpoint to the form action attribute (see the code comment).',
+  },
+  es: {
+    nav_srv:'Servicios', nav_how:'Cómo trabajamos', nav_why:'Por qué Mekriva',
+    nav_proj:'Stack', nav_about:'Nosotros', nav_contact:'Contacto',
+    cta:'Háblanos',
+    h_badge:'Ingeniería e Innovación',
+    h_tagline:'Construimos tus ideas.',
+    h_sub:'Del circuito a la nube — convertimos tus retos tecnológicos en soluciones completas y a medida. Hardware, firmware, IoT y software cloud, todo bajo un mismo techo.',
+    h_explore:'Ver servicios',
+    srv_label:'Qué hacemos',
+    srv_title:'Nuestros servicios',
+    srv_sub:'Diseñamos y construimos soluciones tecnológicas completas — desde el primer esquema hasta el panel de control en la nube. Sin productos enlatados, todo a medida.',
+    s1t:'Sistemas Embebidos',
+    s1d:'Firmware personalizado y software en tiempo real para microcontroladores y microprocesadores (STM32, ESP32, NRF52, RISC-V y más). Desde bare metal hasta RTOS.',
+    s2t:'IoT & LoRa',
+    s2d:'Redes de dispositivos conectados, arquitecturas LoRaWAN, gateways MQTT y soluciones IoT de extremo a extremo diseñadas para la fiabilidad y el bajo consumo.',
+    s3t:'Hardware a Medida',
+    s3d:'Diseño de PCB, captura de esquemas, selección de componentes y soporte de prototipo a producción. Diseñamos exactamente el hardware que tu proyecto necesita.',
+    s4t:'Software Cloud',
+    s4d:'APIs backend, dashboards en tiempo real, pipelines de datos e infraestructura cloud adaptada a tu ecosistema IoT o aplicación industrial.',
+    s5t:'Sensórica e Instrumentación',
+    s5d:'Integración de sensores personalizados, acondicionamiento de señal, diseño ADC y sistemas de adquisición de datos para aplicaciones industriales, medioambientales y científicas.',
+    s6t:'Consultoría Técnica',
+    s6d:'Evaluación tecnológica, revisión de arquitecturas, estudios de viabilidad y due diligence técnica. Te ayudamos a tomar las decisiones correctas desde el primer día.',
+    how_label:'Nuestro proceso', how_title:'Cómo trabajamos',
+    how_sub:'Un proceso claro, sin sorpresas. Trabajamos contigo en cada etapa.',
+    p1t:'Entendemos el problema',
+    p1d:'Empezamos con una conversación técnica profunda. Escuchamos tu reto, hacemos las preguntas correctas y nos aseguramos de entender bien lo que necesitas antes de proponer nada.',
+    p2t:'Diseñamos la solución',
+    p2d:'Proponemos un plan técnico concreto: arquitectura, tecnologías, plazos y coste. Tú validas cada decisión antes de que escribamos una sola línea de código o dibujemos una pista.',
+    p3t:'Lo construimos',
+    p3d:'Desarrollamos hardware y software en paralelo, con actualizaciones y demos periódicos. Siempre sabrás el estado actual del proyecto — sin cajas negras.',
+    p4t:'Entregamos y damos soporte',
+    p4d:'La entrega incluye documentación completa, archivos fuente y un período de transición. No te lo entregamos y desaparecemos — nos aseguramos de que funcione en tu entorno real.',
+    why_label:'Por qué nosotros',
+    why_title:'No somos consultores.<br>Somos ingenieros.',
+    why_sub:'Hemos construido productos reales, enviado hardware real y depurado a las 3 de la madrugada. Traemos esa experiencia directamente a tu proyecto.',
+    w1t:'Experiencia real en campo',
+    w1d:'Nuestro equipo ha llevado productos desde el prototipo hasta la producción en serie. Sabemos qué funciona bajo restricciones del mundo real.',
+    w2t:'Full-stack hardware + software',
+    w2d:'Del diseño de PCB a la API en la nube, cubrimos toda la cadena. Sin sobrecarga de coordinación ni culpas cruzadas entre proveedores.',
+    w3t:'Soluciones 100% a medida',
+    w3d:'No vendemos plataformas genéricas con tu logo encima. Cada proyecto se diseña desde cero para tus requisitos específicos.',
+    w4t:'Comunicación directa',
+    w4d:'Hablas directamente con los ingenieros que construyen tu producto. Sin gestores de cuenta, sin sistemas de tickets, sin intermediarios.',
+    tech_label:'Nuestro stack',
+    tech_title:'Con qué trabajamos',
+    tech_sub:'Las herramientas, plataformas y tecnologías que dominamos — del chip a la nube.',
+    tc1t:'Microcontroladores',
+    tc2t:'Wireless & IoT',
+    tc3t:'Diseño de PCB',
+    tc4t:'Firmware & RTOS',
+    tc5t:'Cloud & Backend',
+    tc6t:'Protocolos e Interfaces',
+    ab_label:'El equipo',
+    ab_title:'Equipo pequeño,<br>gran experiencia.',
+    ab_sub1:'Somos un equipo pequeño y ágil de ingenieros con base en Sevilla, España. Sin capas de gestión — solo ingenieros con experiencia que se preocupan por construir cosas que realmente funcionan.',
+    ab_sub2:'Mekriva nació de la convicción de que las empresas merecen un socio técnico que hable su idioma y esté genuinamente comprometido con su éxito — no un proveedor que desaparece tras la factura.',
+    st1:'Años de experiencia combinada', st2:'Tecnologías dominadas',
+    st3:'Sectores atendidos', st4:'Con base en Sevilla, España',
+    ct_label:'Contacta con nosotros',
+    ct_title:'Hablemos de tu proyecto',
+    ct_sub:'Cuéntanos en qué estás trabajando. Sin compromisos, sin argumentario de ventas — solo una conversación técnica para ver si encajamos.',
+    ct_loc:'Sevilla, España', ct_hrs:'Lun–Vie, 9:00–18:00 CET',
+    fl_name:'Nombre', fl_company:'Empresa', fl_email:'Email',
+    fl_msg:'Mensaje', fl_btn:'Enviar mensaje',
+    fp_name:'Tu nombre', fp_company:'Tu empresa (opcional)',
+    fp_email:'tu@empresa.com',
+    fp_msg:'¿Qué estás intentando construir o resolver? Cuéntanos tu proyecto.',
+    form_subject:'Nueva consulta desde la web de Mekriva',
+    ft_desc:'Del circuito a la nube. Ingeniería que funciona para tu negocio.',
+    ft_nav:'Navegación', ft_ct:'Contacto', ft_form:'Formulario de contacto',
+    ft_copy:'© 2025 Mekriva. Todos los derechos reservados.',
+    ft_made:'Hecho con precisión en Sevilla.',
+    no_action:'Formulario no configurado. Añade tu endpoint de Formspree al atributo action del formulario (ver el comentario en el código).',
+  }
+};
+
+// ── LANGUAGE SWITCH ───────────────────────────────────────────────
+let lang = localStorage.getItem('mk-lang') ||
+           (navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en');
+
+function applyLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  const tr = t[l];
+
+  // Text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (tr[k] != null) el.innerHTML = tr[k];
+  });
+
+  // Input/textarea placeholders
+  document.querySelectorAll('[data-ph]').forEach(el => {
+    const k = el.getAttribute('data-ph');
+    if (tr[k] != null) el.placeholder = tr[k];
+  });
+
+  // Hidden subject field
+  const subj = document.querySelector('[data-i18n-subject]');
+  if (subj) subj.value = tr.form_subject || '';
+
+  // Toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === l)
+  );
+
+  localStorage.setItem('mk-lang', l);
+}
+
+document.querySelectorAll('.lang-btn').forEach(b =>
+  b.addEventListener('click', () => applyLang(b.dataset.lang))
+);
+
+// ── NAVBAR SCROLL ─────────────────────────────────────────────────
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () =>
+  nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true }
+);
+
+// ── MOBILE MENU ───────────────────────────────────────────────────
+const hbg     = document.getElementById('hamburger');
+const mobMenu = document.getElementById('mobMenu');
+
+hbg.addEventListener('click', () => {
+  hbg.classList.toggle('open');
+  mobMenu.classList.toggle('open');
+});
+
+mobMenu.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
+    hbg.classList.remove('open');
+    mobMenu.classList.remove('open');
+  })
+);
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('on');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -44px 0px' });
+
+// Hero elements reveal immediately
+document.querySelectorAll('.hero .rv').forEach(el => {
+  setTimeout(() => el.classList.add('on'), 80);
+});
+
+// All others via observer
+document.querySelectorAll('.rv:not(.hero .rv)').forEach(el => obs.observe(el));
+
+// ── FORM GUARD ────────────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  if (!this.getAttribute('action')) {
+    e.preventDefault();
+    alert(t[lang].no_action);
+  }
+});
+
+// ── INIT ──────────────────────────────────────────────────────────
+applyLang(lang);
+</script>
+</body>
+</html>
