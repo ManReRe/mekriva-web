@@ -1005,16 +1005,9 @@
             </div>
 
             <div class="c-form rv d1">
-                <!--
-                    FORMSPREE SETUP
-                    ──────────────
-                    1. Go to https://formspree.io and create a free account.
-                    2. Create a new form and copy the action URL (e.g. https://formspree.io/f/xabcdefg).
-                    3. Paste it into the action attribute below.
-                    4. That's it — submissions will arrive in your email inbox.
-                -->
-                <form id="contactForm" action="" method="POST">
-                    <input type="hidden" name="_subject" data-i18n-subject="true">
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="ca076abd-e241-41ae-9aa7-a2d0b7ce8214">
+                    <input type="hidden" name="subject" data-i18n-subject="true">
                     <div class="f-row">
                         <div class="fg">
                             <label data-i18n="fl_name">Name</label>
@@ -1033,11 +1026,18 @@
                         <label data-i18n="fl_msg">Message</label>
                         <textarea name="message" class="fc" required data-ph="fp_msg"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary f-submit">
+                    <button type="submit" id="formBtn" class="btn btn-primary f-submit">
                         <span data-i18n="fl_btn">Send message</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </form>
+                <div id="formSuccess" style="display:none; text-align:center; padding: 40px 0;">
+                    <div style="font-size:36px; color:var(--accent); margin-bottom:16px;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <p style="font-size:17px; font-weight:600; margin-bottom:8px;" data-i18n="form_ok_title">Message sent!</p>
+                    <p style="font-size:14px; color:var(--muted);" data-i18n="form_ok_sub">We'll get back to you as soon as possible.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1158,7 +1158,9 @@ const t = {
     ft_nav:'Navigation', ft_ct:'Contact', ft_form:'Contact form',
     ft_copy:'© 2025 Mekriva. All rights reserved.',
     ft_made:'Made with precision in Seville.',
-    no_action:'Form not configured. Add your Formspree endpoint to the form action attribute (see the code comment).',
+    form_ok_title:'Message sent!',
+    form_ok_sub:"We'll get back to you as soon as possible.",
+    form_err:'Something went wrong. Please try again or email us directly.',
   },
   es: {
     nav_srv:'Servicios', nav_how:'Cómo trabajamos', nav_why:'Por qué Mekriva',
@@ -1233,7 +1235,9 @@ const t = {
     ft_nav:'Navegación', ft_ct:'Contacto', ft_form:'Formulario de contacto',
     ft_copy:'© 2025 Mekriva. Todos los derechos reservados.',
     ft_made:'Hecho con precisión en Sevilla.',
-    no_action:'Formulario no configurado. Añade tu endpoint de Formspree al atributo action del formulario (ver el comentario en el código).',
+    form_ok_title:'¡Mensaje enviado!',
+    form_ok_sub:'Nos pondremos en contacto contigo lo antes posible.',
+    form_err:'Algo salió mal. Inténtalo de nuevo o escríbenos directamente.',
   }
 };
 
@@ -1314,11 +1318,27 @@ document.querySelectorAll('.hero .rv').forEach(el => {
 // All others via observer
 document.querySelectorAll('.rv:not(.hero .rv)').forEach(el => obs.observe(el));
 
-// ── FORM GUARD ────────────────────────────────────────────────────
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  if (!this.getAttribute('action')) {
-    e.preventDefault();
-    alert(t[lang].no_action);
+// ── FORM SUBMIT ───────────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('formBtn');
+  btn.disabled = true;
+  btn.style.opacity = '.6';
+
+  const data = Object.fromEntries(new FormData(this));
+  const res  = await fetch('https://api.web3forms.com/submit', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body:    JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    this.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  } else {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    alert(t[lang].form_err);
   }
 });
 
