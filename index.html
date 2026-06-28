@@ -36,7 +36,7 @@
     /* === VARIABLES === */
     :root {
       --bg:          #0a0a0a;
-      --bg-alt:      #0e0e0e;
+      --bg-alt:      #0d0d0d;
       --bg-card:     #111111;
       --bg-card-h:   #161616;
       --accent:      #00C2FF;
@@ -95,8 +95,8 @@
       font-size: 17px;
       color: var(--muted);
       line-height: 1.8;
-      max-width: 640px;
-      margin-bottom: 20px;
+      max-width: 760px;
+      margin-bottom: 40px;
     }
 
     .section-sub {
@@ -393,6 +393,15 @@
     }
     .val-title { font-size: 14px; font-weight: 600; }
     .val-desc  { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    .stat-grid { margin-top: 48px; }
+
+    .tech-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: 10px;
+    }
 
     /* ============================================================
        SERVICES
@@ -722,7 +731,7 @@
         <span data-i18n="h_badge">Engineering &amp; Innovation</span>
       </div>
       <h1 class="hero-title rv d1">Mekriva</h1>
-      <p class="hero-tagline rv d2" data-i18n="h_tagline">Embedded Systems &amp; IoT Engineering</p>
+      <h2 class="hero-tagline rv d2" data-i18n="h_tagline">Embedded Systems &amp; IoT Engineering</h2>
       <p class="hero-sub rv d3" data-i18n="h_sub">
         From circuit to cloud — we turn your technical challenges into complete, custom solutions. Hardware, firmware, IoT, and cloud software, all under one roof.
       </p>
@@ -747,7 +756,7 @@
     <p class="lead rv d2" data-i18n="ab_sub1">We are a focused team of engineers with over a decade of experience building real technology products — from the microcontroller firmware to the cloud infrastructure. The same team that talks to you is the one that designs, codes, and delivers.</p>
     <p class="lead rv d3" data-i18n="ab_sub2">This full-stack capability — hardware, firmware, and cloud under one roof — is what sets us apart. In IoT and industrial electronics, problems rarely respect layer boundaries. Having the same engineers own the circuit and the data architecture eliminates friction and produces more coherent solutions.</p>
 
-    <div class="stat-grid" style="margin-top:48px">
+    <div class="stat-grid">
       <div class="stat-box rv">
         <div class="stat-num">10+</div>
         <div class="stat-label" data-i18n="st1">Years combined experience</div>
@@ -839,7 +848,7 @@
   <div class="container">
     <p class="lbl rv" data-i18n="srv_label">What we do</p>
     <h2 class="h2 rv d1" data-i18n="srv_title">Our services</h2>
-    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="srv_sub">Complete technological solutions from the first schematic to the cloud dashboard. No off-the-shelf products — everything custom.</p>
+    <p class="lead rv d2" data-i18n="srv_sub">Complete technological solutions from the first schematic to the cloud dashboard. No off-the-shelf products — everything custom.</p>
 
     <div class="srv-list">
       <details class="srv-item rv">
@@ -936,7 +945,7 @@
   <div class="container">
     <p class="lbl rv" data-i18n="how_label">Our process</p>
     <h2 class="h2 rv d1" data-i18n="how_title">How we work</h2>
-    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="how_sub">A clear process, no surprises. We work closely with you at every step.</p>
+    <p class="lead rv d2" data-i18n="how_sub">A clear process, no surprises. We work closely with you at every step.</p>
 
     <div class="process-grid">
       <div class="process-card rv">
@@ -970,7 +979,7 @@
   <div class="container">
     <p class="lbl rv" data-i18n="tech_label">Our stack</p>
     <h2 class="h2 rv d1" data-i18n="tech_title">What we work with</h2>
-    <p class="lead rv d2" style="margin-bottom:40px" data-i18n="tech_sub">The tools, platforms, and technologies we know inside out — from the chip to the cloud.</p>
+    <p class="lead rv d2" data-i18n="tech_sub">The tools, platforms, and technologies we know inside out — from the chip to the cloud.</p>
 
     <div class="tech-grid">
       <div class="tech-card rv">
@@ -978,6 +987,7 @@
           <div class="tech-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc1t">Microcontrollers</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc1d">From ultra-low-power sensor nodes to high-performance multi-core embedded processors.</p>
         <div class="tech-tags">
           <span class="tech-tag">STM32</span><span class="tech-tag">ESP32</span>
           <span class="tech-tag">NRF52840</span><span class="tech-tag">RP2040</span>
@@ -989,6 +999,7 @@
           <div class="tech-icon"><i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc2t">Wireless &amp; IoT</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc2d">Selecting the right wireless stack for range, power budget, and data throughput requirements.</p>
         <div class="tech-tags">
           <span class="tech-tag">LoRaWAN</span><span class="tech-tag">BLE 5.x</span>
           <span class="tech-tag">WiFi</span><span class="tech-tag">MQTT</span>
@@ -1000,6 +1011,7 @@
           <div class="tech-icon"><i class="fa-solid fa-memory" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc3t">PCB Design</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc3d">Multi-layer boards optimised for signal integrity, thermal management, and manufacturability.</p>
         <div class="tech-tags">
           <span class="tech-tag">KiCad</span><span class="tech-tag">Altium</span>
           <span class="tech-tag">Multi-layer</span><span class="tech-tag">DFM</span>
@@ -1011,6 +1023,7 @@
           <div class="tech-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc4t">Firmware &amp; RTOS</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc4d">Bare-metal C/C++ to full RTOS — written for reliability, low latency, and long-term maintainability.</p>
         <div class="tech-tags">
           <span class="tech-tag">C / C++</span><span class="tech-tag">FreeRTOS</span>
           <span class="tech-tag">Zephyr</span><span class="tech-tag">Bare metal</span>
@@ -1022,6 +1035,7 @@
           <div class="tech-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc5t">Cloud &amp; Backend</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc5d">Scalable telemetry ingestion, time-series storage, device management, and monitoring dashboards.</p>
         <div class="tech-tags">
           <span class="tech-tag">AWS IoT</span><span class="tech-tag">Node.js</span>
           <span class="tech-tag">REST API</span><span class="tech-tag">InfluxDB</span>
@@ -1033,6 +1047,7 @@
           <div class="tech-icon"><i class="fa-solid fa-plug" aria-hidden="true"></i></div>
           <h3 class="tech-cat" data-i18n="tc6t">Protocols &amp; Interfaces</h3>
         </div>
+        <p class="tech-desc" data-i18n="tc6d">Wired and industrial communication protocols implemented correctly from the start.</p>
         <div class="tech-tags">
           <span class="tech-tag">SPI</span><span class="tech-tag">I2C</span>
           <span class="tech-tag">UART</span><span class="tech-tag">CAN</span>
@@ -1052,7 +1067,7 @@
       <div>
         <p class="lbl rv" data-i18n="ct_label">Get in touch</p>
         <h2 class="h2 rv d1" data-i18n="ct_title">Let's talk about your project</h2>
-        <p class="lead rv d2" style="margin-bottom:32px" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
+        <p class="lead rv d2" style="margin-bottom:24px" data-i18n="ct_sub">Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.</p>
         <div class="contact-detail rv d3">
           <i class="fa-solid fa-envelope" aria-hidden="true"></i>
           <a href="mailto:hellothere@mekriva.com">hellothere@mekriva.com</a>
@@ -1224,6 +1239,12 @@ const t = {
     tech_sub:'The tools, platforms, and technologies we know inside out — from the chip to the cloud.',
     tc1t:'Microcontrollers', tc2t:'Wireless & IoT', tc3t:'PCB Design',
     tc4t:'Firmware & RTOS',  tc5t:'Cloud & Backend', tc6t:'Protocols & Interfaces',
+    tc1d:'From ultra-low-power sensor nodes to high-performance multi-core embedded processors.',
+    tc2d:'Selecting the right wireless stack for range, power budget, and data throughput requirements.',
+    tc3d:'Multi-layer boards optimised for signal integrity, thermal management, and manufacturability.',
+    tc4d:'Bare-metal C/C++ to full RTOS — written for reliability, low latency, and long-term maintainability.',
+    tc5d:'Scalable telemetry ingestion, time-series storage, device management, and monitoring dashboards.',
+    tc6d:'Wired and industrial communication protocols implemented correctly from the start.',
     ct_label:'Get in touch',
     ct_title:"Let's talk about your project",
     ct_sub:"Tell us what you're working on. No commitment, no sales pitch — just a technical conversation to see if we're the right fit.",
@@ -1311,7 +1332,13 @@ const t = {
     tech_label:'Nuestro stack', tech_title:'Con qué trabajamos',
     tech_sub:'Las herramientas, plataformas y tecnologías que dominamos — del chip a la nube.',
     tc1t:'Microcontroladores', tc2t:'Wireless & IoT', tc3t:'Diseño de PCB',
-    tc4t:'Firmware & RTOS',   tc5t:'Cloud & Backend', tc6t:'Protocolos e Interfaces',
+    tc4t:'Firmware & RTOS',    tc5t:'Cloud & Backend', tc6t:'Protocolos e Interfaces',
+    tc1d:'Desde nodos sensores de ultra-bajo consumo hasta procesadores embebidos multicúcleo de alto rendimiento.',
+    tc2d:'Seleccionamos el stack inalámbrico adecuado según rango, presupuesto energético y tasa de datos.',
+    tc3d:'Placas multicapa optimizadas para integridad de señal, gestión térmica y fabricabilidad.',
+    tc4d:'De C/C++ bare-metal a RTOS completo — escrito para fiabilidad, baja latencia y mantenibilidad a largo plazo.',
+    tc5d:'Ingesta escalable de telemetría, almacenamiento de series temporales, gestión de dispositivos y dashboards de monitorización.',
+    tc6d:'Protocolos de comunicación industriales y cableados implementados correctamente desde el inicio.',
     ct_label:'Contacta con nosotros',
     ct_title:'Hablemos de tu proyecto',
     ct_sub:'Cuéntanos en qué estás trabajando. Sin compromisos, sin argumentario de ventas — solo una conversación técnica para ver si encajamos.',
